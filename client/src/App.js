@@ -1,24 +1,29 @@
-import React from "react";
+// import { Flex, VStack, Heading, Spacer } from '@chakra-ui/layout';
+// import { IconButton, Link } from '@chakra-ui/react';
 
-import { ChakraProvider } from '@chakra-ui/react';
-import { extendTheme, ChakraProvider } from '@chakra-ui/react'
+// import { FaSun, FaMoon, FaGithub } from 'react-icons/fa';
+// import { useColorMode } from '@chakra-ui/color-mode';
 
-const colors = {
-  brand: {
-    900: '#1a365d',
-    800: '#153e75',
-    700: '#2a69ac',
-  },
-}
+// import Profile from './components/Profile';
+// import Post from './components/Post';
+import { Routes, Route } from 'react-router-dom';
 
-const theme = extendTheme({ colors })
+import Login from './components/Login';
+import Homepage from './components/Homepage';
+import Signup from './components/Signup';
 
 function App() {
-    return (
-        <ChakraProvider theme={theme}>
-            <App />
-        </ChakraProvider>
-    )
+  return (
+    <div className='App'>
+        <Routes>
+          <Route path='/' element={<Homepage />}/>
+          <Route path='/login' element={<Login />} />
+          <Route path='/signup' element={<Signup />} />
+        </Routes>
+      
+    </div>
+      
+  )
 }
 
 export default App;
