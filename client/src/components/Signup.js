@@ -29,7 +29,7 @@ const Signup = () => {
     const toast = useToast();
     const history = useNavigate();
 
-    const [name, setName] = useState();
+    const [username, setUsername] = useState();
     const [email, setEmail] = useState();
     const [password, setPassword] = useState();
     const [confirmpassword, setConfirmpassword] = useState();
@@ -56,7 +56,7 @@ const Signup = () => {
 
     const submitHandler = async () => {
         setInformation(true);
-        if (!name || !email || !password || !confirmpassword) {
+        if (!username || !email || !password || !confirmpassword) {
           toast({
             title: "Invalid information. Please try again.",
             status: "warning",
@@ -89,7 +89,7 @@ const Signup = () => {
           const { data } = await axios.post(
             "/api/user/signup",
             {
-              name,
+              username,
               email,
               password,
             },
@@ -120,6 +120,7 @@ const Signup = () => {
       };
 
     return (
+
       <VStack>
         <Box p={5} ml='auto'>
               <Link href='https://github.com/a-vitug/react-app'>
@@ -150,15 +151,16 @@ const Signup = () => {
                   p='100px'
                   >
                     
-                    <FormControl isRequired id="name" pb={8}>
-                      <FormLabel>Name</FormLabel>
+                    <FormControl isRequired id="username" pb={8}>
+
+                      <FormLabel>Username</FormLabel>
                       <InputGroup size="md" 
                           backgroundColor={bgcolor} 
                           color={textcolor}
                           boxShadow='lg'>
                       <Input
-                          placeholder="Enter your full name"
-                          onChange={(e) => setName(e.target.value)}
+                          placeholder="Enter your username"
+                          onChange={(e) => setUsername(e.target.value)}
                           />  
                       </InputGroup>
                     </FormControl>
