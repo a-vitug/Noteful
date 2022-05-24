@@ -11,6 +11,8 @@ const server = new ApolloServer({
   resolvers,
 });
 
+//something.
+
 server.applyMiddleware({ app });
 
 app.use(express.urlencoded({ extended: true }));
