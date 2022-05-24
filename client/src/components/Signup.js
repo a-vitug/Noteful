@@ -120,6 +120,7 @@ const Signup = () => {
       };
 
     return (
+
       <VStack>
         <Box p={5} ml='auto'>
               <Link href='https://github.com/a-vitug/react-app'>
@@ -151,6 +152,7 @@ const Signup = () => {
                   >
                     
                     <FormControl isRequired id="name" pb={8}>
+
                       <FormLabel>Name</FormLabel>
                       <InputGroup size="md" 
                           backgroundColor={bgcolor} 
