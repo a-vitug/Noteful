@@ -119,7 +119,9 @@ const Signup = () => {
         <Container >
         {/* <SimpleGrid rows={2} spacing='40px'> */}
         <Box pl='120px'>
-            <Flex flexDirection='column' >
+            <Flex 
+            justify-content='flex-start'
+            >
                 <Box pt='140px'>
                   <Box p={3}>
                     <FormControl isRequired 
