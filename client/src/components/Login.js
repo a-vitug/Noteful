@@ -2,190 +2,200 @@ import { useState } from 'react';
 import { axios } from 'axios';
 import { useNavigate } from 'react-router-dom';
 import { Flex, Stack, VStack, Spacer, Container } from '@chakra-ui/layout';
-import { 
-    Input,
-    Box,
-    FormControl,
-    FormLabel,
-    Button,
-    ButtonGroup,
-    Link,
-    IconButton,
-    InputGroup,
-    InputRightElement,
-    useToast,
-    Text,
-    Wrap,
-    WrapItem
+import {
+  Input,
+  Box,
+  FormControl,
+  FormLabel,
+  Button,
+  ButtonGroup,
+  Link,
+  IconButton,
+  InputGroup,
+  InputRightElement,
+  useToast,
+  Text,
+  Wrap,
+  WrapItem,
 } from '@chakra-ui/react';
 
 import { useColorMode, useColorModeValue } from '@chakra-ui/color-mode';
 import { FaSun, FaMoon, FaGithub } from 'react-icons/fa';
 
-
 const Login = () => {
-    const [show, setShow] = useState(false);
-    const handleClick = () => setShow(!show);
-    const toast = useToast();
-    const [email, setEmail] = useState();
-    const [password, setPassword] = useState();
-    const [info, setInformation] = useState(false);
-    const history = useNavigate();
+  const [show, setShow] = useState(false);
+  const handleClick = () => setShow(!show);
+  const toast = useToast();
+  const [email, setEmail] = useState();
+  const [password, setPassword] = useState();
+  const [info, setInformation] = useState(false);
+  const history = useNavigate();
 
-    const { colorMode, toggleColorMode } = useColorMode();
-    const textcolor = useColorModeValue('#E8DFD8', 'yellow.900');
-    const bgcolor = useColorModeValue('#ECE8DF', '#BFAE98')
-    const isDark = colorMode === 'dark';
+  const { colorMode, toggleColorMode } = useColorMode();
+  const textcolor = useColorModeValue('#E8DFD8', 'yellow.900');
+  const bgcolor = useColorModeValue('#ECE8DF', '#BFAE98');
+  const isDark = colorMode === 'dark';
 
-    const submitHandler = async () => {
-        setInformation(true);
-        if (!email || !password) {
-          toast({
-            title: "Please Fill all the Fields",
-            status: "warning",
-            duration: 5000,
-            isClosable: true,
-            position: 'bottom',
-          });
-          setInformation(false);
-          return;
-        }
-    
-        // console.log(email, password);
-        try {
-          const config = {
-            headers: {
-              "Content-type": "application/json",
-            },
-          };
-    
-          const { data } = await axios.post(
-            "/api/user/login",
-            { email, password },
-            config
-          );
-    
-          // console.log(JSON.stringify(data));
-          toast({
-            title: "Login Successful",
-            status: "success",
-            duration: 5000,
-            isClosable: true,
-            position: "bottom",
-          });
-          localStorage.setItem("userInfo", JSON.stringify(data));
-          setInformation(false);
-          history.push("/chats");
-        } catch (error) {
-          toast({
-            title: "Error Occured!",
-            description: error.response.data.message,
-            status: "error",
-            duration: 5000,
-            isClosable: true,
-            position: "bottom",
-          });
-          setInformation(false);
-        }
+  const submitHandler = async () => {
+    setInformation(true);
+    if (!email || !password) {
+      toast({
+        title: 'Please Fill all the Fields',
+        status: 'warning',
+        duration: 5000,
+        isClosable: true,
+        position: 'bottom',
+      });
+      setInformation(false);
+      return;
+    }
+
+    // console.log(email, password);
+    try {
+      const config = {
+        headers: {
+          'Content-type': 'application/json',
+        },
       };
 
-    return (
-        <VStack>
-          <Box p={5} ml='auto'>
-                <Link href='https://github.com/a-vitug/react-app'>
-                    <IconButton ml={2} icon={<FaGithub />} isRound='true'></IconButton>
-                </Link>
-                
-                <IconButton ml={8} icon={isDark ? <FaSun /> : <FaMoon />} isRound='true' onClick={toggleColorMode}></IconButton>
-          </Box>
+      const { data } = await axios.post(
+        '/api/user/login',
+        { email, password },
+        config
+      );
 
-        <Wrap color={textcolor}>
-          <Stack pt='200px' textShadow='2px 2px #BFAE98'>
-              <WrapItem className='halimun'>
-                <Text fontSize='90px'>welcome</Text>
-              </WrapItem>
-              <WrapItem noOfLines={2} textAlign='center'>
-                <Text className='gloria' fontSize='60px'>to</Text>
-                <Text  className='gloria' fontSize='70px'>noteful</Text>
-              </WrapItem>
-          </Stack>
+      // console.log(JSON.stringify(data));
+      toast({
+        title: 'Login Successful',
+        status: 'success',
+        duration: 5000,
+        isClosable: true,
+        position: 'bottom',
+      });
+      localStorage.setItem('userInfo', JSON.stringify(data));
+      setInformation(false);
+      history.push('/chats');
+    } catch (error) {
+      toast({
+        title: 'Error Occured!',
+        description: error.response.data.message,
+        status: 'error',
+        duration: 5000,
+        isClosable: true,
+        position: 'bottom',
+      });
+      setInformation(false);
+    }
+  };
 
-          <WrapItem>
-            <Flex flexDirection='column' p='200px' pl='200px'>
-                <Box 
-                  border='2px'
-                  borderRadius='md'
-                  boxShadow='lg'
-                  color={isDark ? '#5E4D3B' : '#E8DFD8'}
-                  p={20}
-                  >
-                    
-                  <FormControl id="email" isRequired pb='40px'>
-                    <FormLabel>Email Address</FormLabel>
-                    <InputGroup size="md" 
-                        backgroundColor={bgcolor} 
-                        color={textcolor}
-                        boxShadow='lg'>
-                    <Input
-                        color='black'
-                        value={email}
-                        type="email"
-                        placeholder="Enter your email address"
-                        onChange={(e) => setEmail(e.target.value)}
-                        />  
-                    </InputGroup>
-                  </FormControl>
+  return (
+    <VStack>
+      <Box p={5} ml='auto'>
+        <Link href='https://github.com/a-vitug/react-app'>
+          <IconButton ml={2} icon={<FaGithub />} isRound='true'></IconButton>
+        </Link>
 
-                  <FormControl id="password" isRequired>
-                      <FormLabel>Password</FormLabel>
-                      <InputGroup size="md" 
-                          backgroundColor={bgcolor} 
-                          color={textcolor}
-                          boxShadow='lg'>
-                      <Input
-                          value={password}
-                          onChange={(e) => setPassword(e.target.value)}
-                          type={show ? "text" : "password"}
-                          placeholder="Enter password"
-                      />
-                      <InputRightElement width="4.5rem">
-                          <Button h="1.75rem" size="sm" onClick={handleClick}
-                            backgroundColor={isDark ? '#ECE8DF' : '#BFAE98'}
-                            color={isDark ? '#5E4D3B' : '#E8DFD8'}
-                          >
-                            {show ? "Hide" : "Show"}
-                          </Button>
-                      </InputRightElement>
-                      </InputGroup>
-                  </FormControl>
-                  
-                  <VStack>
-                    <ButtonGroup pt={5} alignItems='center'>
-                      <Button
-                        backgroundColor={isDark ? '#ECE8DF' : '#BFAE98'}
-                        color={isDark ? '#5E4D3B' : '#E8DFD8'}
-                        boxShadow='lg'
-                        width="100%"
-                        variant='outline'
-                        style={{ marginTop: 15 }}
-                        onClick={submitHandler}
-                        isLoading={info}
-                        >
-                          Login
-                      </Button> 
-                    </ButtonGroup>
-                    <Box>
+        <IconButton
+          ml={8}
+          icon={isDark ? <FaSun /> : <FaMoon />}
+          isRound='true'
+          onClick={toggleColorMode}
+        ></IconButton>
+      </Box>
 
-                    </Box>
-                  </VStack>
-                </Box>
-            </Flex>
+      <Wrap color={textcolor}>
+        <Stack pt='200px' textShadow='2px 2px #BFAE98'>
+          <WrapItem className='halimun'>
+            <Text fontSize='90px'>welcome</Text>
           </WrapItem>
-        </Wrap>
-            
-                        
-      </VStack>
-    )
-}
+          <WrapItem noOfLines={2} textAlign='center'>
+            <Text className='gloria' fontSize='60px'>
+              to
+            </Text>
+            <Text className='gloria' fontSize='70px'>
+              noteful
+            </Text>
+          </WrapItem>
+        </Stack>
+
+        <WrapItem>
+          <Flex flexDirection='column' p='200px' pl='200px'>
+            <Box
+              border='2px'
+              borderRadius='md'
+              boxShadow='lg'
+              color={isDark ? '#5E4D3B' : '#E8DFD8'}
+              p={20}
+            >
+              <FormControl id='email' isRequired pb='40px'>
+                <FormLabel>Email Address</FormLabel>
+                <InputGroup
+                  size='md'
+                  backgroundColor={bgcolor}
+                  color={textcolor}
+                  boxShadow='lg'
+                >
+                  <Input
+                    color='black'
+                    value={email}
+                    type='email'
+                    placeholder='Enter your email address'
+                    onChange={(e) => setEmail(e.target.value)}
+                  />
+                </InputGroup>
+              </FormControl>
+
+              <FormControl id='password' isRequired>
+                <FormLabel>Password</FormLabel>
+                <InputGroup
+                  size='md'
+                  backgroundColor={bgcolor}
+                  color={textcolor}
+                  boxShadow='lg'
+                >
+                  <Input
+                    value={password}
+                    onChange={(e) => setPassword(e.target.value)}
+                    type={show ? 'text' : 'password'}
+                    placeholder='Enter password'
+                  />
+                  <InputRightElement width='4.5rem'>
+                    <Button
+                      h='1.75rem'
+                      size='sm'
+                      onClick={handleClick}
+                      backgroundColor={isDark ? '#ECE8DF' : '#BFAE98'}
+                      color={isDark ? '#5E4D3B' : '#E8DFD8'}
+                    >
+                      {show ? 'Hide' : 'Show'}
+                    </Button>
+                  </InputRightElement>
+                </InputGroup>
+              </FormControl>
+
+              <VStack>
+                <ButtonGroup pt={5} alignItems='center'>
+                  <Button
+                    backgroundColor={isDark ? '#ECE8DF' : '#BFAE98'}
+                    color={isDark ? '#5E4D3B' : '#E8DFD8'}
+                    boxShadow='lg'
+                    width='100%'
+                    variant='outline'
+                    style={{ marginTop: 15 }}
+                    onClick={submitHandler}
+                    isLoading={info}
+                  >
+                    Login
+                  </Button>
+                </ButtonGroup>
+                <Box></Box>
+              </VStack>
+            </Box>
+          </Flex>
+        </WrapItem>
+      </Wrap>
+    </VStack>
+  );
+};
 
 export default Login;
