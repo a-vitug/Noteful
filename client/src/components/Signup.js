@@ -3,22 +3,24 @@ import { useNavigate } from 'react-router-dom';
 import { axios } from 'axios';
 import { Flex, Stack, VStack, Spacer } from '@chakra-ui/layout';
 import { 
-    Input,
-    Box,
-    Container,
-    FormControl,
-    FormLabel,
-    Button,
-    ButtonGroup,
-    InputGroup,
-    InputRightElement,
-    useToast,
-    SimpleGrid,
-    StackDivider
+  Input,
+  Box,
+  FormControl,
+  FormLabel,
+  Button,
+  ButtonGroup,
+  Link,
+  IconButton,
+  InputGroup,
+  InputRightElement,
+  useToast,
+  Text,
+  Wrap,
+  WrapItem
 } from '@chakra-ui/react';
 
-import { useColorMode } from '@chakra-ui/color-mode';
-// import { useMediaQuery, extendTheme } from '@chakra-ui/react'
+import { useColorMode, useColorModeValue } from '@chakra-ui/color-mode';
+import { FaSun, FaMoon, FaGithub } from 'react-icons/fa';
 
 
 const Signup = () => {
@@ -35,6 +37,8 @@ const Signup = () => {
 
     const { colorMode, toggleColorMode } = useColorMode();
     // const theme = extendTheme({ borderRadius });
+    const textcolor = useColorModeValue('#E8DFD8', 'yellow.900');
+    const bgcolor = useColorModeValue('#ECE8DF', '#BFAE98')
     const isDark = colorMode === 'dark';
 
     // const borderRadius = {
@@ -116,110 +120,117 @@ const Signup = () => {
       };
 
     return (
-        <Container >
-        {/* <SimpleGrid rows={2} spacing='40px'> */}
-        <Box pl='120px'>
-            <Flex flexDirection='column' >
-                <Box pt='140px'>
-                  <Box p={3}>
-                    <FormControl isRequired 
-                      id="name" 
-                      p='20px' 
-                      border='2px'
-                      borderRadius='md'
-                      color={isDark ? '#5E4D3B' : '#E8DFD8'}>
+      <VStack>
+        <Box p={5} ml='auto'>
+              <Link href='https://github.com/a-vitug/react-app'>
+                  <IconButton ml={2} icon={<FaGithub />} isRound='true'></IconButton>
+              </Link>
+              
+              <IconButton ml={8} icon={isDark ? <FaSun /> : <FaMoon />} isRound='true' onClick={toggleColorMode}></IconButton>
+        </Box>
+
+        <Wrap color={textcolor}>
+          <Stack pt='180px' textShadow='2px 2px #BFAE98'>
+            <WrapItem className='halimun'>
+              <Text fontSize='90px'>welcome</Text>
+            </WrapItem>
+            <WrapItem noOfLines={2} textAlign='center'>
+              <Text className='gloria' fontSize='60px'>to</Text>
+              <Text  className='gloria' fontSize='70px'>noteful</Text>
+            </WrapItem>
+          </Stack>
+
+          <WrapItem>
+            <Flex flexDirection='column' p='100px' pl='200px'>
+                <Box 
+                  border='2px'
+                  borderRadius='md'
+                  boxShadow='lg'
+                  color={isDark ? '#5E4D3B' : '#E8DFD8'}
+                  p='100px'
+                  >
+                    
+                    <FormControl isRequired id="name" pb={8}>
                       <FormLabel>Name</FormLabel>
                       <InputGroup size="md" 
-                          backgroundColor={isDark ? '#BFAE98' : '#ECE8DF'} 
-                          color={isDark ? '#E8DFD8' : '#5E4D3B'}>
+                          backgroundColor={bgcolor} 
+                          color={textcolor}
+                          boxShadow='lg'>
                       <Input
-                          placeholder="Enter full name"
+                          placeholder="Enter your full name"
                           onChange={(e) => setName(e.target.value)}
                           />  
                       </InputGroup>
                     </FormControl>
-                  </Box>
 
-                  <Box p={3}>
-                    <FormControl isRequired 
-                      id="email"  
-                      p='20px' 
-                      border='2px'
-                      borderRadius='md'
-                      color={isDark ? '#5E4D3B' : '#E8DFD8'}>
-                      <FormLabel>Email Address</FormLabel>
-                        <InputGroup size="md" 
-                            backgroundColor={isDark ? '#BFAE98' : '#ECE8DF'} 
-                            color={isDark ? '#E8DFD8' : '#5E4D3B'}>
-                        <Input
-                            value={email}
-                            type="email"
-                            placeholder="Enter email address"
-                            onChange={(e) => setEmail(e.target.value)}
-                            />  
-                        </InputGroup>
-                    </FormControl>
-                  </Box>  
+                  <FormControl isRequired id="email" pb={8}>
+                    <FormLabel>Email Address</FormLabel>
+                      <InputGroup size="md" 
+                          backgroundColor={bgcolor} 
+                          color={textcolor}
+                          boxShadow='lg'>
+                      <Input
+                          value={email}
+                          type="email"
+                          placeholder="Enter your email address"
+                          onChange={(e) => setEmail(e.target.value)}
+                          />  
+                      </InputGroup>
+                  </FormControl>
                   
-                  <Box p={3}>
-                    <FormControl isRequired 
-                      id="password" 
-                      p='20px' 
-                      border='2px'
-                      borderRadius='md'
-                      color={isDark ? '#5E4D3B' : '#E8DFD8'}>
-                        <FormLabel>Password</FormLabel>
-                        <InputGroup size="md" 
-                            backgroundColor={isDark ? '#BFAE98' : '#ECE8DF'} 
-                            color={isDark ? '#E8DFD8' : '#5E4D3B'}>
+                  <FormControl isRequired id="password" pb={8}>
+                    <FormLabel>Password</FormLabel>
+                    <InputGroup size="md" 
+                        backgroundColor={bgcolor} 
+                        color={textcolor}
+                        boxShadow='lg'>
+                    <Input
+                        value={password}
+                        onChange={(e) => setPassword(e.target.value)}
+                        type={show ? "text" : "password"}
+                        placeholder="Enter password"
+                    />
+                    <InputRightElement width="4.5rem">
+                        <Button h="1.75rem" size="sm" onClick={handleClick}
+                          backgroundColor={isDark ? '#ECE8DF' : '#BFAE98'}
+                          color={isDark ? '#5E4D3B' : '#E8DFD8'}
+                        >
+                          {show ? "Hide" : "Show"}
+                        </Button>
+                    </InputRightElement>
+                    </InputGroup>
+                  </FormControl>
+                  
+                  <FormControl isRequired id="password" pb={5}>
+                      <FormLabel>Confirm Password</FormLabel>
+                      <InputGroup 
+                        size="md"
+                        backgroundColor={bgcolor} 
+                        color={textcolor}
+                        boxShadow='lg'
+                        >
                         <Input
-                            value={password}
-                            onChange={(e) => setPassword(e.target.value)}
-                            type={show ? "text" : "password"}
-                            placeholder="Enter password"
+                          type={show ? "text" : "password"}
+                          placeholder="Confirm password"
+                          onChange={(e) => setConfirmpassword(e.target.value)}
                         />
                         <InputRightElement width="4.5rem">
-                            <Button h="1.75rem" size="sm" onClick={handleClick}>
-                            {show ? "Hide" : "Show"}
-                            </Button>
-                        </InputRightElement>
-                        </InputGroup>
-                      </FormControl>
-                  </Box>
-                  
-                  <Box p={3}>
-                    <FormControl isRequired
-                      id="password" 
-                      p='20px' 
-                      border='2px'
-                      borderRadius='md'
-                      color={isDark ? '#5E4D3B' : '#E8DFD8'}>
-                        <FormLabel>Confirm Password</FormLabel>
-                        <InputGroup 
-                          size="md"
-                          backgroundColor={isDark ? '#BFAE98' : '#ECE8DF'} 
-                          color={isDark ? '#E8DFD8' : '#5E4D3B'}
+                          <Button h="1.75rem" size="sm" onClick={handleClick}
+                            backgroundColor={isDark ? '#ECE8DF' : '#BFAE98'}
+                            color={isDark ? '#5E4D3B' : '#E8DFD8'}
                           >
-                          <Input
-                            type={show ? "text" : "password"}
-                            placeholder="Confirm password"
-                            onChange={(e) => setConfirmpassword(e.target.value)}
-                          />
-                          <InputRightElement width="4.5rem">
-                            <Button h="1.75rem" size="sm" onClick={handleClick}>
-                              {show ? "Hide" : "Show"}
-                            </Button>
-                          </InputRightElement>
-                        </InputGroup>
-                    </FormControl>
-                  </Box>
-                  
+                            {show ? "Hide" : "Show"}
+                          </Button>
+                        </InputRightElement>
+                      </InputGroup>
+                  </FormControl>
                   
                   <VStack>
                     <ButtonGroup pt={5} alignItems='center'>
                       <Button
-                      backgroundColor={isDark ? '#ECE8DF' : '#BFAE98'}
+                        backgroundColor={isDark ? '#ECE8DF' : '#BFAE98'}
                         color={isDark ? '#5E4D3B' : '#E8DFD8'}
+                        boxShadow='lg'
                         width="100%"
                         variant='outline'
                         style={{ marginTop: 15 }}
@@ -230,16 +241,14 @@ const Signup = () => {
                       </Button> 
                     </ButtonGroup>
                   </VStack>
-                </Box>
-            </Flex>
-        </Box>
-        {/* </SimpleGrid> */}
-        </Container>
 
-        
+              </Box>
+            </Flex>
+          </WrapItem>
+        </Wrap>
+      </VStack>
+
     )
 };
-
-console.log('Signup')
 
 export default Signup;

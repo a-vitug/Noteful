@@ -1,3 +1,6 @@
+@import url('http://fonts.cdnfonts.com/css/halimun');
+@import url('https://fonts.googleapis.com/css2?family=Itim&display=swap');
+
 .App {
     background-image: url(./img/background.png);
     min-height: 100vh;
@@ -8,3 +11,10 @@
 .text {
     font-weight: bold;
 }
+
+.halimun {
+    font-family: 'Halimun', sans-serif;                                          
+}
+
+.gloria {
+    font-family: 'Itim', cursive;}
