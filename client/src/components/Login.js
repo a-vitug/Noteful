@@ -1,12 +1,10 @@
 import { useState } from 'react';
 import { axios } from 'axios';
 import { useNavigate } from 'react-router-dom';
-import { Flex, Stack, Heading, Spacer } from '@chakra-ui/layout';
+import { Flex, Stack, VStack } from '@chakra-ui/layout';
 import { 
     Input,
-    Box, 
-    IconButton, 
-    Link, 
+    Box,
     FormControl,
     FormLabel,
     Button,
@@ -16,7 +14,6 @@ import {
     useToast
 } from '@chakra-ui/react';
 
-import { FaSun, FaMoon, FaGithub } from 'react-icons/fa';
 import { useColorMode } from '@chakra-ui/color-mode';
 
 const Login = () => {
@@ -25,14 +22,14 @@ const Login = () => {
     const toast = useToast();
     const [email, setEmail] = useState();
     const [password, setPassword] = useState();
-    const [loading, setLoading] = useState(false);
+    const [info, setInformation] = useState(false);
     const history = useNavigate();
 
     const { colorMode, toggleColorMode } = useColorMode();
     const isDark = colorMode === 'dark';
 
     const submitHandler = async () => {
-        setLoading(true);
+        setInformation(true);
         if (!email || !password) {
           toast({
             title: "Please Fill all the Fields",
@@ -41,7 +38,7 @@ const Login = () => {
             isClosable: true,
             position: 'bottom',
           });
-          setLoading(false);
+          setInformation(false);
           return;
         }
     
@@ -68,7 +65,7 @@ const Login = () => {
             position: "bottom",
           });
           localStorage.setItem("userInfo", JSON.stringify(data));
-          setLoading(false);
+          setInformation(false);
           history.push("/chats");
         } catch (error) {
           toast({
@@ -79,92 +76,80 @@ const Login = () => {
             isClosable: true,
             position: "bottom",
           });
-          setLoading(false);
+          setInformation(false);
         }
       };
 
     return (
-        <Stack p={5}>
-            <Flex w='100%'>
-                <Heading
-                ml="8" size="md" fontWeight='semibold' color="cyan.400"> Noteful 
-                </Heading>
-
-                <Spacer></Spacer>
-                <Link href='https://github.com/a-vitug/react-app'>
-                <IconButton ml={2} icon={<FaGithub />} isRound='true'></IconButton>
-                </Link>
-                
-                <IconButton ml={8} icon={isDark ? <FaSun /> : <FaMoon />} isRound='true' onClick={toggleColorMode}></IconButton>
-            </Flex>
-
-
-        <Box p={130} >
-            <Flex flexDirection='column' alignItems='center'>
-                <Box p={10} fontSize='3xl'
-                    color={isDark ? '#5E4D3B' : '#E8DFD8'}
-                    ml={'auto'}>
-                        Log In Here!
-                    </Box>
+        <Stack>
+        <Box ml='auto'>
+            <Flex flexDirection='column' p='200px' pr='200px' >
                 <Box 
-                    backgroundColor={isDark ? '#ECE8DF' : '#BFAE98'} 
-                    color={isDark ? '#5E4D3B' : '#E8DFD8'}
-                    ml={'auto'} 
-                    p={20}>
+                  border='2px'
+                  // bgGradient={isDark ? ['linear(to-l, #C89D81, #ECE8DF)'] : ['linear(to-l, #ECE8DF, #C89D81)']}
+                  // backgroundColor={isDark ? '#ECE8DF' : '#BFAE98'} 
+                  color={isDark ? '#5E4D3B' : '#E8DFD8'}
+                  p={20}>
                     
-                    <FormControl id="email" isRequired pb='40px'>
-                        <FormLabel>Email Address</FormLabel>
-                        <InputGroup size="md" 
-                            backgroundColor={isDark ? '#BFAE98' : '#ECE8DF'} 
-                            color={isDark ? '#E8DFD8' : '#5E4D3B'}>
-                        <Input
-                            color='black'
-                            value={email}
-                            type="email"
-                            placeholder="Enter your email address"
-                            onChange={(e) => setEmail(e.target.value)}
-                            />  
-                        </InputGroup>
-                        
-                    </FormControl>
+                  <FormControl id="email" isRequired pb='40px'>
+                      <FormLabel>Email Address</FormLabel>
+                      <InputGroup size="md" 
+                          backgroundColor={isDark ? '#BFAE98' : '#ECE8DF'} 
+                          color={isDark ? '#E8DFD8' : '#5E4D3B'}>
+                      <Input
+                          color='black'
+                          value={email}
+                          type="email"
+                          placeholder="Enter your email address"
+                          onChange={(e) => setEmail(e.target.value)}
+                          />  
+                      </InputGroup>
+                      
+                  </FormControl>
 
-                    <FormControl id="password" isRequired>
-                        <FormLabel>Password</FormLabel>
-                        <InputGroup size="md" 
-                            backgroundColor={isDark ? '#BFAE98' : '#ECE8DF'} 
-                            color={isDark ? '#E8DFD8' : '#5E4D3B'}>
-                        <Input
-                            value={password}
-                            onChange={(e) => setPassword(e.target.value)}
-                            type={show ? "text" : "password"}
-                            placeholder="Enter password"
-                        />
-                        <InputRightElement width="4.5rem">
-                            <Button h="1.75rem" size="sm" onClick={handleClick}>
-                            {show ? "Hide" : "Show"}
-                            </Button>
-                        </InputRightElement>
-                        </InputGroup>
-                    </FormControl>
-                    <ButtonGroup p={3} pl={20} alignItems='center'>
-                       <Button
+                  <FormControl id="password" isRequired>
+                      <FormLabel>Password</FormLabel>
+                      <InputGroup size="md" 
+                          backgroundColor={isDark ? '#BFAE98' : '#ECE8DF'} 
+                          color={isDark ? '#E8DFD8' : '#5E4D3B'}>
+                      <Input
+                          value={password}
+                          onChange={(e) => setPassword(e.target.value)}
+                          type={show ? "text" : "password"}
+                          placeholder="Enter password"
+                      />
+                      <InputRightElement width="4.5rem">
+                          <Button h="1.75rem" size="sm" onClick={handleClick}>
+                          {show ? "Hide" : "Show"}
+                          </Button>
+                      </InputRightElement>
+                      </InputGroup>
+                  </FormControl>
+                  
+                  <VStack>
+                    <ButtonGroup pt={5} alignItems='center'>
+                      <Button
+                      backgroundColor={isDark ? '#ECE8DF' : '#BFAE98'}
                         color={isDark ? '#5E4D3B' : '#E8DFD8'}
                         width="100%"
                         variant='outline'
                         style={{ marginTop: 15 }}
                         onClick={submitHandler}
-                        isLoading={loading}
-                    >
-                        Login
-                    </Button> 
+                        isLoading={info}
+                        >
+                          Login
+                      </Button> 
                     </ButtonGroup>
-                    
+                    <Box>
+
+                    </Box>
+                  </VStack>
                 </Box>
             </Flex>
         </Box>
             
                         
-        </Stack>
+      </Stack>
     )
 }
 

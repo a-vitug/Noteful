@@ -28,4 +28,4 @@ root.render(
             </ChakraProvider> 
         </BrowserRouter>
     </React.StrictMode>
-)
+);
