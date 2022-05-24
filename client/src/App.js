@@ -1,11 +1,3 @@
-// import { Flex, VStack, Heading, Spacer } from '@chakra-ui/layout';
-// import { IconButton, Link } from '@chakra-ui/react';
-
-// import { FaSun, FaMoon, FaGithub } from 'react-icons/fa';
-// import { useColorMode } from '@chakra-ui/color-mode';
-
-// import Profile from './components/Profile';
-// import Post from './components/Post';
 import { Routes, Route } from 'react-router-dom';
 
 import './App.css';

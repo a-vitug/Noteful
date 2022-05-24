@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { axios } from 'axios';
 import { useNavigate } from 'react-router-dom';
-import { Flex, Stack, VStack } from '@chakra-ui/layout';
+import { Flex, Stack, VStack, Spacer, Container } from '@chakra-ui/layout';
 import { 
     Input,
     Box,
@@ -9,12 +9,19 @@ import {
     FormLabel,
     Button,
     ButtonGroup,
+    Link,
+    IconButton,
     InputGroup,
     InputRightElement,
-    useToast
+    useToast,
+    Text,
+    Wrap,
+    WrapItem
 } from '@chakra-ui/react';
 
-import { useColorMode } from '@chakra-ui/color-mode';
+import { useColorMode, useColorModeValue } from '@chakra-ui/color-mode';
+import { FaSun, FaMoon, FaGithub } from 'react-icons/fa';
+
 
 const Login = () => {
     const [show, setShow] = useState(false);
@@ -26,6 +33,8 @@ const Login = () => {
     const history = useNavigate();
 
     const { colorMode, toggleColorMode } = useColorMode();
+    const textcolor = useColorModeValue('#E8DFD8', 'yellow.900');
+    const bgcolor = useColorModeValue('#ECE8DF', '#BFAE98')
     const isDark = colorMode === 'dark';
 
     const submitHandler = async () => {
@@ -81,37 +90,58 @@ const Login = () => {
       };
 
     return (
-        <Stack>
-        <Box ml='auto'>
-            <Flex flexDirection='column' p='200px' pr='200px' >
+        <VStack>
+          <Box p={5} ml='auto'>
+                <Link href='https://github.com/a-vitug/react-app'>
+                    <IconButton ml={2} icon={<FaGithub />} isRound='true'></IconButton>
+                </Link>
+                
+                <IconButton ml={8} icon={isDark ? <FaSun /> : <FaMoon />} isRound='true' onClick={toggleColorMode}></IconButton>
+          </Box>
+
+        <Wrap color={textcolor}>
+          <Stack pt='200px' textShadow='2px 2px #BFAE98'>
+              <WrapItem className='halimun'>
+                <Text fontSize='90px'>welcome</Text>
+              </WrapItem>
+              <WrapItem noOfLines={2} textAlign='center'>
+                <Text className='gloria' fontSize='60px'>to</Text>
+                <Text  className='gloria' fontSize='70px'>noteful</Text>
+              </WrapItem>
+          </Stack>
+
+          <WrapItem>
+            <Flex flexDirection='column' p='200px' pl='200px'>
                 <Box 
                   border='2px'
-                  // bgGradient={isDark ? ['linear(to-l, #C89D81, #ECE8DF)'] : ['linear(to-l, #ECE8DF, #C89D81)']}
-                  // backgroundColor={isDark ? '#ECE8DF' : '#BFAE98'} 
+                  borderRadius='md'
+                  boxShadow='lg'
                   color={isDark ? '#5E4D3B' : '#E8DFD8'}
-                  p={20}>
+                  p={20}
+                  >
                     
                   <FormControl id="email" isRequired pb='40px'>
-                      <FormLabel>Email Address</FormLabel>
-                      <InputGroup size="md" 
-                          backgroundColor={isDark ? '#BFAE98' : '#ECE8DF'} 
-                          color={isDark ? '#E8DFD8' : '#5E4D3B'}>
-                      <Input
-                          color='black'
-                          value={email}
-                          type="email"
-                          placeholder="Enter your email address"
-                          onChange={(e) => setEmail(e.target.value)}
-                          />  
-                      </InputGroup>
-                      
+                    <FormLabel>Email Address</FormLabel>
+                    <InputGroup size="md" 
+                        backgroundColor={bgcolor} 
+                        color={textcolor}
+                        boxShadow='lg'>
+                    <Input
+                        color='black'
+                        value={email}
+                        type="email"
+                        placeholder="Enter your email address"
+                        onChange={(e) => setEmail(e.target.value)}
+                        />  
+                    </InputGroup>
                   </FormControl>
 
                   <FormControl id="password" isRequired>
                       <FormLabel>Password</FormLabel>
                       <InputGroup size="md" 
-                          backgroundColor={isDark ? '#BFAE98' : '#ECE8DF'} 
-                          color={isDark ? '#E8DFD8' : '#5E4D3B'}>
+                          backgroundColor={bgcolor} 
+                          color={textcolor}
+                          boxShadow='lg'>
                       <Input
                           value={password}
                           onChange={(e) => setPassword(e.target.value)}
@@ -119,8 +149,11 @@ const Login = () => {
                           placeholder="Enter password"
                       />
                       <InputRightElement width="4.5rem">
-                          <Button h="1.75rem" size="sm" onClick={handleClick}>
-                          {show ? "Hide" : "Show"}
+                          <Button h="1.75rem" size="sm" onClick={handleClick}
+                            backgroundColor={isDark ? '#ECE8DF' : '#BFAE98'}
+                            color={isDark ? '#5E4D3B' : '#E8DFD8'}
+                          >
+                            {show ? "Hide" : "Show"}
                           </Button>
                       </InputRightElement>
                       </InputGroup>
@@ -129,8 +162,9 @@ const Login = () => {
                   <VStack>
                     <ButtonGroup pt={5} alignItems='center'>
                       <Button
-                      backgroundColor={isDark ? '#ECE8DF' : '#BFAE98'}
+                        backgroundColor={isDark ? '#ECE8DF' : '#BFAE98'}
                         color={isDark ? '#5E4D3B' : '#E8DFD8'}
+                        boxShadow='lg'
                         width="100%"
                         variant='outline'
                         style={{ marginTop: 15 }}
@@ -146,10 +180,11 @@ const Login = () => {
                   </VStack>
                 </Box>
             </Flex>
-        </Box>
+          </WrapItem>
+        </Wrap>
             
                         
-      </Stack>
+      </VStack>
     )
 }
 
