@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { checkPassword, validateEmail } from '../utils/helpers';
+import { checkPassword, validateEmail } from '../../utils/helpers';
 import { useNavigate } from 'react-router-dom';
 import { axios } from 'axios';
 import { Flex, Stack, VStack, Spacer } from '@chakra-ui/layout';
@@ -108,35 +108,6 @@ const Signup = () => {
   };
 
   return (
-    <VStack>
-      <Box p={5} ml='auto'>
-        <Link href='https://github.com/a-vitug/react-app'>
-          <IconButton ml={2} icon={<FaGithub />} isRound='true'></IconButton>
-        </Link>
-
-        <IconButton
-          ml={8}
-          icon={isDark ? <FaSun /> : <FaMoon />}
-          isRound='true'
-          onClick={toggleColorMode}
-        ></IconButton>
-      </Box>
-
-      <Wrap color={textcolor}>
-        <Stack pt='180px' textShadow='2px 2px #BFAE98'>
-          <WrapItem className='halimun'>
-            <Text fontSize='90px'>welcome</Text>
-          </WrapItem>
-          <WrapItem noOfLines={2} textAlign='center'>
-            <Text className='gloria' fontSize='60px'>
-              to
-            </Text>
-            <Text className='gloria' fontSize='70px'>
-              noteful
-            </Text>
-          </WrapItem>
-        </Stack>
-
         <WrapItem>
           <Flex flexDirection='column' p='100px' pl='200px'>
             <Box
@@ -260,8 +231,6 @@ const Signup = () => {
             </Box>
           </Flex>
         </WrapItem>
-      </Wrap>
-    </VStack>
   );
 };
 
