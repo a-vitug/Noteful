@@ -2,7 +2,7 @@ const { Schema, model } = require('mongoose')
 
 const postSchema = new Schema(
     {
-    userId: {
+    username: {
         type: String,
         require: true,
         trim: true
