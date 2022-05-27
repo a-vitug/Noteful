@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { checkPassword, validateEmail } from '../../utils/helpers';
 import { useNavigate } from 'react-router-dom';
 import { axios } from 'axios';
+import { motion } from "framer-motion";
 import { Flex, Stack, VStack, Spacer } from '@chakra-ui/layout';
 import {
   Input,
@@ -141,11 +142,28 @@ const Authspage = () => {
           </WrapItem>
         </Stack>
 
-        <Box>
-        <Tabs align='end' variant='soft-rounded' colorScheme='green'>
-            <TabList mb='1em'>
-                <Tab>Login</Tab>
-                <Tab>Signup</Tab>
+        <Tabs align='end' variant='unstyled'>
+            <TabList m={3}>
+                <Tab 
+                    m={1}
+                    border='2px'
+                    borderRadius='md'
+                    boxShadow='lg'
+                    color='#BDD1B6'
+                    fontWeight='bold'
+                    >
+                        Login
+                </Tab>
+                <Tab
+                    m={1}
+                    border='2px'
+                    borderRadius='md'
+                    boxShadow='lg'
+                    color='#BDD1B6'
+                    fontWeight='bold'
+                    >
+                        Signup
+                </Tab>
             </TabList>
             <TabPanels>
                 <TabPanel>
@@ -156,7 +174,6 @@ const Authspage = () => {
                 </TabPanel>
             </TabPanels>
             </Tabs>
-            </Box>
       </Wrap>
 
     </VStack>

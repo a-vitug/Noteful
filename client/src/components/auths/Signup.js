@@ -108,129 +108,127 @@ const Signup = () => {
   };
 
   return (
-        <WrapItem>
-          <Flex flexDirection='column' p='100px' pl='200px'>
-            <Box
-              border='2px'
-              borderRadius='md'
+    <Flex flexDirection='column' p='50px' pl='200px'>
+      <Box
+        border='2px'
+        borderRadius='md'
+        boxShadow='lg'
+        color={isDark ? '#5E4D3B' : '#E8DFD8'}
+        p={20}
+      >
+        <FormControl isRequired id='username' pb={8}>
+          <FormLabel>Username</FormLabel>
+          <InputGroup
+            size='md'
+            backgroundColor={bgcolor}
+            color={textcolor}
+            boxShadow='lg'
+          >
+            <Input
+              placeholder='Enter your username'
+              onChange={(e) => setUsername(e.target.value)}
+            />
+          </InputGroup>
+        </FormControl>
+
+        <FormControl isRequired id='email' pb={8}>
+          <FormLabel>Email Address</FormLabel>
+          <InputGroup
+            size='md'
+            backgroundColor={bgcolor}
+            color={textcolor}
+            boxShadow='lg'
+          >
+            <Input
+              value={email}
+              type='email'
+              placeholder='Enter your email address'
+              onChange={(e) => setEmail(e.target.value)}
+            />
+          </InputGroup>
+        </FormControl>
+
+        <FormControl isRequired id='password' pb={8}>
+          <FormLabel>Password</FormLabel>
+          <Tooltip
+            label='Must be a minimum of eight characters, 
+                at least one uppercase letter, 
+                one lowercase letter, 
+                one number and 
+                one special character'
+          >
+            <InputGroup
+              size='md'
+              backgroundColor={bgcolor}
+              color={textcolor}
               boxShadow='lg'
-              color={isDark ? '#5E4D3B' : '#E8DFD8'}
-              p='100px'
             >
-              <FormControl isRequired id='username' pb={8}>
-                <FormLabel>Username</FormLabel>
-                <InputGroup
-                  size='md'
-                  backgroundColor={bgcolor}
-                  color={textcolor}
-                  boxShadow='lg'
+              <Input
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                type={show ? 'text' : 'password'}
+                placeholder='Enter password'
+              />
+              <InputRightElement width='4.5rem'>
+                <Button
+                  h='1.75rem'
+                  size='sm'
+                  onClick={handleClick}
+                  backgroundColor={isDark ? '#ECE8DF' : '#BFAE98'}
+                  color={isDark ? '#5E4D3B' : '#E8DFD8'}
                 >
-                  <Input
-                    placeholder='Enter your username'
-                    onChange={(e) => setUsername(e.target.value)}
-                  />
-                </InputGroup>
-              </FormControl>
+                  {show ? 'Hide' : 'Show'}
+                </Button>
+              </InputRightElement>
+            </InputGroup>
+          </Tooltip>
+        </FormControl>
 
-              <FormControl isRequired id='email' pb={8}>
-                <FormLabel>Email Address</FormLabel>
-                <InputGroup
-                  size='md'
-                  backgroundColor={bgcolor}
-                  color={textcolor}
-                  boxShadow='lg'
-                >
-                  <Input
-                    value={email}
-                    type='email'
-                    placeholder='Enter your email address'
-                    onChange={(e) => setEmail(e.target.value)}
-                  />
-                </InputGroup>
-              </FormControl>
+        <FormControl isRequired id='password' pb={5}>
+          <FormLabel>Confirm Password</FormLabel>
+          <InputGroup
+            size='md'
+            backgroundColor={bgcolor}
+            color={textcolor}
+            boxShadow='lg'
+          >
+            <Input
+              type={show ? 'text' : 'password'}
+              placeholder='Confirm password'
+              onChange={(e) => setConfirmpassword(e.target.value)}
+            />
+            <InputRightElement width='4.5rem'>
+              <Button
+                h='1.75rem'
+                size='sm'
+                onClick={handleClick}
+                backgroundColor={isDark ? '#ECE8DF' : '#BFAE98'}
+                color={isDark ? '#5E4D3B' : '#E8DFD8'}
+              >
+                {show ? 'Hide' : 'Show'}
+              </Button>
+            </InputRightElement>
+          </InputGroup>
+        </FormControl>
 
-              <FormControl isRequired id='password' pb={8}>
-                <FormLabel>Password</FormLabel>
-                <Tooltip
-                  label='Must be a minimum of eight characters, 
-                      at least one uppercase letter, 
-                      one lowercase letter, 
-                      one number and 
-                      one special character'
-                >
-                  <InputGroup
-                    size='md'
-                    backgroundColor={bgcolor}
-                    color={textcolor}
-                    boxShadow='lg'
-                  >
-                    <Input
-                      value={password}
-                      onChange={(e) => setPassword(e.target.value)}
-                      type={show ? 'text' : 'password'}
-                      placeholder='Enter password'
-                    />
-                    <InputRightElement width='4.5rem'>
-                      <Button
-                        h='1.75rem'
-                        size='sm'
-                        onClick={handleClick}
-                        backgroundColor={isDark ? '#ECE8DF' : '#BFAE98'}
-                        color={isDark ? '#5E4D3B' : '#E8DFD8'}
-                      >
-                        {show ? 'Hide' : 'Show'}
-                      </Button>
-                    </InputRightElement>
-                  </InputGroup>
-                </Tooltip>
-              </FormControl>
-
-              <FormControl isRequired id='password' pb={5}>
-                <FormLabel>Confirm Password</FormLabel>
-                <InputGroup
-                  size='md'
-                  backgroundColor={bgcolor}
-                  color={textcolor}
-                  boxShadow='lg'
-                >
-                  <Input
-                    type={show ? 'text' : 'password'}
-                    placeholder='Confirm password'
-                    onChange={(e) => setConfirmpassword(e.target.value)}
-                  />
-                  <InputRightElement width='4.5rem'>
-                    <Button
-                      h='1.75rem'
-                      size='sm'
-                      onClick={handleClick}
-                      backgroundColor={isDark ? '#ECE8DF' : '#BFAE98'}
-                      color={isDark ? '#5E4D3B' : '#E8DFD8'}
-                    >
-                      {show ? 'Hide' : 'Show'}
-                    </Button>
-                  </InputRightElement>
-                </InputGroup>
-              </FormControl>
-
-              <VStack>
-                <ButtonGroup pt={5} alignItems='center'>
-                  <Button
-                    backgroundColor={isDark ? '#ECE8DF' : '#BFAE98'}
-                    color={isDark ? '#5E4D3B' : '#E8DFD8'}
-                    boxShadow='lg'
-                    width='100%'
-                    variant='outline'
-                    style={{ marginTop: 15 }}
-                    onClick={submitHandler}
-                    isLoading={info}
-                  >
-                    Signup
-                  </Button>
-                </ButtonGroup>
-              </VStack>
-            </Box>
-          </Flex>
-        </WrapItem>
+        <VStack>
+          <ButtonGroup pt={5} alignItems='center'>
+            <Button
+              backgroundColor={isDark ? '#ECE8DF' : '#BFAE98'}
+              color={isDark ? '#5E4D3B' : '#E8DFD8'}
+              boxShadow='lg'
+              width='100%'
+              variant='outline'
+              style={{ marginTop: 15 }}
+              onClick={submitHandler}
+              isLoading={info}
+            >
+              Signup
+            </Button>
+          </ButtonGroup>
+        </VStack>
+      </Box>
+    </Flex>
   );
 };
 

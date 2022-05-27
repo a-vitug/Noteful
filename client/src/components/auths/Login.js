@@ -89,81 +89,79 @@ const Login = () => {
   };
 
   return (
-        <WrapItem>
-          <Flex flexDirection='column' p='200px' pl='200px'>
-            <Box
-              border='2px'
-              borderRadius='md'
-              boxShadow='lg'
+    <Flex flexDirection='column' p='50px' pl='200px'>
+      <Box
+        border='2px'
+        borderRadius='md'
+        boxShadow='lg'
+        color={isDark ? '#5E4D3B' : '#E8DFD8'}
+        p={20}
+      >
+        <FormControl id='email' isRequired pb='40px'>
+          <FormLabel>Email Address</FormLabel>
+          <InputGroup
+            size='md'
+            backgroundColor={bgcolor}
+            color={textcolor}
+            boxShadow='lg'
+          >
+            <Input
+              color='black'
+              value={email}
+              type='email'
+              placeholder='Enter your email address'
+              onChange={(e) => setEmail(e.target.value)}
+            />
+          </InputGroup>
+        </FormControl>
+
+        <FormControl id='password' isRequired>
+          <FormLabel>Password</FormLabel>
+          <InputGroup
+            size='md'
+            backgroundColor={bgcolor}
+            color={textcolor}
+            boxShadow='lg'
+          >
+            <Input
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              type={show ? 'text' : 'password'}
+              placeholder='Enter password'
+            />
+            <InputRightElement width='4.5rem'>
+              <Button
+                h='1.75rem'
+                size='sm'
+                onClick={handleClick}
+                backgroundColor={isDark ? '#ECE8DF' : '#BFAE98'}
+                color={isDark ? '#5E4D3B' : '#E8DFD8'}
+              >
+                {show ? 'Hide' : 'Show'}
+              </Button>
+            </InputRightElement>
+          </InputGroup>
+        </FormControl>
+
+        <VStack>
+          <ButtonGroup pt={5} alignItems='center'>
+            <Button
+              backgroundColor={isDark ? '#ECE8DF' : '#BFAE98'}
               color={isDark ? '#5E4D3B' : '#E8DFD8'}
-              p={20}
+              boxShadow='lg'
+              width='100%'
+              variant='outline'
+              style={{ marginTop: 15 }}
+              onClick={submitHandler}
+              isLoading={info}
             >
-              <FormControl id='email' isRequired pb='40px'>
-                <FormLabel>Email Address</FormLabel>
-                <InputGroup
-                  size='md'
-                  backgroundColor={bgcolor}
-                  color={textcolor}
-                  boxShadow='lg'
-                >
-                  <Input
-                    color='black'
-                    value={email}
-                    type='email'
-                    placeholder='Enter your email address'
-                    onChange={(e) => setEmail(e.target.value)}
-                  />
-                </InputGroup>
-              </FormControl>
-
-              <FormControl id='password' isRequired>
-                <FormLabel>Password</FormLabel>
-                <InputGroup
-                  size='md'
-                  backgroundColor={bgcolor}
-                  color={textcolor}
-                  boxShadow='lg'
-                >
-                  <Input
-                    value={password}
-                    onChange={(e) => setPassword(e.target.value)}
-                    type={show ? 'text' : 'password'}
-                    placeholder='Enter password'
-                  />
-                  <InputRightElement width='4.5rem'>
-                    <Button
-                      h='1.75rem'
-                      size='sm'
-                      onClick={handleClick}
-                      backgroundColor={isDark ? '#ECE8DF' : '#BFAE98'}
-                      color={isDark ? '#5E4D3B' : '#E8DFD8'}
-                    >
-                      {show ? 'Hide' : 'Show'}
-                    </Button>
-                  </InputRightElement>
-                </InputGroup>
-              </FormControl>
-
-              <VStack>
-                <ButtonGroup pt={5} alignItems='center'>
-                  <Button
-                    backgroundColor={isDark ? '#ECE8DF' : '#BFAE98'}
-                    color={isDark ? '#5E4D3B' : '#E8DFD8'}
-                    boxShadow='lg'
-                    width='100%'
-                    variant='outline'
-                    style={{ marginTop: 15 }}
-                    onClick={submitHandler}
-                    isLoading={info}
-                  >
-                    Login
-                  </Button>
-                </ButtonGroup>
-                <Box></Box>
-              </VStack>
-            </Box>
-          </Flex>
-        </WrapItem>
+              Login
+            </Button>
+          </ButtonGroup>
+          <Box></Box>
+        </VStack>
+      </Box>
+    </Flex>
   );
 };
 
