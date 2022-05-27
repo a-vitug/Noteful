@@ -1,5 +1,5 @@
 @import url('http://fonts.cdnfonts.com/css/halimun');
-@import url('https://fonts.googleapis.com/css2?family=Itim&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Itim&family=Mali&display=swap');
 
 .App {
     background-image: url(./img/background.png);
@@ -17,6 +17,9 @@
 }
 
 .gloria {
-    font-family: 'Itim', cursive;}
+    font-family: 'Itim', cursive;
+}
 
-
+.indie {
+    font-family: 'Mali', cursive;
+}
