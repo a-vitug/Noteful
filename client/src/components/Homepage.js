@@ -278,6 +278,84 @@ export default function Homepage({ loggedIn, setLoggedIn }) {
 
                     </Grid>
 
+                    <Box backdropFilter='auto' backdropBlur='3px' borderRadius='md'>
+
+                    <Divider />
+
+                    <Grid templateColumns='repeat(5, 1fr)' gap={5}>
+                        <Spacer></Spacer>
+                        <GridItem colSpan={3}>
+                            <Text 
+                                className='indie'
+                                fontWeight='bold'
+                                p='20px'
+                                fontSize='3xl'
+                                color={textcolor}
+                                > 
+                                    Check out some user's opinions
+                            </Text>
+                            <Box m={3}>
+                                <FormControl isReadOnly id='comment' >
+                                    <FormLabel color={isDark ? '#5E4D3B' : '#E8DFD8'}> username1 </FormLabel>
+                                    <InputGroup
+                                        size='md'
+                                        boxShadow='lg'
+                                    >
+                                        <Input h='65px' backgroundColor='RGBA(0, 0, 0, 0.16)'
+                                            variant='filled'
+                                            type='comment'
+                                            placeholder='wow this is a great app! '
+                                        />
+                                    </InputGroup>
+                                </FormControl>
+                            </Box>
+                            <Box m={3}>
+                                <FormControl isReadOnly id='comment' >
+                                    <FormLabel color={isDark ? '#5E4D3B' : '#E8DFD8'}> username2 </FormLabel>
+                                    <InputGroup
+                                        size='md'
+                                        boxShadow='lg'
+                                    >
+                                        <Input h='65px' backgroundColor='RGBA(0, 0, 0, 0.16)'
+                                            variant='filled'
+                                            type='comment'
+                                            placeholder='this is my very first post yay ~~~ '
+                                        />
+                                        
+                                    </InputGroup>
+                                </FormControl>
+                            </Box>
+                            <Box m={3}>
+                                <FormControl isReadOnly id='comment' >
+                                    <FormLabel color={isDark ? '#5E4D3B' : '#E8DFD8'}> username3 </FormLabel>
+                                    <InputGroup
+                                        size='md'
+                                        boxShadow='lg'
+                                    >
+                                        <Input h='65px' backgroundColor='RGBA(0, 0, 0, 0.16)'
+                                            variant='filled'
+                                            type='comment'
+                                            placeholder='lorem ipsum dolor sit amet consectetur adipiscing elit. '
+                                        />
+                                    </InputGroup>
+                                </FormControl>
+                            </Box>
+
+                        </GridItem>
+
+                        {/* paid ads */}
+                        <GridItem colEnd={6}>
+                            <Box m={4}>
+                                <Image src='https://via.placeholder.com/150' />
+                            </Box>
+                            <Box m={7}>
+                                <Image src='https://via.placeholder.com/150' />
+                            </Box>
+                        </GridItem>
+
+                    </Grid>
+            </Box>
+
                     
                         
                 </Box>
