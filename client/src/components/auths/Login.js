@@ -1,7 +1,8 @@
 import { useState } from 'react';
 import { axios } from 'axios';
 import { useNavigate } from 'react-router-dom';
-import { Flex, Stack, VStack, Spacer, Container } from '@chakra-ui/layout';
+import { Flex, VStack } from '@chakra-ui/layout';
+import { useColorMode, useColorModeValue } from '@chakra-ui/color-mode';
 import {
   Input,
   Box,
@@ -9,20 +10,12 @@ import {
   FormLabel,
   Button,
   ButtonGroup,
-  Link,
-  IconButton,
   InputGroup,
   InputRightElement,
-  useToast,
-  Text,
-  Wrap,
-  WrapItem,
+  useToast
 } from '@chakra-ui/react';
 
-import { useColorMode, useColorModeValue } from '@chakra-ui/color-mode';
-import { FaSun, FaMoon, FaGithub } from 'react-icons/fa';
-
-const Login = () => {
+export default function Login({ loggedIn, setLoggedIn }) {
   const [show, setShow] = useState(false);
   const handleClick = () => setShow(!show);
   const toast = useToast();
@@ -146,13 +139,16 @@ const Login = () => {
         <VStack>
           <ButtonGroup pt={5} alignItems='center'>
             <Button
+              className='loginBtn'
+              type='button'
+              onClick={() => setLoggedIn(!loggedIn)}
               backgroundColor={isDark ? '#ECE8DF' : '#BFAE98'}
               color={isDark ? '#5E4D3B' : '#E8DFD8'}
               boxShadow='lg'
               width='100%'
               variant='outline'
               style={{ marginTop: 15 }}
-              onClick={submitHandler}
+              // onClick={submitHandler}
               isLoading={info}
             >
               Login
@@ -165,4 +161,4 @@ const Login = () => {
   );
 };
 
-export default Login;
+// export default Login;

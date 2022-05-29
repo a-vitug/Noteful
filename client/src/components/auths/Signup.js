@@ -1,8 +1,8 @@
 import { useState } from 'react';
-import { checkPassword, validateEmail } from '../../utils/helpers';
 import { useNavigate } from 'react-router-dom';
 import { axios } from 'axios';
-import { Flex, Stack, VStack, Spacer } from '@chakra-ui/layout';
+import { Flex, VStack } from '@chakra-ui/layout';
+import { useColorMode, useColorModeValue } from '@chakra-ui/color-mode';
 import {
   Input,
   Box,
@@ -10,19 +10,11 @@ import {
   FormLabel,
   Button,
   ButtonGroup,
-  Link,
-  IconButton,
   InputGroup,
   InputRightElement,
   useToast,
-  Text,
   Tooltip,
-  Wrap,
-  WrapItem,
 } from '@chakra-ui/react';
-
-import { useColorMode, useColorModeValue } from '@chakra-ui/color-mode';
-import { FaSun, FaMoon, FaGithub } from 'react-icons/fa';
 
 const Signup = () => {
   const [show, setShow] = useState(false);
@@ -37,7 +29,6 @@ const Signup = () => {
   const [info, setInformation] = useState();
 
   const { colorMode, toggleColorMode } = useColorMode();
-  // const theme = extendTheme({ borderRadius });
   const textcolor = useColorModeValue('#E8DFD8', 'yellow.900');
   const bgcolor = useColorModeValue('#ECE8DF', '#BFAE98');
   const isDark = colorMode === 'dark';
@@ -214,6 +205,7 @@ const Signup = () => {
         <VStack>
           <ButtonGroup pt={5} alignItems='center'>
             <Button
+              className='signupBtn'
               backgroundColor={isDark ? '#ECE8DF' : '#BFAE98'}
               color={isDark ? '#5E4D3B' : '#E8DFD8'}
               boxShadow='lg'
