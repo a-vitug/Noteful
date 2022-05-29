@@ -12,7 +12,7 @@ import Authspage from './auths/Authspage';
 
 // swiper elements
 import { Swiper, SwiperSlide } from 'swiper/react';
-import SwiperCore, { Navigation, Pagination, Controller, Thumbs, EffectFade } from 'swiper';
+import SwiperCore, { Autoplay, Navigation, Pagination, Controller, Thumbs, EffectFade } from 'swiper';
 import 'swiper/css';
 
 export default function Homepage({ loggedIn, setLoggedIn }) {
@@ -208,11 +208,16 @@ export default function Homepage({ loggedIn, setLoggedIn }) {
 
                         {/* paid ads */}
                         <GridItem colEnd={6}>
-                            <Box m={4}>
-                                <Image src='https://via.placeholder.com/150' />
+                            <Box m={3}>
+                                <Link href='https://buy.stripe.com/test_aEU7sD5at8bBali004'>
+                                    <Image src='./images/adss4.png' />
+                                </Link>
                             </Box>
-                            <Box m={7}>
-                                <Image src='https://via.placeholder.com/150' />
+                            <Box m={5}>
+                                <Link href='https://buy.stripe.com/test_eVaaEP7iBajJ9he8wx'>
+                                    <Image src='./images/adsss3.png' />
+                                </Link>
+                                
                             </Box>
                         </GridItem>
 
@@ -229,7 +234,8 @@ export default function Homepage({ loggedIn, setLoggedIn }) {
 
                     <Grid templateColumns='repeat(4, 1fr)' gap={1}>
                         <GridItem colSpan={2}>
-                            <Swiper modules={[Navigation, Pagination, EffectFade]}
+                            <Swiper modules={[Autoplay, Navigation, Pagination, EffectFade]}
+                                autoplay={{ disableOnInteraction: false}}
                                 navigation={true}
                                 pagination={{clickable: true}}
                                 loop
@@ -240,10 +246,10 @@ export default function Homepage({ loggedIn, setLoggedIn }) {
                                 
                             >
                                 <SwiperSlide>
-                                    <Image w='100%' h='100%' objectFit='cover' src='./images/2.png' />
+                                    <Image w='100%' h='100%' objectFit='cover' src='./images/4.png' />
                                 </SwiperSlide>
                                 <SwiperSlide>
-                                    <Image w='100%' h='100%' objectFit='cover' src='./images/4.png' />
+                                    <Image w='100%' h='100%' objectFit='cover' src='./images/2.png' />
                                 </SwiperSlide>
                                 <SwiperSlide>
                                     <Image w='100%' h='100%' objectFit='cover' src='./images/6.png' />
@@ -254,7 +260,8 @@ export default function Homepage({ loggedIn, setLoggedIn }) {
                         </GridItem>
                            
                         <GridItem colStart={3} colEnd={6}>
-                            <Swiper modules={[Navigation, Pagination, EffectFade]}
+                            <Swiper modules={[Autoplay, Navigation, Pagination, EffectFade]}
+                                autoplay={{disableOnInteraction: false}}
                                 navigation={true}
                                 pagination={{clickable: true}}
                                 loop
@@ -264,10 +271,10 @@ export default function Homepage({ loggedIn, setLoggedIn }) {
                                 id='second'
                             >
                                 <SwiperSlide>
-                                    <Image w='100%' h='100%' objectFit='cover' src='./images/3.png' />
+                                    <Image w='100%' h='100%' objectFit='cover' src='./images/5.png' />
                                 </SwiperSlide>
                                 <SwiperSlide>
-                                    <Image w='100%' h='100%' objectFit='cover' src='./images/5.png' />
+                                    <Image w='100%' h='100%' objectFit='cover' src='./images/3.png' />
                                 </SwiperSlide>
                                 <SwiperSlide>
                                     <Image w='100%' h='100%' objectFit='cover' src='./images/7.png' />
@@ -342,14 +349,17 @@ export default function Homepage({ loggedIn, setLoggedIn }) {
                             </Box>
 
                         </GridItem>
-
                         {/* paid ads */}
                         <GridItem colEnd={6}>
-                            <Box m={4}>
-                                <Image src='https://via.placeholder.com/150' />
+                            <Box m={5}>
+                                <Link href='https://buy.stripe.com/test_6oE5kveL363t796cMO'>
+                                    <Image src='./images/ad1.png' />
+                                </Link>
                             </Box>
-                            <Box m={7}>
-                                <Image src='https://via.placeholder.com/150' />
+                            <Box m={3}>
+                                <Link href='https://buy.stripe.com/test_bIY7sDbyR4Zp652003'>
+                                    <Image src='./images/ads2.png' />
+                                </Link>
                             </Box>
                         </GridItem>
 
