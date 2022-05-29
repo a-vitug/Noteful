@@ -23,6 +23,8 @@
   },
   "homepage": "https://github.com/a-vitug/react-app#readme",
   "dependencies": {
+    "mongodb": "^4.6.0",
+    "mongoose": "^6.3.4",
     "react-icons": "^4.3.1"
   }
 }
