@@ -2,14 +2,24 @@ const { Schema, model } = require('mongoose')
 
 const postSchema = new Schema(
     {
-    userId: {
+    username: {
         type: String,
         require: true,
+        trim: true
     },
-    description: {
-        type: String,
-        max: 500,
-    },
+    comments: [{
+        commentText: {
+            type: String,
+            required: true,
+            min: 1,
+            max: 280,
+        },
+        createdAt: {
+            type: Date,
+            default: Date.now,
+            get: (timestamp) => dateFormat(timestamp),
+        },
+    }],
     image: {
         type: String,
     },
