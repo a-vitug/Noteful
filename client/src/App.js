@@ -17,8 +17,8 @@ function App() {
     <div className='App'>
         <Routes>
           <Route path='/' element={<Homepage loggedIn={loggedIn} setLoggedIn={setLoggedIn} />} className='Homepage' />
-          <Route path='/authspage' element={<Authspage />} className='Authspage' />
-          <Route path='/login' element={<Login />} className='Login' />
+          <Route path='/authspage' element={<Authspage loggedIn={loggedIn} setLoggedIn={setLoggedIn} />} className='Authspage' />
+          <Route path='/login' element={<Login loggedIn={loggedIn} setLoggedIn={setLoggedIn} />} className='Login' />
           <Route path='/signup' element={<Signup />} className='Signup' />
           <Route path='/profile' element={<Profile /> } className='Profile' />
         </Routes>
