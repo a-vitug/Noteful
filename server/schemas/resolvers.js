@@ -80,9 +80,41 @@ const resolvers = {
             }
 
             throw new AuthenticationError('You need to be logged in!')
+        },
+        createComment: async (parent, { postId, body }, context) => {
+            if(context.user) {
+                return Post.findOneAndUpdate(
+                    { _id: postId },
+                    {
+                        $addToSet: {
+                            comments: { commentText, commentAuthor: context.user.username },
+                        },
+                    },
+                    {
+                        new: true,
+                        runValidators: true,
+                    }
+                );
+            }
+            throw new AuthenticationError('You need to be logged in!');
+        },
+        removeComment: async(parent, { postId, commentId }, context) => {
+            if(context.user) {
+                return Post.findOneAndUpdate(
+                    { _id: postId},
+                    {
+                        $pull: {
+                            comments: {_id: commentId, username: context.user.username},
+                        },
+                    },
+                    { new: true}
+                )
+            }
+            throw new AuthenticationError('You need to be logged in!')
         }
     }
-}
+};
+
 
 
 module.exports = resolvers;
