@@ -6,27 +6,34 @@ import { Flex, Stack, VStack, Spacer } from '@chakra-ui/layout';
 import {
   Input,
   Box,
+  Center,
   Container,
   FormControl,
   FormLabel,
+  Grid,
+  GridItem,
   Button,
   ButtonGroup,
   IconButton,
+  Image,
   Link,
   InputGroup,
   InputRightElement,
   SimpleGrid,
   StackDivider,
+  Text,
   Wrap,
   WrapItem,
 } from '@chakra-ui/react';
 
-import { useColorMode } from '@chakra-ui/color-mode';
-import { FaSun, FaMoon, FaGithub, FaUser } from 'react-icons/fa';
+import { useColorMode, useColorModeValue } from '@chakra-ui/color-mode';
+import { FaSun, FaMoon, FaGithub, FaUser, FaPaperPlane, FaHeart, FaTrashAlt } from 'react-icons/fa';
 
 const Profile = () => {
   const { colorMode, toggleColorMode } = useColorMode();
   const isDark = colorMode === 'dark';
+  const textcolor = useColorModeValue('#E8DFD8', 'yellow.900');
+  const bgcolor = useColorModeValue('RGBA(0, 0, 0, 0.16)', 'RGBA(0, 0, 0, 0.36)');
   const toast = useToast();
   const navigate = useNavigate();
 
@@ -128,7 +135,7 @@ const Profile = () => {
           ml={8}
           icon={<FaUser />}
           isRound='true'
-          onClick={toggleColorMode}
+          backgroundColor={bgcolor}
         ></IconButton>
 
         <Link href='https://github.com/a-vitug/react-app'>
@@ -136,7 +143,7 @@ const Profile = () => {
             ml={8}
             icon={<FaGithub />}
             isRound='true'
-            onClick={toggleColorMode}
+            backgroundColor={bgcolor}
           ></IconButton>
         </Link>
 
@@ -145,6 +152,7 @@ const Profile = () => {
           icon={isDark ? <FaSun /> : <FaMoon />}
           isRound='true'
           onClick={toggleColorMode}
+          backgroundColor={bgcolor}
         ></IconButton>
       </Flex>
 
@@ -174,9 +182,159 @@ const Profile = () => {
             </Box>
           </Flex>
         </WrapItem>
+        
+        <WrapItem>
+          <Box m='30px'>
+            <Text 
+                textShadow='2px 2px #BFAE98'
+                className='gloria' 
+                p='30px'
+                pl='100px'
+                fontSize='6xl'
+                color={textcolor}
+                > 
+                    What's on your mind? 
+            </Text>
+            <Center>
+                <Box p='30px' w='80%'>
+                    <FormControl id='post'>
+                        <InputGroup
+                            size='lg'
+                            boxShadow='lg'
+                        >
+                            <Input h='100px'
+                                backgroundColor='RGBA(0, 0, 0, 0.16)'
+                                variant='filled'
+                                type='post'
+                                placeholder='Type something here... '
+                                // onChange={(e) => setEmail(e.target.value)}
+                            />
+                            <InputRightElement mr={5} p='50px'>
+                                <IconButton icon={<FaPaperPlane />} 
+                                size='lg'
+                                    backgroundColor={isDark ? '#ECE8DF' : '#BFAE98'}
+                                    color={isDark ? '#5E4D3B' : '#E8DFD8'} />
+                            </InputRightElement>
+                        </InputGroup>
+                    </FormControl>
+                </Box>
+            </Center>
+          </Box>
+        </WrapItem>
+        
+        <Grid templateColumns='repeat(5, 1fr)' gap={5}>
+
+          {/* paid ads */}
+          <GridItem colSpan={1}>
+              <Box m={3}>
+                  <Link href='https://buy.stripe.com/test_aEU7sD5at8bBali004'>
+                      <Image src='./images/adss4.png' />
+                  </Link>
+              </Box>
+          </GridItem>
+
+          <GridItem colSpan={3}>
+              <Text 
+                  className='indie'
+                  fontWeight='bold'
+                  p='20px'
+                  fontSize='3xl'
+                  color={textcolor}
+                  > 
+                      Here's some news for you...
+              </Text>
+              <Box m={3}>
+                  <FormControl id='comment' >
+                      <FormLabel color={isDark ? '#5E4D3B' : '#E8DFD8'}> username1 </FormLabel>
+                      <InputGroup
+                          size='md'
+                          boxShadow='lg'
+                      >
+                          <Input h='65px' backgroundColor='RGBA(0, 0, 0, 0.16)'
+                              variant='filled'
+                              type='comment'
+                              placeholder='Type something here... '
+                          />
+                          <InputRightElement mr={5} p='33px'>
+                              <IconButton
+                                  icon={<FaHeart />} 
+                                  backgroundColor={isDark ? '#ECE8DF' : '#BFAE98'}
+                                  color={isDark ? '#5E4D3B' : '#E8DFD8'} />
+                              <IconButton 
+                                  icon={<FaTrashAlt />} 
+                                  backgroundColor={isDark ? '#ECE8DF' : '#BFAE98'}
+                                  color={isDark ? '#5E4D3B' : '#E8DFD8'} />
+                          </InputRightElement>
+                      </InputGroup>
+                  </FormControl>
+              </Box>
+              <Box m={3}>
+                  <FormControl id='comment' >
+                      <FormLabel color={isDark ? '#5E4D3B' : '#E8DFD8'}> username2 </FormLabel>
+                      <InputGroup
+                          size='md'
+                          boxShadow='lg'
+                      >
+                          <Input h='65px' backgroundColor='RGBA(0, 0, 0, 0.16)'
+                              variant='filled'
+                              type='comment'
+                              placeholder='Type something here... '
+                          />
+                          <InputRightElement mr={5} p='33px'>
+                              <IconButton
+                                  icon={<FaHeart />} 
+                                  backgroundColor={isDark ? '#ECE8DF' : '#BFAE98'}
+                                  color={isDark ? '#5E4D3B' : '#E8DFD8'} />
+                              <IconButton 
+                                  icon={<FaTrashAlt />} 
+                                  backgroundColor={isDark ? '#ECE8DF' : '#BFAE98'}
+                                  color={isDark ? '#5E4D3B' : '#E8DFD8'} />
+                          </InputRightElement>
+                          
+                      </InputGroup>
+                  </FormControl>
+              </Box>
+              <Box m={3}>
+                  <FormControl id='comment' >
+                      <FormLabel color={isDark ? '#5E4D3B' : '#E8DFD8'}> username3 </FormLabel>
+                      <InputGroup
+                          size='md'
+                          boxShadow='lg'
+                      >
+                          <Input h='65px' backgroundColor='RGBA(0, 0, 0, 0.16)'
+                              variant='filled'
+                              type='comment'
+                              placeholder='Type something here... '
+                          />
+                          <InputRightElement mr={5} p='33px'>
+                              <IconButton
+                                  icon={<FaHeart />} 
+                                  backgroundColor={isDark ? '#ECE8DF' : '#BFAE98'}
+                                  color={isDark ? '#5E4D3B' : '#E8DFD8'} />
+                              <IconButton 
+                                  icon={<FaTrashAlt />} 
+                                  backgroundColor={isDark ? '#ECE8DF' : '#BFAE98'}
+                                  color={isDark ? '#5E4D3B' : '#E8DFD8'} />
+                          </InputRightElement>
+                      </InputGroup>
+                  </FormControl>
+              </Box>
+          </GridItem>
+
+          {/* paid ads */}
+          <GridItem colEnd={6}>
+              <Box m={5}>
+                  <Link href='https://buy.stripe.com/test_eVaaEP7iBajJ9he8wx'>
+                      <Image src='./images/adsss3.png' />
+                  </Link>
+                  
+              </Box>
+          </GridItem>
+
+        </Grid>
+
       </Wrap>
 
-      <Box></Box>
     </Stack>
   );
 };
