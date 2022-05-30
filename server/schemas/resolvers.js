@@ -87,7 +87,7 @@ const resolvers = {
                     { _id: postId },
                     {
                         $addToSet: {
-                            comments: { body, username: context.user.username },
+                            comments: { commentText, commentAuthor: context.user.username },
                         },
                     },
                     {
@@ -114,6 +114,7 @@ const resolvers = {
         }
     }
 };
+
 
 
 module.exports = resolvers;
