@@ -37,6 +37,7 @@ const typeDefs = gql`
         post(postId: ID!): Post
         me: User
     }
+    
     type Mutation {
         addUser(username: String!, email: String!, password: String!): Auth
         login(email: String!, password: String!): Auth
