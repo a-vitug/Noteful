@@ -116,7 +116,12 @@ export default function Homepage({ loggedIn, setLoggedIn }) {
                     <Divider />
 
                     <Grid templateColumns='repeat(5, 1fr)' gap={5}>
-                        <Spacer></Spacer>
+                        {/* paid ads */}
+                        <Box m={3}>
+                                <Link href='https://buy.stripe.com/test_aEU7sD5at8bBali004'>
+                                    <Image src='./images/adss4.png' />
+                                </Link>
+                            </Box>
                         <GridItem colSpan={3}>
                             <Text 
                                 className='indie'
@@ -208,11 +213,6 @@ export default function Homepage({ loggedIn, setLoggedIn }) {
 
                         {/* paid ads */}
                         <GridItem colEnd={6}>
-                            <Box m={3}>
-                                <Link href='https://buy.stripe.com/test_aEU7sD5at8bBali004'>
-                                    <Image src='./images/adss4.png' />
-                                </Link>
-                            </Box>
                             <Box m={5}>
                                 <Link href='https://buy.stripe.com/test_eVaaEP7iBajJ9he8wx'>
                                     <Image src='./images/adsss3.png' />
@@ -290,88 +290,88 @@ export default function Homepage({ loggedIn, setLoggedIn }) {
 
                     <Box backdropFilter='auto' backdropBlur='3px' borderRadius='md'>
 
-                    <Divider />
+                        <Divider />
 
-                    <Grid templateColumns='repeat(5, 1fr)' gap={5}>
-                        <Spacer></Spacer>
-                        <GridItem colSpan={3}>
-                            <Text 
-                                className='indie'
-                                fontWeight='bold'
-                                p='20px'
-                                fontSize='3xl'
-                                color={textcolor}
-                                > 
-                                    Check out some user's opinions
-                            </Text>
-                            <Box m={3}>
-                                <FormControl isReadOnly id='comment' >
-                                    <FormLabel color={isDark ? '#5E4D3B' : '#E8DFD8'}> username1 </FormLabel>
-                                    <InputGroup
-                                        size='md'
-                                        boxShadow='lg'
-                                    >
-                                        <Input h='65px' backgroundColor={bgcolor}
-                                            variant='filled'
-                                            type='comment'
-                                            placeholder='wow this is a great app! '
-                                        />
-                                    </InputGroup>
-                                </FormControl>
-                            </Box>
-                            <Box m={3}>
-                                <FormControl isReadOnly id='comment' >
-                                    <FormLabel color={isDark ? '#5E4D3B' : '#E8DFD8'}> username2 </FormLabel>
-                                    <InputGroup
-                                        size='md'
-                                        boxShadow='lg'
-                                    >
-                                        <Input h='65px' backgroundColor={bgcolor}
-                                            variant='filled'
-                                            type='comment'
-                                            placeholder='this is my very first post yay ~~~ '
-                                        />
-                                        
-                                    </InputGroup>
-                                </FormControl>
-                            </Box>
-                            <Box m={3}>
-                                <FormControl isReadOnly id='comment' >
-                                    <FormLabel color={isDark ? '#5E4D3B' : '#E8DFD8'}> username3 </FormLabel>
-                                    <InputGroup
-                                        size='md'
-                                        boxShadow='lg'
-                                    >
-                                        <Input h='65px' backgroundColor={bgcolor}
-                                            variant='filled'
-                                            type='comment'
-                                            placeholder='lorem ipsum dolor sit amet consectetur adipiscing elit. '
-                                        />
-                                    </InputGroup>
-                                </FormControl>
-                            </Box>
+                        <Grid templateColumns='repeat(5, 1fr)' gap={5}>
 
-                        </GridItem>
-                        {/* paid ads */}
-                        <GridItem colEnd={6}>
+                            {/* paid ads */}
                             <Box m={5}>
                                 <Link href='https://buy.stripe.com/test_6oE5kveL363t796cMO'>
                                     <Image src='./images/ad1.png' />
                                 </Link>
                             </Box>
-                            <Box m={3}>
-                                <Link href='https://buy.stripe.com/test_bIY7sDbyR4Zp652003'>
-                                    <Image src='./images/ads2.png' />
-                                </Link>
-                            </Box>
-                        </GridItem>
+                            <GridItem colSpan={3}>
+                                <Text 
+                                    className='indie'
+                                    fontWeight='bold'
+                                    p='20px'
+                                    fontSize='3xl'
+                                    color={textcolor}
+                                    > 
+                                        Check out some user's opinions
+                                </Text>
+                                <Box m={3}>
+                                    <FormControl isReadOnly id='comment' >
+                                        <FormLabel color={isDark ? '#5E4D3B' : '#E8DFD8'}> username1 </FormLabel>
+                                        <InputGroup
+                                            size='md'
+                                            boxShadow='lg'
+                                        >
+                                            <Input h='65px' backgroundColor={bgcolor}
+                                                variant='filled'
+                                                type='comment'
+                                                placeholder='wow this is a great app! '
+                                            />
+                                        </InputGroup>
+                                    </FormControl>
+                                </Box>
+                                <Box m={3}>
+                                    <FormControl isReadOnly id='comment' >
+                                        <FormLabel color={isDark ? '#5E4D3B' : '#E8DFD8'}> username2 </FormLabel>
+                                        <InputGroup
+                                            size='md'
+                                            boxShadow='lg'
+                                        >
+                                            <Input h='65px' backgroundColor={bgcolor}
+                                                variant='filled'
+                                                type='comment'
+                                                placeholder='this is my very first post yay ~~~ '
+                                            />
+                                            
+                                        </InputGroup>
+                                    </FormControl>
+                                </Box>
+                                <Box m={3}>
+                                    <FormControl isReadOnly id='comment' >
+                                        <FormLabel color={isDark ? '#5E4D3B' : '#E8DFD8'}> username3 </FormLabel>
+                                        <InputGroup
+                                            size='md'
+                                            boxShadow='lg'
+                                        >
+                                            <Input h='65px' backgroundColor={bgcolor}
+                                                variant='filled'
+                                                type='comment'
+                                                placeholder='lorem ipsum dolor sit amet consectetur adipiscing elit. '
+                                            />
+                                        </InputGroup>
+                                    </FormControl>
+                                </Box>
 
-                    </Grid>
-            </Box>
+                            </GridItem>
+                            {/* paid ads */}
+                            <GridItem colEnd={6}>
+                                <Box m={3}>
+                                    <Link href='https://buy.stripe.com/test_bIY7sDbyR4Zp652003'>
+                                        <Image src='./images/ads2.png' />
+                                    </Link>
+                                </Box>
+                            </GridItem>
 
-                    
-                        
+                        </Grid>
+                    </Box>
+   
                 </Box>
+                
             )} 
             
             
