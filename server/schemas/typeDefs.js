@@ -23,7 +23,6 @@ const typeDefs = gql`
         id: ID!
         body: String!
         username: String!
-        body: String!
     }
 
     type Like {

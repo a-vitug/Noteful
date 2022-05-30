@@ -1,9 +1,6 @@
 const express = require('express');
 const { ApolloServer } = require('apollo-server-express');
-const db = require('./config/connection');
 const { authMiddleware } = require('./utils/auth')
-const { typeDefs, resolvers } = require('./schemas');
-
 
 const db = require('./config/connection')
 const { typeDefs, resolvers } = require('./schemas')
@@ -23,7 +20,6 @@ server.applyMiddleware({
 
 app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
-
 
 
 db.once('open', () => {
