@@ -20,7 +20,7 @@ export default function Homepage({ loggedIn, setLoggedIn }) {
     const { colorMode, toggleColorMode } = useColorMode();
     const isDark = colorMode === 'dark';
     const textcolor = useColorModeValue('#E8DFD8', 'yellow.900');
-    const bgcolor = useColorModeValue('#ECE8DF', '#BFAE98');
+    const bgcolor = useColorModeValue('RGBA(0, 0, 0, 0.16)', 'RGBA(0, 0, 0, 0.36)');
 
     const outerBoxStyles = {
         background:
@@ -45,10 +45,10 @@ export default function Homepage({ loggedIn, setLoggedIn }) {
             <Flex w='100%'>
                 <Spacer></Spacer>
                 <Link href='https://github.com/a-vitug/react-app'>
-                    <IconButton ml={2} icon={<FaGithub />} isRound='true'></IconButton>
+                    <IconButton ml={2} icon={<FaGithub />} backgroundColor={bgcolor} isRound='true'></IconButton>
                 </Link>
                 
-                <IconButton ml={8} icon={isDark ? <FaSun /> : <FaMoon />} isRound='true' onClick={toggleColorMode}></IconButton>
+                <IconButton ml={8} icon={isDark ? <FaSun /> : <FaMoon />} backgroundColor={bgcolor} isRound='true' onClick={toggleColorMode}></IconButton>
             </Flex>
 
             {/* if logged in */}
@@ -67,7 +67,7 @@ export default function Homepage({ loggedIn, setLoggedIn }) {
                         </Button>
                         <Button onClick={() => setLoggedIn(!loggedIn)}
                             ml={8} 
-                            color='#BDD1B6' 
+                            color='#BDD1B6'
                             border='2px'
                             borderRadius='md'
                             boxShadow='lg'
@@ -227,10 +227,13 @@ export default function Homepage({ loggedIn, setLoggedIn }) {
             // else logged out
             ) : (
                 <Box>
+                    <Flex>
+                        <Spacer></Spacer>
+                        <Button m={5} backgroundColor={bgcolor} onClick={() => setLoggedIn(!loggedIn)}>
+                            Log in
+                        </Button>
+                    </Flex>
                     
-                    <Button onClick={() => setLoggedIn(!loggedIn)}>
-                        Log in
-                    </Button>
 
                     <Grid templateColumns='repeat(4, 1fr)' gap={1}>
                         <GridItem colSpan={2}>
@@ -308,7 +311,7 @@ export default function Homepage({ loggedIn, setLoggedIn }) {
                                         size='md'
                                         boxShadow='lg'
                                     >
-                                        <Input h='65px' backgroundColor='RGBA(0, 0, 0, 0.16)'
+                                        <Input h='65px' backgroundColor={bgcolor}
                                             variant='filled'
                                             type='comment'
                                             placeholder='wow this is a great app! '
@@ -323,7 +326,7 @@ export default function Homepage({ loggedIn, setLoggedIn }) {
                                         size='md'
                                         boxShadow='lg'
                                     >
-                                        <Input h='65px' backgroundColor='RGBA(0, 0, 0, 0.16)'
+                                        <Input h='65px' backgroundColor={bgcolor}
                                             variant='filled'
                                             type='comment'
                                             placeholder='this is my very first post yay ~~~ '
@@ -339,7 +342,7 @@ export default function Homepage({ loggedIn, setLoggedIn }) {
                                         size='md'
                                         boxShadow='lg'
                                     >
-                                        <Input h='65px' backgroundColor='RGBA(0, 0, 0, 0.16)'
+                                        <Input h='65px' backgroundColor={bgcolor}
                                             variant='filled'
                                             type='comment'
                                             placeholder='lorem ipsum dolor sit amet consectetur adipiscing elit. '
