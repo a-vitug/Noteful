@@ -33,45 +33,7 @@ const Profile = () => {
   const [pic, setPic] = useState(false);
   const [user, setUser] = useState();
 
-  const upload = async () => {
-    setUser(true);
-    try {
-      const config = {
-        headers: {
-          'Content-type': 'application/json',
-        },
-      };
-      const { data } = await axios.post(
-        '/api/user',
-        {
-          pic,
-        },
-        config
-      );
-      console.log(data);
-      toast({
-        title: 'Successfully uploaded your profile picture',
-        status: 'success',
-        duration: 5000,
-        isClosable: true,
-        position: 'bottom',
-      });
-      localStorage.setItem('userInfo', JSON.stringify(data));
-      setUser(false);
-      navigate.push('/homepage');
-    } catch (error) {
-      toast({
-        title: 'Error Occured!',
-        description: error.response.data.message,
-        status: 'error',
-        duration: 5000,
-        isClosable: true,
-        position: 'bottom',
-      });
-      setUser(false);
-    }
-  };
-
+  // uploads user's profile picture
   const uploadPic = (pics) => {
     setUser(true);
     if (pics === undefined) {
@@ -116,6 +78,47 @@ const Profile = () => {
       return;
     }
   };
+
+  const upload = async () => {
+    setUser(true);
+    try {
+      const config = {
+        headers: {
+          'Content-type': 'application/json',
+        },
+      };
+      const { data } = await axios.post(
+        '/api/user',
+        {
+          pic,
+        },
+        config
+      );
+      console.log(data);
+      toast({
+        title: 'Successfully uploaded your profile picture',
+        status: 'success',
+        duration: 5000,
+        isClosable: true,
+        position: 'bottom',
+      });
+      localStorage.setItem('userInfo', JSON.stringify(data));
+      setUser(false);
+      navigate.push('/profile');
+    } catch (error) {
+      toast({
+        title: 'Error Occured!',
+        description: error.response.data.message,
+        status: 'error',
+        duration: 5000,
+        isClosable: true,
+        position: 'bottom',
+      });
+      setUser(false);
+    }
+  };
+
+  
 
   return (
     <Stack p={5}>
