@@ -15,7 +15,7 @@ export default function Authspage({ loggedIn, setLoggedIn }) {
   const isDark = colorMode === 'dark';
 
   return (
-    <VStack>
+    <VStack className='background'>
         {/* <Box p={5} ml='auto'>
             <Link href='https://github.com/a-vitug/react-app'>
             <IconButton ml={2} icon={<FaGithub />} isRound='true'></IconButton>
