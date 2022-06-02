@@ -16,6 +16,8 @@ const typeDefs = gql`
         postAuthor: String
         createdAt: String
         comments: [Comment]!
+        likes: [Like]
+        likeCount: Int!
     }
 
     type Comment {
@@ -23,6 +25,12 @@ const typeDefs = gql`
         commentText: String
         commentAuthor: String
         createdAt: String
+    }
+
+    type Like {
+        _id: ID!
+        username: String!
+        createAt: String!
     }
 
     type Auth {
@@ -45,6 +53,8 @@ const typeDefs = gql`
         removePost(postId: ID!): Post
         createComment(postId: ID!, commentText: String!): Post
         removeComment(postId: ID!, commentId: ID!): Post
+        likePost(postId: ID!): Post
+
     }
 `;
 
