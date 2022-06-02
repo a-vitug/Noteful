@@ -7,31 +7,31 @@ const resolvers = {
         users: async () => {
             return User.find().populate('posts');
         },
-        user: async (parent, {username}) => {
+        user: async (parent, { username }) => {
             return User.findOne({ username }).populate('post');
         },
-        posts: async (parent, {username}) => {
-            const params = username ? {username} : {};
-            return  Post.find(params).sort({ createdAt: -1});
+        posts: async (parent, { username }) => {
+            const params = username ? { username } : {};
+            return Post.find(params).sort({ createdAt: -1 });
         },
-        post: async (parent, {postId}) => {
-            return Post.findOne({ _id: postId});
+        post: async (parent, { postId }) => {
+            return Post.findOne({ _id: postId });
         },
         me: async (parant, args, context) => {
             if (context.user) {
-                return User.findOne({ _id: context.user._id}).populate('posts')
+                return User.findOne({ _id: context.user._id }).populate('posts')
             }
             throw new AuthenticationError('You need to be logged in')
         }
     },
 
     Mutation: {
-        addUser: async (parent, {username, email, password}) => {
-            const user = await User.create({ username, email, password});
+        addUser: async (parent, { username, email, password }) => {
+            const user = await User.create({ username, email, password });
             const token = signToken(user);
-            return {token, user};
+            return { token, user };
         },
-        login: async (parent, { email, password}) => {
+        login: async (parent, { email, password }) => {
             const user = await User.findOne({ email });
 
             if (!user) {
@@ -46,9 +46,9 @@ const resolvers = {
 
             const token = signToken(user);
 
-            return { token, user};
+            return { token, user };
         },
-        addPost: async (parent, { thoughText }, context) => {
+        addPost: async (parent, { postText }, context) => {
             if (context.user) {
                 const post = await Post.create({
                     postText,
@@ -56,38 +56,37 @@ const resolvers = {
                 });
 
                 await User.findOneAndUpdate(
-                    {_id: context.user._id},
-                    { $addToSet: { thoughts: thoughText._id}}
+                    { _id: context.user._id },
+                    { $addToSet: { posts: postText._id } }
                 );
 
                 return post;
             }
             throw new AuthenticationError('You need to be logged in!')
         },
-        removePost: async (parent, { throughId }, context) => {
+        removePost: async (parent, { postId }, context) => {
             if (context.user) {
-                const post = await Post.findOneAndDelete({
+                const post = await Post.findByIdAndDelete({
                     _id: postId,
-                    postAuthor: context.user.username,
+                    postAuthor: context.user.username
                 });
 
                 await User.findOneAndUpdate(
-                    { _id: context.user._id},
-                    { $pull: { posts: post._id}}
+                    { _id: context.user._id },
+                    { $pull: { posts: post._id } }
                 );
 
-                return post;
+                return post
             }
-
             throw new AuthenticationError('You need to be logged in!')
         },
-        createComment: async (parent, { postId, body }, context) => {
-            if(context.user) {
+        createComment: async (parent, { postId, commentText }, context) => {
+            if (context.user) {
                 return Post.findOneAndUpdate(
                     { _id: postId },
                     {
                         $addToSet: {
-                            comments: { commentText, commentAuthor: context.user.username },
+                            comments: { commentText, commentAuthor: context.user.username }
                         },
                     },
                     {
@@ -98,21 +97,50 @@ const resolvers = {
             }
             throw new AuthenticationError('You need to be logged in!');
         },
-        removeComment: async(parent, { postId, commentId }, context) => {
-            if(context.user) {
+        removeComment: async (parent, { postId, commentId }, context, info) => {
+            if (context.user) {
                 return Post.findOneAndUpdate(
-                    { _id: postId},
+                    { _id: postId },
                     {
                         $pull: {
-                            comments: {_id: commentId, username: context.user.username},
-                        },
+                            comments: {
+                                _id: commentId,
+                                commentAuthor: context.user.username
+                            }
+                        }
                     },
                     { new: true}
-                )
+                );
             }
             throw new AuthenticationError('You need to be logged in!')
-        }
-    }
+        },
+        likePost: async (parent, { postId }, context) => {
+            if (context.user) {
+                const post = await Post.findById({
+                    _id: postId,
+                });
+
+                if (post) {
+                    if (post.likes.find(like => like.username === context.username)) {
+                        //Post is already like and will unlike it
+                        post.likes = post.likes.filter((like) => like.username !== context.username)
+                    } else {
+                        //when post is not liked, when cliked, then post it
+                        // const username = post.likes.username
+
+                        post.likes.push({
+                            username: post.likes.username, // delete likes.username if it doesn't work.
+                            createdAt: new Date().toISOString()
+                        });
+                    }
+
+                    await post.save();
+                    return post;
+
+                } else throw new UserInputError('Post not found')
+            }
+        },
+    },
 };
 
 
