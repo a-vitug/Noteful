@@ -1,5 +1,5 @@
 import React from 'react';
-import { Box, FormControl, FormLabel, Input, InputGroup, InputRightElement, IconButton, Text } from '@chakra-ui/react';
+import { Box, FormControl, FormLabel, FormHelperText, Input, InputGroup, InputRightElement, InputRightAddon, IconButton, Text } from '@chakra-ui/react';
 import { FaSun, FaMoon, FaGithub, FaUser, FaPaperPlane, FaHeart, FaTrashAlt } from 'react-icons/fa';
 import { useColorMode, useColorModeValue } from '@chakra-ui/color-mode';
 
@@ -42,7 +42,7 @@ const ProfileList = ({ me }) => {
                                 type='comment'
                                 placeholder={me.post.postText}
                             />
-                            <InputRightElement mr={5} p='33px'>
+                            <InputRightAddon mr={5} p='33px'>
                                 <IconButton
                                     icon={<FaHeart />} 
                                     backgroundColor={isDark ? '#ECE8DF' : '#BFAE98'}
@@ -51,8 +51,9 @@ const ProfileList = ({ me }) => {
                                     icon={<FaTrashAlt />} 
                                     backgroundColor={isDark ? '#ECE8DF' : '#BFAE98'}
                                     color={textcolor} />
-                            </InputRightElement>
-                        </InputGroup>    
+                            </InputRightAddon>
+                        </InputGroup>
+                        <FormHelperText>likes</FormHelperText>  
                     </FormControl>
             ))}
             
