@@ -8,6 +8,7 @@ import {
   Box,
   Center,
   Container,
+  Divider,
   FormControl,
   FormLabel,
   Grid,
@@ -221,6 +222,8 @@ const Profile = () => {
             </Center>
           </Box>
         </WrapItem>
+
+        <Divider></Divider>
         
         <Grid templateColumns='repeat(5, 1fr)' gap={5}>
 
@@ -228,7 +231,7 @@ const Profile = () => {
           <GridItem colSpan={1}>
               <Box m={3}>
                   <Link href='https://buy.stripe.com/test_aEU7sD5at8bBali004'>
-                      <Image src='./images/adss4.png' />
+                      <Image src={isDark ? './images/dark4.png' : './images/adss4.png'} />
                   </Link>
               </Box>
           </GridItem>
@@ -325,7 +328,7 @@ const Profile = () => {
           <GridItem colEnd={6}>
               <Box m={5}>
                   <Link href='https://buy.stripe.com/test_eVaaEP7iBajJ9he8wx'>
-                      <Image src='./images/adsss3.png' />
+                      <Image src={isDark ? './images/dark3.png' : './images/adsss3.png'} />
                   </Link>
                   
               </Box>

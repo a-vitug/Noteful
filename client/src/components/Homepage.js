@@ -63,8 +63,8 @@ export default function Homepage({ loggedIn, setLoggedIn }) {
                             borderRadius='md'
                             boxShadow='lg'
                             type='button'
-                            > 
-                                My Account 
+                            >
+                            <Link to='/profile'> My Account </Link>
                         </Button>
                         <Button onClick={() => setLoggedIn(!loggedIn)}
                             ml={8} 

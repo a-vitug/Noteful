@@ -1,6 +1,7 @@
 import { Stack, VStack } from '@chakra-ui/layout';
-import { Text, Wrap, WrapItem } from '@chakra-ui/react';
-import { Tabs, TabList, TabPanels, Tab, TabPanel } from '@chakra-ui/react'
+import { Box, Link, IconButton, Text, Wrap, WrapItem } from '@chakra-ui/react';
+import { Tabs, TabList, TabPanels, Tab, TabPanel } from '@chakra-ui/react';
+import { FaSun, FaMoon, FaGithub, FaPaperPlane, FaHeart, FaTrashAlt } from 'react-icons/fa';
 
 import { useColorMode, useColorModeValue } from '@chakra-ui/color-mode';
 
@@ -16,7 +17,7 @@ export default function Authspage({ loggedIn, setLoggedIn }) {
 
   return (
     <VStack className='background'>
-        {/* <Box p={5} ml='auto'>
+        <Box p={5} ml='auto'>
             <Link href='https://github.com/a-vitug/react-app'>
             <IconButton ml={2} icon={<FaGithub />} isRound='true'></IconButton>
             </Link>
@@ -27,7 +28,7 @@ export default function Authspage({ loggedIn, setLoggedIn }) {
             isRound='true'
             onClick={toggleColorMode}
             ></IconButton>
-        </Box> */}
+        </Box>
 
       <Wrap color={textcolor}>
         <Stack pt='180px' textShadow='2px 2px #BFAE98'>
