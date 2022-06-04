@@ -8,7 +8,7 @@ const resolvers = {
             return User.find().populate('posts');
         },
         user: async (parent, { username }) => {
-            return User.findOne({ username }).populate('post');
+            return User.findOne({ username }).populate('posts');
         },
         posts: async (parent, { username }) => {
             const params = username ? { username } : {};
@@ -57,7 +57,7 @@ const resolvers = {
 
                 await User.findOneAndUpdate(
                     { _id: context.user._id },
-                    { $addToSet: { posts: postText._id } }
+                    { $addToSet: { posts: post._id } }
                 );
 
                 return post;

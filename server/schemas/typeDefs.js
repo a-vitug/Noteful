@@ -16,8 +16,8 @@ const typeDefs = gql`
         postAuthor: String
         createdAt: String
         comments: [Comment]!
-        likes: [Like]
-        likeCount: Int!
+        # likes: [Like]
+        # likeCount: Int!
     }
 
     type Comment {
@@ -27,11 +27,11 @@ const typeDefs = gql`
         createdAt: String
     }
 
-    type Like {
-        _id: ID!
-        username: String!
-        createAt: String!
-    }
+    # type Like {
+    #     _id: ID!
+    #     username: String!
+    #     createAt: String!
+    # }
 
     type Auth {
         token: ID!
