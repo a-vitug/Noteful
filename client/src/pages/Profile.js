@@ -252,6 +252,7 @@ const Profile = () => {
                       Here's some news for you...
               </Text>
 
+              {/* user's posts */}
               {loading ? (
                   <Box m={3}>
                     No Posts
@@ -261,7 +262,6 @@ const Profile = () => {
                     me={me}
                   />
                 )}
-              
               
           </GridItem>
 
