@@ -3,11 +3,11 @@ import { Routes, Route } from 'react-router-dom';
 import { ApolloClient, InMemoryCache, ApolloProvider } from '@apollo/client';
 
 import './App.css';
-import Homepage from './components/Homepage';
-import Profile from './components/Profile';
-import Login from './components/auths/Login';
-import Signup from './components/auths/Signup';
-import Authspage from './components/auths/Authspage';
+import Homepage from './pages/Homepage';
+import Profile from './pages/Profile';
+import Login from './pages/auths/Login';
+import Signup from './pages/auths/Signup';
+import Authspage from './pages/auths/Authspage';
 
 const client = new ApolloClient({
   uri: '/graphql',
