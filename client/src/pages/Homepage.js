@@ -1,19 +1,17 @@
+import Authspage from './auths/Authspage';
 import { Flex, Stack, HStack, Heading, Grid, GridItem, Spacer } from '@chakra-ui/layout';
 import { IconButton, Link, Box, Button, Center, Divider, ButtonGroup, Container, Image, InputGroup, FormControl, FormLabel, Input, Text, InputRightElement, Wrap, WrapItem } from '@chakra-ui/react';
 import { useColorMode, useColorModeValue } from '@chakra-ui/color-mode'
-import { motion } from "framer-motion";
-import { Formik, Form, Field,  ErrorMessage } from 'formik';
 
-import Login from './auths/Login';
-import Signup from './auths/Signup';
 import { FaSun, FaMoon, FaGithub, FaPaperPlane, FaHeart, FaTrashAlt } from 'react-icons/fa';
-
-import Authspage from './auths/Authspage';
 
 // swiper elements
 import { Swiper, SwiperSlide } from 'swiper/react';
 import SwiperCore, { Autoplay, Navigation, Pagination, Controller, Thumbs, EffectFade } from 'swiper';
 import 'swiper/css';
+
+import { useQuery } from '@apollo/client';
+import { QUERY_USER, QUERY_POSTS, QUERY_SINGLE_POST, QUERY_ME } from '../utils/queries';
 
 export default function Homepage({ loggedIn, setLoggedIn }) {
 
@@ -28,18 +26,6 @@ export default function Homepage({ loggedIn, setLoggedIn }) {
           'url(../img/background.png) center/cover no-repeat',
     }
 
-    // const slides = [];
-
-    // for (let i = 0; i < 5; i++) {
-    //     slides.push(
-    //       <SwiperSlide key={`slide-${i}`} tag='Container'>
-    //         <img
-    //           src={`https://picsum.photos/id/${i + 1}/500/300`}
-    //           alt={`Slide ${i}`}
-    //         />
-    //       </SwiperSlide>
-    //     );
-    //   }
 
     return (
         <Stack p={5} sx={outerBoxStyles}>
