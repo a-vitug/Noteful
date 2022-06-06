@@ -1,7 +1,8 @@
 import Authspage from './auths/Authspage';
 import { Flex, Stack, HStack, Heading, Grid, GridItem, Spacer } from '@chakra-ui/layout';
 import { IconButton, Link, Box, Button, Center, Divider, ButtonGroup, Container, Image, InputGroup, FormControl, FormLabel, Input, Text, InputRightElement, Wrap, WrapItem } from '@chakra-ui/react';
-import { useColorMode, useColorModeValue } from '@chakra-ui/color-mode'
+import { useColorMode, useColorModeValue } from '@chakra-ui/color-mode';
+import { Link as RouteLink } from 'react-router-dom';
 
 import { FaSun, FaMoon, FaGithub, FaPaperPlane, FaHeart, FaTrashAlt } from 'react-icons/fa';
 
@@ -18,7 +19,7 @@ export default function Homepage({ loggedIn, setLoggedIn }) {
 
     const { colorMode, toggleColorMode } = useColorMode();
     const isDark = colorMode === 'dark';
-    const textcolor = useColorModeValue('yellow.900', '#E8DFD8');
+    const textcolor = useColorModeValue('#BFAE98', '#E8DFD8');
     const bgcolor = useColorModeValue('RGBA(0, 0, 0, 0.16)', 'RGBA(0, 0, 0, 0.36)');
 
     const outerBoxStyles = {
@@ -26,9 +27,13 @@ export default function Homepage({ loggedIn, setLoggedIn }) {
           'url(../img/background.png) center/cover no-repeat',
     }
 
+    const logout = (event) => {
+        event.preventDefault();
+        Auth.logout();
+    };
 
     return (
-        <Stack p={5} sx={outerBoxStyles}>
+        <Stack p={5} sx={outerBoxStyles} >
             <Flex w='100%'>
                 <Spacer></Spacer>
                 <Link href='https://github.com/a-vitug/react-app'>
@@ -39,8 +44,8 @@ export default function Homepage({ loggedIn, setLoggedIn }) {
             </Flex>
 
             {/* if logged in */}
-            {loggedIn ? (
-                <Box backdropFilter='auto' backdropBlur='3px' borderRadius='md'>
+            {Auth.loggedIn() ? (
+                <Box mx={100} backdropFilter='auto' backdropBlur='3px' borderRadius='md' >
                     <Flex w='90%'>
                         <Spacer></Spacer>
                         <Button ml={2} 
@@ -50,9 +55,10 @@ export default function Homepage({ loggedIn, setLoggedIn }) {
                             boxShadow='lg'
                             type='button'
                             >
-                            <Link to='/profile'> My Account </Link>
+                            <RouteLink to='/profile'> My Account </RouteLink>
                         </Button>
-                        <Button onClick={() => setLoggedIn(!loggedIn)}
+                        <Button onClick={logout}
+                            // onClick={() => setLoggedIn(!loggedIn)}
                             ml={8} 
                             color='#BDD1B6'
                             border='2px'
@@ -65,7 +71,7 @@ export default function Homepage({ loggedIn, setLoggedIn }) {
                     </Flex>
                     <Box m='30px'>
                         <Text 
-                            textShadow='2px 2px #BFAE98'
+                            textShadow={isDark ? '2px 2px #BFAE98' : '2px 2px #E8DFD8'}
                             className='gloria' 
                             p='30px'
                             pl='100px'
@@ -90,7 +96,7 @@ export default function Homepage({ loggedIn, setLoggedIn }) {
                                         />
                                         <InputRightElement mr={5} p='50px'>
                                             <IconButton icon={<FaPaperPlane />} 
-                                            size='lg'
+                                                size='lg'
                                                 backgroundColor={isDark ? '#ECE8DF' : '#BFAE98'}
                                                 color={isDark ? '#5E4D3B' : '#E8DFD8'} />
                                         </InputRightElement>
@@ -222,13 +228,17 @@ export default function Homepage({ loggedIn, setLoggedIn }) {
                 <Box>
                     <Flex>
                         <Spacer></Spacer>
-                        <Button m={5} backgroundColor={bgcolor} onClick={() => setLoggedIn(!loggedIn)}>
-                            Log in
-                        </Button>
+                        <RouteLink to='/authspage'>
+                            <Button m={5} backgroundColor={bgcolor} 
+                            // onClick={() => setLoggedIn(!loggedIn)}
+                            >
+                                Log in
+                            </Button>
+                        </RouteLink>
                     </Flex>
                     
 
-                    <Grid templateColumns='repeat(4, 1fr)' gap={1}>
+                    <Grid mx={100} templateColumns='repeat(4, 1fr)' gap={1}>
                         <GridItem colSpan={2}>
                             <Swiper modules={[Autoplay, Navigation, Pagination, EffectFade]}
                                 autoplay={{ disableOnInteraction: false}}

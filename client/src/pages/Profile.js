@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { axios } from 'axios';
 import { useToast } from '@chakra-ui/toast';
-import { useNavigate, Navigate, useParams } from 'react-router-dom';
+import { useNavigate, Navigate, useParams, Link as RouteLink } from 'react-router-dom';
 import { Flex, Stack, VStack, Spacer } from '@chakra-ui/layout';
 import {
   Input,
@@ -28,7 +28,7 @@ import {
 } from '@chakra-ui/react';
 
 import { useColorMode, useColorModeValue } from '@chakra-ui/color-mode';
-import { FaSun, FaMoon, FaGithub, FaUser, FaPaperPlane, FaHeart, FaTrashAlt } from 'react-icons/fa';
+import { FaSun, FaMoon, FaGithub, FaUser, FaPaperPlane, FaHeart, FaTrashAlt, FaHouseUser } from 'react-icons/fa';
 
 import { useQuery } from '@apollo/client';
 import { QUERY_USER, QUERY_POSTS, QUERY_SINGLE_POST, QUERY_ME } from '../utils/queries';
@@ -38,7 +38,7 @@ import Auth from '../utils/auth'
 const Profile = () => {
   const { colorMode, toggleColorMode } = useColorMode();
   const isDark = colorMode === 'dark';
-  const textcolor = useColorModeValue('yellow.900', '#E8DFD8');
+  const textcolor = useColorModeValue('#BFAE98', '#E8DFD8');
   const bgcolor = useColorModeValue('RGBA(0, 0, 0, 0.16)', 'RGBA(0, 0, 0, 0.36)');
   const toast = useToast();
   const navigate = useNavigate();
@@ -160,15 +160,18 @@ const Profile = () => {
   };
 
   return (
-    <Stack p={5}>
+    <Stack p={5} className={isDark ? 'darkbg': 'lightbg'}>
       <Flex w='100%'>
         <Spacer></Spacer>
-        <IconButton
-          ml={8}
-          icon={<FaUser />}
-          isRound='true'
-          backgroundColor={bgcolor}
-        ></IconButton>
+        <RouteLink to='/'>
+          <IconButton
+            ml={8}
+            icon={<FaHouseUser />}
+            isRound='true'
+            backgroundColor={bgcolor}
+          >
+          </IconButton>
+        </RouteLink>
 
         <Link href='https://github.com/a-vitug/react-app'>
           <IconButton
@@ -188,7 +191,7 @@ const Profile = () => {
         ></IconButton>
       </Flex>
 
-      <Wrap spacing='30px'>
+      <Wrap spacing='20px' pl={35}>
         {/* upload 's profile picture */}
         <WrapItem>
           <Flex flexDirection='column' p='170px'>
@@ -224,7 +227,7 @@ const Profile = () => {
         <WrapItem>
           <Box m='30px'>
             <Text 
-                textShadow='2px 2px #BFAE98'
+                textShadow={isDark ? '2px 2px #BFAE98' : '2px 2px #E8DFD8'}
                 className='gloria' 
                 p='30px'
                 pl='100px'
