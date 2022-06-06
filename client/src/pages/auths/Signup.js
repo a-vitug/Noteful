@@ -73,7 +73,7 @@ const Signup = () => {
 
 
   };
-
+  //added
   return (
     <Flex flexDirection='column' p='50px' pl='200px'>
       {data ? (

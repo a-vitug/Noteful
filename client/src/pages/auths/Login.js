@@ -69,9 +69,10 @@ const Login = (props) => {
       password: ''
     })
   };
-
+  //Added
   return (
     <Flex flexDirection='column' p='50px' pl='200px'>
+      
       {data ? (
               <p>
                 Success! You may now head{' '}
