@@ -16,86 +16,62 @@ import {
   Tooltip,
 } from '@chakra-ui/react';
 
+import { useMutation } from '@apollo/client';
+import { ADD_USER } from '../../utils/mutations';
+
+import Auth from '../../utils/auth'
+
 const Signup = () => {
-  const [show, setShow] = useState(false);
-  const handleClick = () => setShow(!show);
-  const toast = useToast();
-  const history = useNavigate();
-
-  const [username, setUsername] = useState();
-  const [email, setEmail] = useState();
-  const [password, setPassword] = useState();
-  const [confirmpassword, setConfirmpassword] = useState();
-  const [info, setInformation] = useState();
-
   const { colorMode, toggleColorMode } = useColorMode();
   const textcolor = useColorModeValue('#E8DFD8', 'yellow.900');
   const bgcolor = useColorModeValue('#ECE8DF', '#BFAE98');
   const isDark = colorMode === 'dark';
 
-  const submitHandler = async () => {
-    setInformation(true);
-    if (!username || !email || !password || !confirmpassword) {
-      toast({
-        title: 'Invalid information. Please try again.',
-        status: 'warning',
-        duration: 5000,
-        isClosable: true,
-        position: 'bottom',
-      });
-      setInformation(false);
-      return;
-    }
+  const [show, setShow] = useState(false);
+  const handleClick = () => setShow(!show);
+  const toast = useToast();
+  const history = useNavigate();
 
-    if (password !== confirmpassword) {
-      toast({
-        title: 'Password must match',
-        status: 'warning',
-        duration: 5000,
-        isClosable: true,
-        position: 'bottom',
-      });
-      return;
-    }
+  //states that set values for the inputs
+  // const [username, setUsername] = useState();
+  // const [email, setEmail] = useState();
+  // const [password, setPassword] = useState();
+  const [info, setInformation] = useState();
 
+  const [formState, setFormSTate] = useState({
+    username: '',
+    email: '',
+    password: ''
+  });
+  const [addUser, { error, data}] = useMutation(ADD_USER)
+ 
+  const handleChange = (event) => {
+    const {name, value } = event.target;
+
+    setFormSTate({
+      ...formState,
+      [name]: value
+    })
+  }
+
+
+  const submitHandler = async (event) => {
+    event.preventDefault();
+    console.log(formState)
     try {
-      const config = {
-        headers: {
-          'Content-type': 'application/json',
-        },
-      };
 
-      const { data } = await axios.post(
-        '/api/user/signup',
-        {
-          username,
-          email,
-          password,
-        },
-        config
-      );
-
-      toast({
-        title: 'Successfully signed up!',
-        status: 'success',
-        duration: 5000,
-        isClosable: true,
-        position: 'bottom',
-      });
-      localStorage.setItem('userInfo', JSON.stringify(data));
-      setInformation(false);
-      history.push('/profile');
-    } catch (error) {
-      toast({
-        title: 'Error Occured!',
-        description: error.response.data.message,
-        status: 'error',
-        duration: 5000,
-        isClosable: true,
-        position: 'bottom',
-      });
-      setInformation(false);
+      const { data } = await addUser({
+        variables: {
+          ...formState
+        }
+      })
+      
+      Auth.login(data.addUser.token);
+    } catch (e) {
+      console.error(e)
     }
+
+    
   };
 
   return (
@@ -116,8 +92,10 @@ const Signup = () => {
             boxShadow='lg'
           >
             <Input
+              name="username"
+              value={formState.name}
               placeholder='Enter your username'
-              onChange={(e) => setUsername(e.target.value)}
+              onChange={handleChange}
             />
           </InputGroup>
         </FormControl>
@@ -131,10 +109,11 @@ const Signup = () => {
             boxShadow='lg'
           >
             <Input
-              value={email}
+              name="email"
+              value={formState.email}
               type='email'
               placeholder='Enter your email address'
-              onChange={(e) => setEmail(e.target.value)}
+              onChange={handleChange}
             />
           </InputGroup>
         </FormControl>
@@ -155,8 +134,9 @@ const Signup = () => {
               boxShadow='lg'
             >
               <Input
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
+                name="password"
+                value={formState.password}
+                onChange={handleChange}
                 type={show ? 'text' : 'password'}
                 placeholder='Enter password'
               />
@@ -173,33 +153,6 @@ const Signup = () => {
               </InputRightElement>
             </InputGroup>
           </Tooltip>
-        </FormControl>
-
-        <FormControl isRequired id='password' pb={5}>
-          <FormLabel>Confirm Password</FormLabel>
-          <InputGroup
-            size='md'
-            backgroundColor={bgcolor}
-            color={textcolor}
-            boxShadow='lg'
-          >
-            <Input
-              type={show ? 'text' : 'password'}
-              placeholder='Confirm password'
-              onChange={(e) => setConfirmpassword(e.target.value)}
-            />
-            <InputRightElement width='4.5rem'>
-              <Button
-                h='1.75rem'
-                size='sm'
-                onClick={handleClick}
-                backgroundColor={isDark ? '#ECE8DF' : '#BFAE98'}
-                color={isDark ? '#5E4D3B' : '#E8DFD8'}
-              >
-                {show ? 'Hide' : 'Show'}
-              </Button>
-            </InputRightElement>
-          </InputGroup>
         </FormControl>
 
         <VStack>
