@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { axios } from 'axios';
 import { useToast } from '@chakra-ui/toast';
-import { Navigate, useNavigate, useParams } from 'react-router-dom';
+import { useNavigate, Navigate, useParams } from 'react-router-dom';
 import { Flex, Stack, VStack, Spacer } from '@chakra-ui/layout';
 import {
   Input,
@@ -33,7 +33,7 @@ import { FaSun, FaMoon, FaGithub, FaUser, FaPaperPlane, FaHeart, FaTrashAlt } fr
 import { useQuery } from '@apollo/client';
 import { QUERY_USER, QUERY_POSTS, QUERY_SINGLE_POST, QUERY_ME } from '../utils/queries';
 import ProfileList from '../components/ProfileLists';
-import Auth from '../utils/auth';
+import Auth from '../utils/auth'
 
 const Profile = () => {
   const { colorMode, toggleColorMode } = useColorMode();
@@ -73,7 +73,8 @@ const Profile = () => {
   // const { loading, data } = useQuery(QUERY_ME);
   // const me = data?.me || [];
 
-  // uploads user's profile picture
+
+  // uploads 's profile picture
   const uploadPic = (pics) => {
     setUserPic(true);
     if (pics === undefined) {
@@ -128,7 +129,7 @@ const Profile = () => {
         },
       };
       const { data } = await axios.post(
-        '/api/user',
+        '/api/',
         {
           pic,
         },
@@ -188,7 +189,7 @@ const Profile = () => {
       </Flex>
 
       <Wrap spacing='30px'>
-        {/* upload user's profile picture */}
+        {/* upload 's profile picture */}
         <WrapItem>
           <Flex flexDirection='column' p='170px'>
             <Box border='1px' p='10px'>
@@ -283,13 +284,13 @@ const Profile = () => {
                       Here's some news for you...
               </Text>
 
-              {/* user's posts */}
+              {/* 's posts */}
               {loading ? (
                   <Box m={3}>
                     No Posts
                   </Box>
                 ) : (
-                  <ProfileList 
+                  <ProfileList
                     user={user}
                   />
                 )}
