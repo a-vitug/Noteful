@@ -8,6 +8,8 @@ import Profile from './pages/Profile';
 import Login from './pages/auths/Login';
 import Signup from './pages/auths/Signup';
 import Authspage from './pages/auths/Authspage';
+import Post from './pages/Post';
+import Navbar from './components/Navbar';
 
 const client = new ApolloClient({
   uri: '/graphql',
@@ -29,6 +31,7 @@ function App() {
           <Route exact path='/signup' element={<Signup />} className='Signup' />
           <Route exact path='/profile' element={<Profile /> } className='Profile' />
           <Route exact path='/profile/:profileId' element={<Profile /> } className='Profile' />
+          <Route exact path='/post' element={<Post /> } className='Post' />
         </Routes>
       
       </div>

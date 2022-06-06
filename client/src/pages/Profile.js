@@ -129,7 +129,7 @@ const Profile = () => {
         },
       };
       const { data } = await axios.post(
-        '/api/',
+        '/api/user',
         {
           pic,
         },

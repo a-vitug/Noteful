@@ -8,6 +8,13 @@
     background-position: center;
 }
 
+.postbg {
+    background-image: url(./img/postbg.png);
+    min-height: 100vh;
+    background-size: cover;
+    background-position: center;
+}
+
 .text {
     font-weight: bold;
 }
