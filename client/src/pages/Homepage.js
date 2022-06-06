@@ -11,7 +11,6 @@ import { Swiper, SwiperSlide } from 'swiper/react';
 import SwiperCore, { Autoplay, Navigation, Pagination, Controller, Thumbs, EffectFade } from 'swiper';
 import 'swiper/css';
 
-import { Link as RouteLink } from 'react-router-dom';
 import { useQuery } from '@apollo/client';
 import { QUERY_USER, QUERY_POSTS, QUERY_SINGLE_POST, QUERY_ME } from '../utils/queries';
 import Auth from '../utils/auth';
@@ -45,7 +44,7 @@ export default function Homepage({ loggedIn, setLoggedIn }) {
             </Flex>
 
             {/* if logged in */}
-            {loggedIn ? (
+            {Auth.loggedIn() ? (
                 <Box mx={100} backdropFilter='auto' backdropBlur='3px' borderRadius='md' >
                     <Flex w='90%'>
                         <Spacer></Spacer>
