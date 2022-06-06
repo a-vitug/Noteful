@@ -11,6 +11,7 @@ import { Swiper, SwiperSlide } from 'swiper/react';
 import SwiperCore, { Autoplay, Navigation, Pagination, Controller, Thumbs, EffectFade } from 'swiper';
 import 'swiper/css';
 
+import { Link as RouteLink } from 'react-router-dom';
 import { useQuery } from '@apollo/client';
 import { QUERY_USER, QUERY_POSTS, QUERY_SINGLE_POST, QUERY_ME } from '../utils/queries';
 import Auth from '../utils/auth';
@@ -19,7 +20,7 @@ export default function Homepage({ loggedIn, setLoggedIn }) {
 
     const { colorMode, toggleColorMode } = useColorMode();
     const isDark = colorMode === 'dark';
-    const textcolor = useColorModeValue('yellow.900', '#E8DFD8');
+    const textcolor = useColorModeValue('#BFAE98', '#E8DFD8');
     const bgcolor = useColorModeValue('RGBA(0, 0, 0, 0.16)', 'RGBA(0, 0, 0, 0.36)');
 
     const outerBoxStyles = {
@@ -33,7 +34,7 @@ export default function Homepage({ loggedIn, setLoggedIn }) {
     };
 
     return (
-        <Stack p={5} sx={outerBoxStyles}>
+        <Stack p={5} sx={outerBoxStyles} >
             <Flex w='100%'>
                 <Spacer></Spacer>
                 <Link href='https://github.com/a-vitug/react-app'>
@@ -44,8 +45,8 @@ export default function Homepage({ loggedIn, setLoggedIn }) {
             </Flex>
 
             {/* if logged in */}
-            {Auth.loggedIn() ? (
-                <Box backdropFilter='auto' backdropBlur='3px' borderRadius='md'>
+            {loggedIn ? (
+                <Box mx={100} backdropFilter='auto' backdropBlur='3px' borderRadius='md' >
                     <Flex w='90%'>
                         <Spacer></Spacer>
                         <Button ml={2} 
@@ -71,7 +72,7 @@ export default function Homepage({ loggedIn, setLoggedIn }) {
                     </Flex>
                     <Box m='30px'>
                         <Text 
-                            textShadow='2px 2px #BFAE98'
+                            textShadow={isDark ? '2px 2px #BFAE98' : '2px 2px #E8DFD8'}
                             className='gloria' 
                             p='30px'
                             pl='100px'
@@ -96,7 +97,7 @@ export default function Homepage({ loggedIn, setLoggedIn }) {
                                         />
                                         <InputRightElement mr={5} p='50px'>
                                             <IconButton icon={<FaPaperPlane />} 
-                                            size='lg'
+                                                size='lg'
                                                 backgroundColor={isDark ? '#ECE8DF' : '#BFAE98'}
                                                 color={isDark ? '#5E4D3B' : '#E8DFD8'} />
                                         </InputRightElement>
@@ -228,18 +229,17 @@ export default function Homepage({ loggedIn, setLoggedIn }) {
                 <Box>
                     <Flex>
                         <Spacer></Spacer>
-                        <RouteLink>
+                        <RouteLink to='/authspage'>
                             <Button m={5} backgroundColor={bgcolor} 
                             // onClick={() => setLoggedIn(!loggedIn)}
                             >
                                 Log in
                             </Button>
                         </RouteLink>
-                        
                     </Flex>
                     
 
-                    <Grid templateColumns='repeat(4, 1fr)' gap={1}>
+                    <Grid mx={100} templateColumns='repeat(4, 1fr)' gap={1}>
                         <GridItem colSpan={2}>
                             <Swiper modules={[Autoplay, Navigation, Pagination, EffectFade]}
                                 autoplay={{ disableOnInteraction: false}}

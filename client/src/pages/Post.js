@@ -33,7 +33,7 @@ const Post = () => {
 
     const { colorMode, toggleColorMode } = useColorMode();
     const isDark = colorMode === 'dark';
-    const textcolor = useColorModeValue('yellow.900', '#E8DFD8');
+    const textcolor = useColorModeValue('#BFAE98', '#E8DFD8');
     const bgcolor = useColorModeValue('RGBA(0, 0, 0, 0.16)', 'RGBA(0, 0, 0, 0.36)');
 
     let [value, setValue] = React.useState('')
