@@ -23,20 +23,12 @@ import Auth from '../../utils/auth'
 
 const Signup = () => {
   const { colorMode, toggleColorMode } = useColorMode();
-  const textcolor = useColorModeValue('#E8DFD8', 'yellow.900');
+  const textcolor = useColorModeValue('#BFAE98', '#E8DFD8');
   const bgcolor = useColorModeValue('#ECE8DF', '#BFAE98');
   const isDark = colorMode === 'dark';
 
   const [show, setShow] = useState(false);
   const handleClick = () => setShow(!show);
-  const toast = useToast();
-  const history = useNavigate();
-
-  //states that set values for the inputs
-  // const [username, setUsername] = useState();
-  // const [email, setEmail] = useState();
-  // const [password, setPassword] = useState();
-  const [info, setInformation] = useState();
 
   const [formState, setFormSTate] = useState({
     username: '',
@@ -172,7 +164,6 @@ const Signup = () => {
                 variant='outline'
                 style={{ marginTop: 15 }}
                 onClick={submitHandler}
-                isLoading={info}
               >
                 Signup
               </Button>
