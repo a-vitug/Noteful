@@ -23,11 +23,12 @@ function App() {
     <ApolloProvider client={client}>
       <div className='App'>
         <Routes>
-          <Route path='/' element={<Homepage loggedIn={loggedIn} setLoggedIn={setLoggedIn} />} className='Homepage' />
-          <Route path='/authspage' element={<Authspage loggedIn={loggedIn} setLoggedIn={setLoggedIn} />} className='Authspage' />
-          <Route path='/login' element={<Login loggedIn={loggedIn} setLoggedIn={setLoggedIn} />} className='Login' />
-          <Route path='/signup' element={<Signup />} className='Signup' />
-          <Route path='/profile' element={<Profile /> } className='Profile' />
+          <Route exact path='/' element={<Homepage loggedIn={loggedIn} setLoggedIn={setLoggedIn} />} className='Homepage' />
+          <Route exact path='/authspage' element={<Authspage loggedIn={loggedIn} setLoggedIn={setLoggedIn} />} className='Authspage' />
+          <Route exact path='/login' element={<Login loggedIn={loggedIn} setLoggedIn={setLoggedIn} />} className='Login' />
+          <Route exact path='/signup' element={<Signup />} className='Signup' />
+          <Route exact path='/profile' element={<Profile /> } className='Profile' />
+          <Route exact path='/profile/:profileId' element={<Profile /> } className='Profile' />
         </Routes>
       
       </div>

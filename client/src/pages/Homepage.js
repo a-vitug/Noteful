@@ -12,6 +12,7 @@ import 'swiper/css';
 
 import { useQuery } from '@apollo/client';
 import { QUERY_USER, QUERY_POSTS, QUERY_SINGLE_POST, QUERY_ME } from '../utils/queries';
+import Auth from '../utils/auth';
 
 export default function Homepage({ loggedIn, setLoggedIn }) {
 
@@ -19,7 +20,6 @@ export default function Homepage({ loggedIn, setLoggedIn }) {
     const isDark = colorMode === 'dark';
     const textcolor = useColorModeValue('yellow.900', '#E8DFD8');
     const bgcolor = useColorModeValue('RGBA(0, 0, 0, 0.16)', 'RGBA(0, 0, 0, 0.36)');
-    const color = useColorModeValue('#ECE8DF', '#BFAE98')
 
     const outerBoxStyles = {
         background:

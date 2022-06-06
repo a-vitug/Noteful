@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { axios } from 'axios';
 import { useToast } from '@chakra-ui/toast';
-import { useNavigate } from 'react-router-dom';
+import { Navigate, useNavigate, useParams } from 'react-router-dom';
 import { Flex, Stack, VStack, Spacer } from '@chakra-ui/layout';
 import {
   Input,
@@ -33,6 +33,7 @@ import { FaSun, FaMoon, FaGithub, FaUser, FaPaperPlane, FaHeart, FaTrashAlt } fr
 import { useQuery } from '@apollo/client';
 import { QUERY_USER, QUERY_POSTS, QUERY_SINGLE_POST, QUERY_ME } from '../utils/queries';
 import ProfileList from '../components/ProfileLists';
+import Auth from '../utils/auth';
 
 const Profile = () => {
   const { colorMode, toggleColorMode } = useColorMode();
@@ -43,11 +44,38 @@ const Profile = () => {
   const navigate = useNavigate();
 
   const [pic, setPic] = useState(false);
-  const [user, setUser] = useState();
+  const [userPic, setUserPic] = useState();
+
+  const { username: userParam } = useParams();
+
+  const { loading, data } = useQuery(userParam ? QUERY_USER : QUERY_ME, {
+    variables: { username: userParam },
+  });
+
+  const user = data?.me || data?.user || {};
+  if (Auth.loggedIn() && Auth.getProfile().data.username === userParam) {
+    return <Navigate to='/profile' />;
+  }
+
+  if (loading) {
+    return <div>Loading...</div>;
+  }
+
+  // if (!user?.username) {
+  //   return (
+  //     <h4>
+  //       You need to be logged in to see this. Use the navigation links above to
+  //       sign up or log in!
+  //     </h4>
+  //   );
+  // }
+
+  // const { loading, data } = useQuery(QUERY_ME);
+  // const me = data?.me || [];
 
   // uploads user's profile picture
   const uploadPic = (pics) => {
-    setUser(true);
+    setUserPic(true);
     if (pics === undefined) {
       toast({
         title: 'Please Select an Image!',
@@ -72,11 +100,11 @@ const Profile = () => {
         .then((data) => {
           setPic(data.url.toString());
           console.log(data.url.toString());
-          setUser(false);
+          setUserPic(false);
         })
         .catch((err) => {
           console.log(err);
-          setUser(false);
+          setUserPic(false);
         });
     } else {
       toast({
@@ -86,13 +114,13 @@ const Profile = () => {
         isClosable: true,
         position: 'bottom',
       });
-      setUser(false);
+      setUserPic(false);
       return;
     }
   };
 
   const upload = async () => {
-    setUser(true);
+    setUserPic(true);
     try {
       const config = {
         headers: {
@@ -115,7 +143,7 @@ const Profile = () => {
         position: 'bottom',
       });
       localStorage.setItem('userInfo', JSON.stringify(data));
-      setUser(false);
+      setUserPic(false);
       navigate.push('/profile');
     } catch (error) {
       toast({
@@ -126,12 +154,9 @@ const Profile = () => {
         isClosable: true,
         position: 'bottom',
       });
-      setUser(false);
+      setUserPic(false);
     }
   };
-
-  const { loading, data } = useQuery(QUERY_ME);
-  const me = data?.me || [];
 
   return (
     <Stack p={5}>
@@ -180,13 +205,19 @@ const Profile = () => {
                 backgroundColor='#BDD1B6'
                 style={{ marginTop: 15 }}
                 onClick={upload}
-                isLoading={user}
+                isLoading={userPic}
               >
                 {' '}
                 Upload{' '}
               </Button>
             </Box>
           </Flex>
+        </WrapItem>
+
+        <WrapItem>
+          <Text>
+            Welcome {userParam ? `${user.username}'s` : 'your'}
+          </Text>
         </WrapItem>
         
         <WrapItem>
@@ -259,7 +290,7 @@ const Profile = () => {
                   </Box>
                 ) : (
                   <ProfileList 
-                    me={me}
+                    user={user}
                   />
                 )}
               
