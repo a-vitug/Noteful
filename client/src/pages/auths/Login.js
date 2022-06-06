@@ -32,7 +32,7 @@ const Login = (props) => {
   const [info, setInformation] = useState(false);
 
   const { colorMode, toggleColorMode } = useColorMode();
-  const textcolor = useColorModeValue('#E8DFD8', 'yellow.900');
+  const textcolor = useColorModeValue('yellow.900', '#E8DFD8');
   const bgcolor = useColorModeValue('#ECE8DF', '#BFAE98');
   const isDark = colorMode === 'dark';
 

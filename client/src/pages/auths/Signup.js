@@ -164,7 +164,6 @@ const Signup = () => {
                 variant='outline'
                 style={{ marginTop: 15 }}
                 onClick={submitHandler}
-                isLoading={info}
               >
                 Signup
               </Button>

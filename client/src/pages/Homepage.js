@@ -1,7 +1,8 @@
 import Authspage from './auths/Authspage';
 import { Flex, Stack, HStack, Heading, Grid, GridItem, Spacer } from '@chakra-ui/layout';
 import { IconButton, Link, Box, Button, Center, Divider, ButtonGroup, Container, Image, InputGroup, FormControl, FormLabel, Input, Text, InputRightElement, Wrap, WrapItem } from '@chakra-ui/react';
-import { useColorMode, useColorModeValue } from '@chakra-ui/color-mode'
+import { useColorMode, useColorModeValue } from '@chakra-ui/color-mode';
+import { Link as RouteLink } from 'react-router-dom';
 
 import { FaSun, FaMoon, FaGithub, FaPaperPlane, FaHeart, FaTrashAlt } from 'react-icons/fa';
 
@@ -26,6 +27,10 @@ export default function Homepage({ loggedIn, setLoggedIn }) {
           'url(../img/background.png) center/cover no-repeat',
     }
 
+    const logout = (event) => {
+        event.preventDefault();
+        Auth.logout();
+    };
 
     return (
         <Stack p={5} sx={outerBoxStyles}>
@@ -39,7 +44,7 @@ export default function Homepage({ loggedIn, setLoggedIn }) {
             </Flex>
 
             {/* if logged in */}
-            {loggedIn ? (
+            {Auth.loggedIn() ? (
                 <Box backdropFilter='auto' backdropBlur='3px' borderRadius='md'>
                     <Flex w='90%'>
                         <Spacer></Spacer>
@@ -50,9 +55,10 @@ export default function Homepage({ loggedIn, setLoggedIn }) {
                             boxShadow='lg'
                             type='button'
                             >
-                            <Link to='/profile'> My Account </Link>
+                            <RouteLink to='/profile'> My Account </RouteLink>
                         </Button>
-                        <Button onClick={() => setLoggedIn(!loggedIn)}
+                        <Button onClick={logout}
+                            // onClick={() => setLoggedIn(!loggedIn)}
                             ml={8} 
                             color='#BDD1B6'
                             border='2px'
@@ -222,9 +228,14 @@ export default function Homepage({ loggedIn, setLoggedIn }) {
                 <Box>
                     <Flex>
                         <Spacer></Spacer>
-                        <Button m={5} backgroundColor={bgcolor} onClick={() => setLoggedIn(!loggedIn)}>
-                            Log in
-                        </Button>
+                        <RouteLink>
+                            <Button m={5} backgroundColor={bgcolor} 
+                            // onClick={() => setLoggedIn(!loggedIn)}
+                            >
+                                Log in
+                            </Button>
+                        </RouteLink>
+                        
                     </Flex>
                     
 
