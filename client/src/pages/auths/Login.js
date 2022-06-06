@@ -22,70 +22,53 @@ import {
 import { useColorMode, useColorModeValue } from '@chakra-ui/color-mode';
 import { FaSun, FaMoon, FaGithub } from 'react-icons/fa';
 
-const Login = () => {
+import { useMutation } from '@apollo/client'
+import { LOGIN_USER } from '../../utils/mutations'
+
+import Auth from '../../utils/auth'
+
+const Login = (props) => {
   const [show, setShow] = useState(false);
   const handleClick = () => setShow(!show);
-  const toast = useToast();
-  const [email, setEmail] = useState();
-  const [password, setPassword] = useState();
   const [info, setInformation] = useState(false);
-  const history = useNavigate();
 
   const { colorMode, toggleColorMode } = useColorMode();
   const textcolor = useColorModeValue('#E8DFD8', 'yellow.900');
   const bgcolor = useColorModeValue('#ECE8DF', '#BFAE98');
   const isDark = colorMode === 'dark';
 
-  const submitHandler = async () => {
+  const [formState, setFormSTate] = useState({ email: '', password: '' })
+  const [login, { error, data }] = useMutation(LOGIN_USER)
+
+  const handleChange = (event) => {
+    const { name, value } = event.target
+    
+    setFormSTate({
+      ...formState,
+      [name]: value,
+    });
+  };
+
+  const submitHandler = async (event) => {
+    event.preventDefault();
     setInformation(true);
-    if (!email || !password) {
-      toast({
-        title: 'Please Fill all the Fields',
-        status: 'warning',
-        duration: 5000,
-        isClosable: true,
-        position: 'bottom',
-      });
-      setInformation(false);
-      return;
-    }
 
-    // console.log(email, password);
+
     try {
-      const config = {
-        headers: {
-          'Content-type': 'application/json',
-        },
-      };
-
-      const { data } = await axios.post(
-        '/api/user/login',
-        { email, password },
-        config
-      );
-
-      // console.log(JSON.stringify(data));
-      toast({
-        title: 'Login Successful',
-        status: 'success',
-        duration: 5000,
-        isClosable: true,
-        position: 'bottom',
+      const { data } = await login({
+        variables: { ...formState },
       });
-      localStorage.setItem('userInfo', JSON.stringify(data));
+
+      Auth.login(data.login.token);
       setInformation(false);
-      history.push('/chats');
-    } catch (error) {
-      toast({
-        title: 'Error Occured!',
-        description: error.response.data.message,
-        status: 'error',
-        duration: 5000,
-        isClosable: true,
-        position: 'bottom',
-      });
-      setInformation(false);
+    } catch (e) {
+      console.error(e)
     }
+    setInformation(false);
+    setFormSTate({
+      email: '',
+      password: ''
+    })
   };
 
   return (
@@ -107,10 +90,11 @@ const Login = () => {
           >
             <Input
               color='black'
-              value={email}
+              name='email'
               type='email'
+              value={formState.email}
               placeholder='Enter your email address'
-              onChange={(e) => setEmail(e.target.value)}
+              onChange={handleChange}
             />
           </InputGroup>
         </FormControl>
@@ -124,8 +108,9 @@ const Login = () => {
             boxShadow='lg'
           >
             <Input
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
+              name='password'
+              value={formState.password}
+              onChange={handleChange}
               type={show ? 'text' : 'password'}
               placeholder='Enter password'
             />
