@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { axios } from 'axios';
-import { useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { Flex, Stack, VStack, Spacer, Container } from '@chakra-ui/layout';
 import {
   Input,
@@ -9,7 +9,6 @@ import {
   FormLabel,
   Button,
   ButtonGroup,
-  Link,
   IconButton,
   InputGroup,
   InputRightElement,
@@ -73,6 +72,12 @@ const Login = (props) => {
 
   return (
     <Flex flexDirection='column' p='50px' pl='200px'>
+      {data ? (
+              <p>
+                Success! You may now head{' '}
+                <Link to="/">back to the homepage.</Link>
+              </p>
+            ) : (
       <Box
         border='2px'
         borderRadius='md'
@@ -146,6 +151,13 @@ const Login = (props) => {
           <Box></Box>
         </VStack>
       </Box>
+      )}
+
+      {error && (
+        <div className="my-3 p-3 bg-danger text-white">
+          {error.message}
+        </div>
+      )}
     </Flex>
   );
 };
