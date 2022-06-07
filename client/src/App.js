@@ -54,15 +54,9 @@ function App() {
           <Route exact path='/authspage' element={<Authspage />} className='Authspage' />
           <Route exact path='/login' element={<Login />} className='Login' />
           <Route exact path='/signup' element={<Signup />} className='Signup' />
-<<<<<<< Updated upstream
-          <Route exact path='/profile' element={<Profile />} className='Profile' />
-          <Route exact path='/profile/:profileId' element={<Profile />} className='Profile' />
-          <Route exact path='/post' element={<Post />} className='Post' />
-=======
           <Route exact path='/profile' element={<Profile /> } className='Profile' />
           <Route exact path='/profile/:profileId' element={<Profile /> } className='Profile' />
           <Route exact path='/post/:postId' element={<Post /> } className='Post' />
->>>>>>> Stashed changes
         </Routes>
 
       </div>
