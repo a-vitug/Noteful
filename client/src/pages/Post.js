@@ -25,9 +25,6 @@ import {
   WrapItem,
 } from '@chakra-ui/react';
 
-import PostList from '../components/PostsList';
-import PostForm from '../components/PostForm'
-
 import { useColorMode, useColorModeValue } from '@chakra-ui/color-mode';
 import { FaSun, FaMoon, FaGithub, FaUser, FaPaperPlane, FaHeart, FaTrashAlt, FaArrowCircleLeft } from 'react-icons/fa';
 
@@ -36,7 +33,6 @@ import { QUERY_SINGLE_POST } from '../utils/queries';
 
 import { useQuery } from '@apollo/client';
 import { useParams } from 'react-router-dom';
-
 
 const Post = () => {
     const { postId } = useParams();
