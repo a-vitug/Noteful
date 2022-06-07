@@ -131,6 +131,9 @@ export default function Homepage({ loggedIn, setLoggedIn }) {
                                 > 
                                     Here's some news for you...
                             </Text>
+                            <Box>
+                                <RouteLink to="/post"></RouteLink>
+                            </Box>
 
                             {/*POSTS LIST */}
                                     {loading ? (

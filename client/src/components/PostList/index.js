@@ -66,7 +66,16 @@ const PostList = ({
                                                 // posts text
                                                 placeholder={post.postText}
                                             />
-                                            
+                                            <InputRightElement mr={5} p='33px'>
+                                                <IconButton
+                                                    icon={<FaHeart />} 
+                                                    backgroundColor={isDark ? '#ECE8DF' : '#BFAE98'}
+                                                    color={textcolor} />
+                                                <IconButton 
+                                                    icon={<FaTrashAlt />} 
+                                                    backgroundColor={isDark ? '#ECE8DF' : '#BFAE98'}
+                                                    color={textcolor} />
+                                            </InputRightElement>
                                         </InputGroup>
                                     </RouteLink>
 
