@@ -4,14 +4,14 @@ import { FaSun, FaMoon, FaGithub, FaUser, FaPaperPlane, FaHeart, FaTrashAlt } fr
 import { useColorMode, useColorModeValue } from '@chakra-ui/color-mode';
 
 
-const ProfileList = ({ me }) => {
+const ProfileList = ({ user }) => {
 
     const { colorMode, toggleColorMode } = useColorMode();
     const isDark = colorMode === 'dark';
     const textcolor = useColorModeValue('yellow.900', '#E8DFD8');
     const bgcolor = useColorModeValue('RGBA(0, 0, 0, 0.16)', 'RGBA(0, 0, 0, 0.36)');
 
-    if (!me.length) {
+    if (!user.length) {
         return (
             <Text 
             className='indie'
@@ -28,11 +28,11 @@ const ProfileList = ({ me }) => {
 
     return (
         <Box m={3}>
-            {me &&
-                me.map((me) => (
+            {user &&
+                user.map((user) => (
                    
-                    <FormControl id='comment' key={me._id}>
-                        <FormLabel color={textcolor}> {me.username} </FormLabel>
+                    <FormControl id='comment' key={user._id}>
+                        <FormLabel color={textcolor}> {user.username} </FormLabel>
                         <InputGroup
                             size='md'
                             boxShadow='lg'
@@ -40,7 +40,7 @@ const ProfileList = ({ me }) => {
                             <Input h='65px' backgroundColor='RGBA(0, 0, 0, 0.16)'
                                 variant='filled'
                                 type='comment'
-                                placeholder={me.post.postText}
+                                placeholder={user.post.postText}
                             />
                             <InputRightAddon mr={5} p='33px'>
                                 <IconButton

@@ -1,10 +1,10 @@
 import Authspage from './auths/Authspage';
 import { Flex, Stack, HStack, Heading, Grid, GridItem, Spacer } from '@chakra-ui/layout';
-import { IconButton, Link, Box, Button, Center, Divider, ButtonGroup, Container, Image, InputGroup, FormControl, FormLabel, Input, Text, Tooltip, InputRightElement, Wrap, WrapItem } from '@chakra-ui/react';
+import { IconButton, Link, Box, Button, Center, Divider, ButtonGroup, Container, Image, InputGroup, FormControl, FormLabel, Input, Text, InputRightElement, Wrap, WrapItem } from '@chakra-ui/react';
 import { useColorMode, useColorModeValue } from '@chakra-ui/color-mode';
 import { Link as RouteLink } from 'react-router-dom';
 
-import { FaSun, FaMoon, FaGithub, FaPaperPlane, FaHeart, FaTrashAlt, FaUser, FaPowerOff, FaUserPlus } from 'react-icons/fa';
+import { FaSun, FaMoon, FaGithub, FaPaperPlane, FaHeart, FaTrashAlt } from 'react-icons/fa';
 
 // swiper elements
 import { Swiper, SwiperSlide } from 'swiper/react';
@@ -15,6 +15,11 @@ import { useQuery } from '@apollo/client';
 import { QUERY_USER, QUERY_POSTS, QUERY_SINGLE_POST, QUERY_ME } from '../utils/queries';
 import Auth from '../utils/auth';
 import PostList from '../components/PostList';
+
+
+
+
+
 
 export default function Homepage({ loggedIn, setLoggedIn }) {
 
@@ -32,52 +37,51 @@ export default function Homepage({ loggedIn, setLoggedIn }) {
         event.preventDefault();
         Auth.logout();
     };
-  
+
     const { loading, data } = useQuery(QUERY_POSTS)
     const posts = data?.posts || []
 
     return (
-        <Stack p={5} className={isDark ? 'darkbg': 'lightbg'}>
-            <Box  backdropBlur='3px' borderRadius='md' >
+        <Stack p={5} sx={outerBoxStyles} >
+            <Flex w='100%'>
+                <Spacer></Spacer>
+                <Link href='https://github.com/a-vitug/react-app'>
+                    <IconButton ml={2} icon={<FaGithub />} backgroundColor={bgcolor} isRound='true'></IconButton>
+                </Link>
+
+                <IconButton ml={8} icon={isDark ? <FaSun /> : <FaMoon />} backgroundColor={bgcolor} isRound='true' onClick={toggleColorMode}></IconButton>
+            </Flex>
 
             {/* if logged in */}
             {Auth.loggedIn() ? (
-                <>
-                    <Flex w='100%'>
-                        <Link href='https://github.com/a-vitug/react-app'>
-                            <IconButton ml={2} icon={<FaGithub />} backgroundColor={bgcolor} isRound='true'></IconButton>
-                        </Link>
-                        
-                        <IconButton ml={8} icon={isDark ? <FaSun /> : <FaMoon />} backgroundColor={bgcolor} isRound='true' onClick={toggleColorMode}></IconButton>
-                    
-                            <Spacer></Spacer>
-                                <RouteLink to='/profile'>
-                                    <Tooltip label='My Account'>
-                                        <IconButton 
-                                            ml={8}
-                                            icon={<FaUser />}
-                                            backgroundColor={bgcolor}
-                                            isRound='true'
-                                        >
-                                        </IconButton>
-                                    </Tooltip>
-                                </RouteLink>
-
-                                <Tooltip label='Logout'>
-                                    <IconButton
-                                        onClick={logout}
-                                        ml={8}
-                                        icon={<FaPowerOff />}
-                                        backgroundColor={bgcolor}
-                                        isRound='true'
-                                    ></IconButton>
-                                </Tooltip>
+                <Box mx={100} backdropFilter='auto' backdropBlur='3px' borderRadius='md' >
+                    <Flex w='90%'>
+                        <Spacer></Spacer>
+                        <Button ml={2}
+                            color='#BDD1B6'
+                            border='2px'
+                            borderRadius='md'
+                            boxShadow='lg'
+                            type='button'
+                        >
+                            <RouteLink to='/profile'> My Account </RouteLink>
+                        </Button>
+                        <Button onClick={logout}
+                            // onClick={() => setLoggedIn(!loggedIn)}
+                            ml={8}
+                            color='#BDD1B6'
+                            border='2px'
+                            borderRadius='md'
+                            boxShadow='lg'
+                            type='button'
+                        >
+                            Log out
+                        </Button>
                     </Flex>
-             
-                    <Box m='50px' mx={100}>
-                        <Text 
+                    <Box m='30px'>
+                        <Text
                             textShadow={isDark ? '2px 2px #BFAE98' : '2px 2px #E8DFD8'}
-                            className='gloria' 
+                            className='gloria'
                             p='30px'
                             pl='100px'
                             fontSize='6xl'
@@ -86,7 +90,7 @@ export default function Homepage({ loggedIn, setLoggedIn }) {
                             What's on your mind?
                         </Text>
                         <Center>
-                            <Box p='20px' w='80%'>
+                            <Box p='30px' w='80%'>
                                 <FormControl id='post'>
                                     <InputGroup
                                         size='lg'
@@ -100,7 +104,7 @@ export default function Homepage({ loggedIn, setLoggedIn }) {
                                         // onChange={(e) => setEmail(e.target.value)}
                                         />
                                         <InputRightElement mr={5} p='50px'>
-                                            <IconButton icon={<FaPaperPlane />} 
+                                            <IconButton icon={<FaPaperPlane />}
                                                 size='lg'
                                                 backgroundColor={isDark ? '#ECE8DF' : '#BFAE98'}
                                                 color={isDark ? '#5E4D3B' : '#E8DFD8'} />
@@ -157,37 +161,24 @@ export default function Homepage({ loggedIn, setLoggedIn }) {
                         </GridItem>
 
                     </Grid>
-                
-                </>
+                </Box>
 
                 // else logged out
             ) : (
-                <>
-                    <Flex w='100%'>
-
+                <Box>
+                    <Flex>
                         <Spacer></Spacer>
-
                         <RouteLink to='/authspage'>
-                            <Tooltip label='Login'>
-                                <IconButton // onClick={() => setLoggedIn(!loggedIn)}
-                                    ml={8}
-                                    icon={<FaUserPlus />}
-                                    backgroundColor={bgcolor}
-                                    isRound='true'
-                                >
-                                </IconButton>
-                            </Tooltip>
+                            <Button m={5} backgroundColor={bgcolor}
+                            // onClick={() => setLoggedIn(!loggedIn)}
+                            >
+                                Log in
+                            </Button>
                         </RouteLink>
-
-                        <Link href='https://github.com/a-vitug/react-app'>
-                            <IconButton ml={8} icon={<FaGithub />} backgroundColor={bgcolor} isRound='true'></IconButton>
-                        </Link>
-                        
-                        <IconButton ml={8} icon={isDark ? <FaSun /> : <FaMoon />} backgroundColor={bgcolor} isRound='true' onClick={toggleColorMode}></IconButton>
-
                     </Flex>
 
-                    <Grid m={8} mx={100} templateColumns='repeat(4, 1fr)' gap={1}>
+
+                    <Grid mx={100} templateColumns='repeat(4, 1fr)' gap={1}>
                         <GridItem colSpan={2}>
                             <Swiper modules={[Autoplay, Navigation, Pagination, EffectFade]}
                                 autoplay={{ disableOnInteraction: false }}
@@ -294,13 +285,13 @@ export default function Homepage({ loggedIn, setLoggedIn }) {
 
                         </Grid>
                     </Box>
-   
-                </>
-                
-            )} 
-            
-            
-        </Box>
+
+                </Box>
+
+            )}
+
+
+
         </Stack>
     );
 }
