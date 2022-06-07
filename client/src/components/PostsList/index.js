@@ -1,8 +1,11 @@
-import React from 'react';
 import { Box, FormControl, FormLabel, FormHelperText, Input, InputGroup, InputRightElement, InputRightAddon, IconButton, Text } from '@chakra-ui/react';
 import { useColorMode, useColorModeValue } from '@chakra-ui/color-mode';
 import { FaSun, FaMoon, FaGithub, FaUser, FaPaperPlane, FaHeart, FaTrashAlt } from 'react-icons/fa';
 
+
+
+import React from 'react';
+import { Link } from 'react-router-dom'
 const PostList = ({
     posts,
     title,
@@ -19,38 +22,42 @@ const PostList = ({
         return <h3>No posts yet!</h3>;
     }
 
-     return (
-        <Box m={3}>
+    return (
+        <div>
             {showTitle && <h3>{title}</h3>}
-            { posts &&
+            {posts &&
                 posts.map((post) => (
-        <FormControl key={post._id} isReadOnly id='comment' >
-            {showUsername}
-            <FormLabel color={textcolor}> username1 </FormLabel>
-            <InputGroup
-                size='md'
-                boxShadow='lg'
-            >
-                <Input h='65px' backgroundColor='RGBA(0, 0, 0, 0.16)'
-                    variant='filled'
-                    type='comment'
-                    placeholder='I am booooooooored!!! '
-                />
-                <InputRightElement mr={5} p='33px'>
-                    <IconButton
-                        icon={<FaHeart />} 
-                        backgroundColor={isDark ? '#ECE8DF' : '#BFAE98'}
-                        color={isDark ? '#5E4D3B' : '#E8DFD8'} />
-                    <IconButton 
-                        icon={<FaTrashAlt />} 
-                        backgroundColor={isDark ? '#ECE8DF' : '#BFAE98'}
-                        color={isDark ? '#5E4D3B' : '#E8DFD8'} />
-                </InputRightElement>
-            </InputGroup>
-        </FormControl>
-         ))}
-    </Box>
-     )
-}
+                    <div key={post._id}>
+                        <h4>
+                            {/* this is where for username */}
+                            {showUsername ? (
 
-export default PostList;
+                                // this links to the actual post page
+                                <Link to={`/profile/${post.postAuthor}`}>
+                                    {/* this is the post author */}
+                                    {post.postAuthor} <br />
+                                    {/* when the posts where created */}
+                                    <span> create at {post.createdAt}</span>
+                                </Link>
+                            ) : (
+                                <>
+                                    <span>
+                                        You had this post on {post.createdAt}
+                                    </span>
+                                </>
+                            )}
+                        </h4>
+                        <div>
+                            {/* the posts text */}
+                            <p>{post.postText}</p>
+                        </div>
+                        <Link to={`/posts/${post._id}`}>
+                            click this to go
+                        </Link>
+
+                    </div>
+                ))}
+        </div>
+    )
+};
+export default PostList
