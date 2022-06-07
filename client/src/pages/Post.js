@@ -35,29 +35,21 @@ import { useQuery } from '@apollo/client';
 import { useParams } from 'react-router-dom';
 
 const Post = () => {
-    const { postId } = useParams();
-
-    const { loading, data } = useQuery(QUERY_SINGLE_POST, {
-        // pass URL parameter
-        variables: { postId: postId },
-      });
-
-    const post = data?.post || {}
-
+    
     const { colorMode, toggleColorMode } = useColorMode();
     const isDark = colorMode === 'dark';
     const textcolor = useColorModeValue('#BFAE98', '#E8DFD8');
     const bgcolor = useColorModeValue('RGBA(0, 0, 0, 0.16)', 'RGBA(0, 0, 0, 0.36)');
 
-    
+    const { postId } = useParams();
 
-    let [value, setValue] = React.useState('')
+    const { loading, data } = useQuery(QUERY_SINGLE_POST, {
+        variables: { postId: postId },
+      });
 
-    let handleInputChange = (e) => {
-    let inputValue = e.target.value;
-    setValue(inputValue);
-    };
-     if (loading) {
+    const post = data?.post || {}
+
+    if (loading) {
     return <div>Loading...</div>;
   }
 
@@ -83,9 +75,12 @@ const Post = () => {
                 </Box>
 
                 <Divider></Divider>
-                {/* <CommentList> /</CommentList> */}
+                
+                  <CommentList
+                    comments={post.comments}
+                  />
+
                 {/* user #2's comment */}
-                <></>
                 {/* <Box m={10}>
                     <FormControl isReadOnly id='comment' >
                         <FormLabel color={textcolor}> username2 </FormLabel>
@@ -104,7 +99,7 @@ const Post = () => {
                 </Box> */}
 
                 {/* user #3's comment */}
-                <Box m={10}>
+                {/* <Box m={10}>
                     <FormControl isReadOnly id='comment' >
                         <FormLabel color={textcolor}> {post.postAuthor}  </FormLabel>
                         <InputGroup
@@ -118,10 +113,10 @@ const Post = () => {
                             />
                         </InputGroup>
                     </FormControl>
-                </Box>
+                </Box> */}
 
                 {/* user #4's comment */}
-                <Box m={10}>
+                {/* <Box m={10}>
                     <FormControl isReadOnly id='comment' >
                         <FormLabel color={textcolor}> {post.postAuthor} </FormLabel>
                         <InputGroup
@@ -136,7 +131,7 @@ const Post = () => {
                             
                         </InputGroup>
                     </FormControl>
-                </Box>
+                </Box> */}
 
             </Container>
         </Stack>

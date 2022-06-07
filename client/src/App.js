@@ -54,7 +54,7 @@ function App() {
           <Route exact path='/signup' element={<Signup />} className='Signup' />
           <Route exact path='/profile' element={<Profile />} className='Profile' />
           <Route exact path='/profile/:username' element={<Profile />} className='Profile' />
-          <Route exact path='/post' element={<Post />} className='Post' />
+          <Route exact path='/post/:postId' element={<Post />} className='Post' />
         </Routes>
 
       </div>
