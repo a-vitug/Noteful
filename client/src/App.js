@@ -1,6 +1,12 @@
-import React, { useState } from 'react';
-import { Routes, Route } from 'react-router-dom';
-import { ApolloClient, InMemoryCache, ApolloProvider } from '@apollo/client';
+import React from 'react';
+import {
+  ApolloClient,
+  InMemoryCache,
+  ApolloProvider,
+  createHttpLink,
+} from '@apollo/client';
+import { setContext } from '@apollo/client/link/context';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 
 import './App.css';
 import Homepage from './pages/Homepage';
@@ -11,33 +17,52 @@ import Authspage from './pages/auths/Authspage';
 import Post from './pages/Post';
 import Navbar from './components/Navbar';
 
-const client = new ApolloClient({
+const httpLink = createHttpLink({
   uri: '/graphql',
+});
+
+// Construct request middleware that will attach the JWT token to every request as an `authorization` header
+const authLink = setContext((_, { headers }) => {
+  // get the authentication token from local storage if it exists
+  const token = localStorage.getItem('id_token');
+  // return the headers to the context so httpLink can read them
+  return {
+    headers: {
+      ...headers,
+      authorization: token ? `Bearer ${token}` : '',
+    },
+  };
+});
+
+
+const client = new ApolloClient({
+  // Set up our client to execute the `authLink` middleware prior to making the request to our GraphQL API
+  link: authLink.concat(httpLink),
   cache: new InMemoryCache(),
 });
 
 function App() {
 
-  const [loggedIn, setLoggedIn] = useState(false);
-  
+
+
 
   return (
     <ApolloProvider client={client}>
       <div className='App'>
         <Routes>
-          <Route exact path='/' element={<Homepage loggedIn={loggedIn} setLoggedIn={setLoggedIn} />} className='Homepage' />
-          <Route exact path='/authspage' element={<Authspage loggedIn={loggedIn} setLoggedIn={setLoggedIn} />} className='Authspage' />
-          <Route exact path='/login' element={<Login loggedIn={loggedIn} setLoggedIn={setLoggedIn} />} className='Login' />
+          <Route exact path='/' element={<Homepage />} className='Homepage' />
+          <Route exact path='/authspage' element={<Authspage />} className='Authspage' />
+          <Route exact path='/login' element={<Login />} className='Login' />
           <Route exact path='/signup' element={<Signup />} className='Signup' />
-          <Route exact path='/profile' element={<Profile /> } className='Profile' />
-          <Route exact path='/profile/:profileId' element={<Profile /> } className='Profile' />
-          <Route exact path='/post' element={<Post /> } className='Post' />
+          <Route exact path='/profile' element={<Profile />} className='Profile' />
+          <Route exact path='/profile/:profileId' element={<Profile />} className='Profile' />
+          <Route exact path='/post' element={<Post />} className='Post' />
         </Routes>
-      
+
       </div>
     </ApolloProvider>
-    
-      
+
+
   )
 }
 
