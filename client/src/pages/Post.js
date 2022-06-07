@@ -25,8 +25,13 @@ import {
   WrapItem,
 } from '@chakra-ui/react';
 
+import PostList from '../components/PostsList';
+import PostForm from '../components/PostForm'
+
 import { useColorMode, useColorModeValue } from '@chakra-ui/color-mode';
 import { FaSun, FaMoon, FaGithub, FaUser, FaPaperPlane, FaHeart, FaTrashAlt, FaArrowCircleLeft } from 'react-icons/fa';
+
+import CommentList from '../components/CommentList'
 
 
 const Post = () => {
@@ -66,9 +71,10 @@ const Post = () => {
                 </Box>
 
                 <Divider></Divider>
-
+                <CommentList> /</CommentList>
                 {/* user #2's comment */}
-                <Box m={10}>
+                <></>
+                {/* <Box m={10}>
                     <FormControl isReadOnly id='comment' >
                         <FormLabel color={textcolor}> username2 </FormLabel>
                         <InputGroup
@@ -83,7 +89,7 @@ const Post = () => {
                             
                         </InputGroup>
                     </FormControl>
-                </Box>
+                </Box> */}
 
                 {/* user #3's comment */}
                 <Box m={10}>

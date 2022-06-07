@@ -37,6 +37,7 @@ export const QUERY_SINGLE_POST = gql`
                 _id
                 commentText
                 createdAt
+                commentAuthor
             }
         }
     }
@@ -56,4 +57,4 @@ export const QUERY_ME = gql`
             }
         }
     }
-`
+`;
