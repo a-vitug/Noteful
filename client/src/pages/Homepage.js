@@ -125,8 +125,12 @@ export default function Homepage({ loggedIn, setLoggedIn }) {
                                 > 
                                     Here's some news for you...
                             </Text>
+                            <Box>
+                                <RouteLink to="/post"></RouteLink>
+                            </Box>
 
                             {/* user's comment 1 */}
+                        <RouteLink to="/post">
                             <Box m={3}>
                                 <FormControl isReadOnly id='comment' >
                                     <FormLabel color={textcolor}> username1 </FormLabel>
@@ -152,6 +156,7 @@ export default function Homepage({ loggedIn, setLoggedIn }) {
                                     </InputGroup>
                                 </FormControl>
                             </Box>
+                        </RouteLink>
 
                             {/* user's comment 2 */}
                             <Box m={3}>

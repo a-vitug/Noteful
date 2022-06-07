@@ -40,17 +40,29 @@ const CommentForm = ({ postId }) => {
   }
   
   return(
-    <>
-      <Text mb='8px'>What are your comment on this post? {value}</Text>
-      <Textarea
-        value={commentText}
-        onChange={handleChange}
-        placeholder='Here is a sample placeholder'
-        size='sm'
-      />
-    </>
+    <div>
+      {Auth.loggedIn() ? (
+        <>
+        <form
+            className="flex-row justify-center justify-space-between-md align-center"
+            onSubmit={handleFormSubmit}
+          ></form>
+        <Text mb='8px'>What are your comment on this post? {value}</Text>
+          <Textarea
+          value={commentText}
+          onChange={handleChange}
+          placeholder='Here is a sample placeholder'
+          size='sm'
+          />
+        </>
+        ) : (
+          <p>
+              You need to be logged in to share your thoughts. Please{' '}
+              <Link to="/login">login</Link> or <Link to="/signup">signup.</Link>
+          </p>
+        )}
+    </div>
   );
-
 };
 
 export default CommentForm
