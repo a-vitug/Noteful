@@ -53,7 +53,7 @@ const PostList = ({
                                     </FormLabel>
                                     
                                     {/* this links to the actual post page */}
-                                    <RouteLink to={`/posts/${post._id}`}>
+                                    <RouteLink to={`/post/${post._id}`}>
                                         
                                         <InputGroup
                                             size='md'
