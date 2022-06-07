@@ -12,7 +12,7 @@ import { ADD_POST } from '../../utils/mutations';
 import { QUERY_POSTS, QUERY_ME } from '../../utils/queries';
 import Auth from '../../utils/auth';
 
-
+console.log(QUERY_ME)
 const PostForm = () => {
 
     //Styles
@@ -23,7 +23,7 @@ const PostForm = () => {
     const color = useColorModeValue('#ECE8DF', '#BFAE98')
 
 
-    const refresh = function (){
+    const refresh = function () {
         document.location.reload()
     }
 
@@ -79,68 +79,45 @@ const PostForm = () => {
     };
 
     return (
+        <div>
+            <h3>What's on your mind?</h3>
 
-        <Box m='30px'>
-            <Text
-                textShadow='2px 2px #BFAE98'
-                className='gloria'
-                p='30px'
-                pl='100px'
-                fontSize='6xl'
-                color={textcolor}
-            >
-                What's on your mind?
-            </Text>
             {Auth.loggedIn() ? (
-                <Center>
-                    <Box p='30px' w='80%'>
-                        <FormControl id='post'
-                        >
-                            <p> {characterCount} / 160</p>
-                            <InputGroup onChange={handleFormSubmit}
-                                size='lg'
-                                boxShadow='lg'
-                            >
-                                <Input h='100px'
-                                    name='postText'
-                                    placeholder='Please limit your text to 160 characters only '
-                                    value={postText}
-                                    backgroundColor='RGBA(0, 0, 0, 0.16)'
-                                    variant='filled'
-                                    onChange={handleChange}
-                                />
-                                <InputRightElement mr={5} p='50px'
-                                >   
-                                    
-                                    <IconButton icon={<FaPaperPlane />}
-                                        size='lg'
-                                        backgroundColor={isDark ? '#ECE8DF' : '#BFAE98'}
-                                        color={isDark ? '#5E4D3B' : '#E8DFD8'}
-                                        type="submit"
-                                        onClick={refresh}  
-                                        
-                                    />
-                                 
-                                    
-                    
-                                </InputRightElement>
-                            </InputGroup>
-                            {error && (
-                                <p>
-                                    {error.message}
-                                </p>
-                            )}
-                        </FormControl>
-                    </Box>
-                </Center>
+                <>
+                    <p>
+                        Character Count: {characterCount} / 160
+                    </p>
+                    <form onSubmit={handleFormSubmit}>
+                        <div>
+                            <textarea
+                                name="postText"
+                                placeholder="Here's a new thought..."
+                                value={postText}
+                                style={{ lineHeight: '1.5', resize: 'vertical' }}
+                                onChange={handleChange}
+                            ></textarea>
+                        </div>
+
+                        <div>
+                            <button type='submit'
+                            onClick={refresh}>
+                                click to post
+                            </button>
+                        </div>
+                        {error && (
+                            <div>
+                                {error.message}
+                            </div>
+                        )}
+                    </form>
+                </>
             ) : (
                 <p>
-                    You need to be logged in to share your thoughts. Please{' '}
+                    You need to be logged in to share your Posts. Please{' '}
                     <Link to="/login">login</Link> or <Link to="/signup">signup.</Link>
                 </p>
             )}
-        </Box>
-
-    );
+        </div>
+    )
 };
 export default PostForm;
