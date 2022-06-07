@@ -32,7 +32,7 @@ import CommentList from '../components/CommentList'
 import { QUERY_SINGLE_POST } from '../utils/queries';
 
 import { useQuery } from '@apollo/client';
-import { useParams } from 'react-router-dom';
+import { Link as RouteLink, useParams } from 'react-router-dom';
 
 const Post = () => {
     
@@ -57,7 +57,13 @@ const Post = () => {
         <Stack className='postbg' pt={100}>
             
             <Container p={5} maxW='container.sm'>
-                <IconButton icon={<FaArrowCircleLeft />} isRound='true' />
+                <RouteLink to='/'>
+                    <IconButton icon={<FaArrowCircleLeft />} 
+                        isRound='true' 
+                        backgroundColor={isDark ? '#ECE8DF' : '#BFAE98'}
+                        color={isDark ? '#5E4D3B' : '#E8DFD8'} 
+                    />
+                </RouteLink>
                 <Box m={3}>
                     <FormControl isReadOnly id='comment' >
                         <FormLabel color={textcolor}> {post.postAuthor} </FormLabel>
@@ -76,9 +82,10 @@ const Post = () => {
 
                 <Divider></Divider>
                 
-                  <CommentList
+                {/* renders post's comments */}
+                <CommentList
                     comments={post.comments}
-                  />
+                />
 
                 {/* user #2's comment */}
                 {/* <Box m={10}>
@@ -98,40 +105,6 @@ const Post = () => {
                     </FormControl>
                 </Box> */}
 
-                {/* user #3's comment */}
-                {/* <Box m={10}>
-                    <FormControl isReadOnly id='comment' >
-                        <FormLabel color={textcolor}> {post.postAuthor}  </FormLabel>
-                        <InputGroup
-                            size='md'
-                            boxShadow='lg'
-                        >
-                            <CommentList h='65px' backgroundColor={bgcolor}
-                                variant='filled'
-                                type='comment'
-                                comments = {post.comments}
-                            />
-                        </InputGroup>
-                    </FormControl>
-                </Box> */}
-
-                {/* user #4's comment */}
-                {/* <Box m={10}>
-                    <FormControl isReadOnly id='comment' >
-                        <FormLabel color={textcolor}> {post.postAuthor} </FormLabel>
-                        <InputGroup
-                            size='md'
-                            boxShadow='lg'
-                        >
-                            <CommentList h='65px' backgroundColor={bgcolor}
-                                variant='filled'
-                                type='comment'
-                                comments={post.comments}
-                            />
-                            
-                        </InputGroup>
-                    </FormControl>
-                </Box> */}
 
             </Container>
         </Stack>

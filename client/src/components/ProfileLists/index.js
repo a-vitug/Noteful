@@ -52,26 +52,29 @@ const ProfileList = ({ user, posts, showUsername = true }) => {
                                     </AvatarGroup>
                                 </FormLabel>
 
-                                <InputGroup
-                                    size='md'
-                                    boxShadow='lg'
-                                >
-                                    <Input h='65px' backgroundColor='RGBA(0, 0, 0, 0.16)'
-                                        variant='filled'
-                                        type='comment'
-                                        placeholder={post.postText}
-                                    />
-                                    <InputRightElement mr={5} p='33px'>
-                                        <IconButton
-                                            icon={<FaHeart />} 
-                                            backgroundColor={isDark ? '#ECE8DF' : '#BFAE98'}
-                                            color={textcolor} />
-                                        <IconButton 
-                                            icon={<FaTrashAlt />} 
-                                            backgroundColor={isDark ? '#ECE8DF' : '#BFAE98'}
-                                            color={textcolor} />
-                                    </InputRightElement>
-                                </InputGroup>
+                                {/* this links to the actual post page */}
+                                <RouteLink to={`/post/${post._id}`}>
+                                    <InputGroup
+                                        size='md'
+                                        boxShadow='lg'
+                                    >
+                                        <Input h='65px' backgroundColor='RGBA(0, 0, 0, 0.16)'
+                                            variant='filled'
+                                            type='comment'
+                                            placeholder={post.postText}
+                                        />
+                                        <InputRightElement mr={5} p='33px'>
+                                            <IconButton
+                                                icon={<FaHeart />} 
+                                                backgroundColor={isDark ? '#ECE8DF' : '#BFAE98'}
+                                                color={textcolor} />
+                                            <IconButton 
+                                                icon={<FaTrashAlt />} 
+                                                backgroundColor={isDark ? '#ECE8DF' : '#BFAE98'}
+                                                color={textcolor} />
+                                        </InputRightElement>
+                                    </InputGroup>
+                                </RouteLink>
                             </>
                         ) : (
                             <Text 

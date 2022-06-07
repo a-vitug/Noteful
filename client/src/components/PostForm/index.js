@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import { useMutation, useQuery } from '@apollo/client';
 
 import { useColorMode, useColorModeValue } from '@chakra-ui/color-mode';
-import { FormControl, Box, Input, InputGroup, InputRightElement, IconButton, Text, Center, Button } from '@chakra-ui/react';
+import { FormControl, FormHelperText, Box, Input, InputGroup, InputRightElement, IconButton, Text, Center, Button, Textarea } from '@chakra-ui/react';
 import { FaPaperPlane } from 'react-icons/fa';
 
 
@@ -13,6 +13,7 @@ import { QUERY_POSTS, QUERY_ME } from '../../utils/queries';
 import Auth from '../../utils/auth';
 
 console.log(QUERY_ME)
+
 const PostForm = () => {
 
     //Styles
@@ -44,6 +45,7 @@ const PostForm = () => {
             }
 
             const { me } = cache.readQuery({ query: QUERY_ME });
+
             cache.writeQuery({
                 query: QUERY_ME,
                 data: { me: { ...me, posts: [...me.posts, addPost] } },
@@ -62,9 +64,11 @@ const PostForm = () => {
                     postAuthor: Auth.getProfile().data.username,
                 },
             });
+            console.log('hello?');
 
             setPostText('');
         } catch (err) {
+            console.log(err);
             console.error(err);
         }
     };
@@ -79,45 +83,41 @@ const PostForm = () => {
     };
 
     return (
-        <div>
-            <h3>What's on your mind?</h3>
-
+        <>
             {Auth.loggedIn() ? (
-                <>
-                    <p>
-                        Character Count: {characterCount} / 160
-                    </p>
-                    <form onSubmit={handleFormSubmit}>
-                        <div>
-                            <textarea
-                                name="postText"
-                                placeholder="Here's a new thought..."
-                                value={postText}
-                                style={{ lineHeight: '1.5', resize: 'vertical' }}
-                                onChange={handleChange}
-                            ></textarea>
-                        </div>
+                <form className='form' id='post' onSubmit={handleFormSubmit}>
+                    <InputGroup
+                            size='lg'
+                            boxShadow='lg'
+                        >
+                            <Input h='100px'
+                               name="postText"
+                               value={postText}
+                               backgroundColor='RGBA(0, 0, 0, 0.16)'
+                               variant='filled'
+                               placeholder='Type something here... '
+                               onChange={handleChange}
+                            />
+                            <InputRightElement mr={5} p='50px'>
+                                <IconButton icon={<FaPaperPlane />}
+                                    type='submit'
+                                    onClick={refresh}
+                                    size='lg'
+                                    backgroundColor={isDark ? '#ECE8DF' : '#BFAE98'}
+                                    color={isDark ? '#5E4D3B' : '#E8DFD8'} 
+                                />
+                            </InputRightElement>
+                        </InputGroup>
+                </form>
 
-                        <div>
-                            <button type='submit'
-                            onClick={refresh}>
-                                click to post
-                            </button>
-                        </div>
-                        {error && (
-                            <div>
-                                {error.message}
-                            </div>
-                        )}
-                    </form>
-                </>
             ) : (
                 <p>
                     You need to be logged in to share your Posts. Please{' '}
                     <Link to="/login">login</Link> or <Link to="/signup">signup.</Link>
                 </p>
             )}
-        </div>
-    )
+
+        </>
+    );
 };
 export default PostForm;
