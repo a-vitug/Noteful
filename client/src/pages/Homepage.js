@@ -1,10 +1,9 @@
 import Authspage from './auths/Authspage';
 import { Flex, Stack, HStack, Heading, Grid, GridItem, Spacer } from '@chakra-ui/layout';
-import { IconButton, Link, Box, Button, Center, Divider, ButtonGroup, Container, Image, InputGroup, FormControl, FormLabel, Input, Text, Tooltip, InputRightElement, Wrap, WrapItem } from '@chakra-ui/react';
-import { useColorMode, useColorModeValue } from '@chakra-ui/color-mode';
-import { Link as RouteLink } from 'react-router-dom';
+import { IconButton, Link, Box, Button, Center, Divider, ButtonGroup, Container, Image, InputGroup, FormControl, FormLabel, Input, Text, InputRightElement, Wrap, WrapItem } from '@chakra-ui/react';
+import { useColorMode, useColorModeValue } from '@chakra-ui/color-mode'
 
-import { FaSun, FaMoon, FaGithub, FaPaperPlane, FaHeart, FaTrashAlt, FaUser, FaPowerOff, FaUserPlus } from 'react-icons/fa';
+import { FaSun, FaMoon, FaGithub, FaPaperPlane, FaHeart, FaTrashAlt } from 'react-icons/fa';
 
 // swiper elements
 import { Swiper, SwiperSlide } from 'swiper/react';
@@ -20,8 +19,9 @@ export default function Homepage({ loggedIn, setLoggedIn }) {
 
     const { colorMode, toggleColorMode } = useColorMode();
     const isDark = colorMode === 'dark';
-    const textcolor = useColorModeValue('#BFAE98', '#E8DFD8');
+    const textcolor = useColorModeValue('yellow.900', '#E8DFD8');
     const bgcolor = useColorModeValue('RGBA(0, 0, 0, 0.16)', 'RGBA(0, 0, 0, 0.36)');
+    const color = useColorModeValue('#ECE8DF', '#BFAE98')
 
     const outerBoxStyles = {
         background:
@@ -37,8 +37,15 @@ export default function Homepage({ loggedIn, setLoggedIn }) {
     const posts = data?.posts || []
 
     return (
-        <Stack p={5} className={isDark ? 'darkbg': 'lightbg'}>
-            <Box  backdropBlur='3px' borderRadius='md' >
+        <Stack p={5} sx={outerBoxStyles}>
+            <Flex w='100%'>
+                <Spacer></Spacer>
+                <Link href='https://github.com/a-vitug/react-app'>
+                    <IconButton ml={2} icon={<FaGithub />} backgroundColor={bgcolor} isRound='true'></IconButton>
+                </Link>
+                
+                <IconButton ml={8} icon={isDark ? <FaSun /> : <FaMoon />} backgroundColor={bgcolor} isRound='true' onClick={toggleColorMode}></IconButton>
+            </Flex>
 
             {/* if logged in */}
             {Auth.loggedIn() ? (
@@ -76,7 +83,7 @@ export default function Homepage({ loggedIn, setLoggedIn }) {
              
                     <Box m='50px' mx={100}>
                         <Text 
-                            textShadow={isDark ? '2px 2px #BFAE98' : '2px 2px #E8DFD8'}
+                            textShadow='2px 2px #BFAE98'
                             className='gloria' 
                             p='30px'
                             pl='100px'
@@ -86,7 +93,7 @@ export default function Homepage({ loggedIn, setLoggedIn }) {
                             What's on your mind?
                         </Text>
                         <Center>
-                            <Box p='20px' w='80%'>
+                            <Box p='30px' w='80%'>
                                 <FormControl id='post'>
                                     <InputGroup
                                         size='lg'
@@ -101,7 +108,7 @@ export default function Homepage({ loggedIn, setLoggedIn }) {
                                         />
                                         <InputRightElement mr={5} p='50px'>
                                             <IconButton icon={<FaPaperPlane />} 
-                                                size='lg'
+                                            size='lg'
                                                 backgroundColor={isDark ? '#ECE8DF' : '#BFAE98'}
                                                 color={isDark ? '#5E4D3B' : '#E8DFD8'} />
                                         </InputRightElement>
@@ -157,37 +164,19 @@ export default function Homepage({ loggedIn, setLoggedIn }) {
                         </GridItem>
 
                     </Grid>
-                
-                </>
+            </>
 
                 // else logged out
             ) : (
-                <>
-                    <Flex w='100%'>
-
+                <Box>
+                    <Flex>
                         <Spacer></Spacer>
-
-                        <RouteLink to='/authspage'>
-                            <Tooltip label='Login'>
-                                <IconButton // onClick={() => setLoggedIn(!loggedIn)}
-                                    ml={8}
-                                    icon={<FaUserPlus />}
-                                    backgroundColor={bgcolor}
-                                    isRound='true'
-                                >
-                                </IconButton>
-                            </Tooltip>
-                        </RouteLink>
-
-                        <Link href='https://github.com/a-vitug/react-app'>
-                            <IconButton ml={8} icon={<FaGithub />} backgroundColor={bgcolor} isRound='true'></IconButton>
-                        </Link>
-                        
-                        <IconButton ml={8} icon={isDark ? <FaSun /> : <FaMoon />} backgroundColor={bgcolor} isRound='true' onClick={toggleColorMode}></IconButton>
-
+                        <Button m={5} backgroundColor={bgcolor} onClick={() => setLoggedIn(!loggedIn)}>
+                            Log in
+                        </Button>
                     </Flex>
 
-                    <Grid m={8} mx={100} templateColumns='repeat(4, 1fr)' gap={1}>
+                    <Grid templateColumns='repeat(4, 1fr)' gap={1}>
                         <GridItem colSpan={2}>
                             <Swiper modules={[Autoplay, Navigation, Pagination, EffectFade]}
                                 autoplay={{ disableOnInteraction: false }}
@@ -295,12 +284,12 @@ export default function Homepage({ loggedIn, setLoggedIn }) {
                         </Grid>
                     </Box>
    
-                </>
+                </Box>
                 
             )} 
             
             
-        </Box>
+            
         </Stack>
     );
 }
