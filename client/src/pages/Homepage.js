@@ -10,7 +10,7 @@ import { Swiper, SwiperSlide } from 'swiper/react';
 import SwiperCore, { Autoplay, Navigation, Pagination, Controller, Thumbs, EffectFade } from 'swiper';
 import 'swiper/css';
 
-import  PostsList  from '../components/PostsList'
+import  PostsList  from '../components/PostList'
 import PostForm from '../components/PostForm'
 
 import { useQuery } from '@apollo/client';
