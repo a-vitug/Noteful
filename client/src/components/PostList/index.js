@@ -1,5 +1,5 @@
-import { Avatar, AvatarGroup, Box, FormControl, FormLabel, FormHelperText, Input, InputGroup, InputRightElement, InputRightAddon, IconButton, Tooltip, Text, Tag, TagLabel, Divider } from '@chakra-ui/react';
-import { FaSun, FaMoon, FaGithub, FaUser, FaPaperPlane, FaHeart, FaTrashAlt, FaUserAlien, FaPowerOff } from 'react-icons/fa';
+import { Avatar, AvatarGroup, Box, FormControl, FormLabel, FormHelperText, Input, InputGroup, InputRightElement, InputRightAddon, IconButton, Text, Tag, TagLabel, Divider } from '@chakra-ui/react';
+import { FaSun, FaMoon, FaGithub, FaUser, FaPaperPlane, FaHeart, FaTrashAlt, FaUserAlien } from 'react-icons/fa';
 import { useColorMode, useColorModeValue } from '@chakra-ui/color-mode';
 
 import React from 'react';
@@ -14,7 +14,7 @@ const PostList = ({
 
     const { colorMode, toggleColorMode } = useColorMode();
     const isDark = colorMode === 'dark';
-    const textcolor = useColorModeValue('#E8DFD8', 'yellow.900');
+    const textcolor = useColorModeValue('yellow.900', '#E8DFD8');
     const bgcolor = useColorModeValue('RGBA(0, 0, 0, 0.16)', 'RGBA(0, 0, 0, 0.36)');
 
     if (!posts.length) {
@@ -33,7 +33,7 @@ const PostList = ({
                             {showUsername ? (
                                 <>
                                     {/* this is the post author */}
-                                    <FormLabel color={isDark ? '#E8DFD8' : 'yellow.900'}>
+                                    <FormLabel color={textcolor}>
                                         <AvatarGroup>
                                             <Avatar 
                                                 bg='#1D454E'
@@ -54,6 +54,7 @@ const PostList = ({
                                     
                                     {/* this links to the actual post page */}
                                     <RouteLink to={`/posts/${post._id}`}>
+                                        
                                         <InputGroup
                                             size='md'
                                             boxShadow='lg'
