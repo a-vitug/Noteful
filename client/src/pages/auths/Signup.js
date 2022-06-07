@@ -24,7 +24,7 @@ import Auth from '../../utils/auth'
 const Signup = () => {
   const { colorMode, toggleColorMode } = useColorMode();
   const textcolor = useColorModeValue('#BFAE98', '#E8DFD8');
-  const bgcolor = useColorModeValue('#ECE8DF', '#BFAE98');
+  const bgcolor = useColorModeValue('RGBA(0, 0, 0, 0.16)', 'RGBA(0, 0, 0, 0.36)');
   const isDark = colorMode === 'dark';
 
   const [show, setShow] = useState(false);
@@ -66,6 +66,7 @@ const Signup = () => {
 
   };
 
+  //added
   return (
     <Flex flexDirection='column' p='50px' pl='200px'>
       {data ? (
@@ -78,7 +79,7 @@ const Signup = () => {
           border='2px'
           borderRadius='md'
           boxShadow='lg'
-          color={isDark ? '#5E4D3B' : '#E8DFD8'}
+          color={textcolor}
           p={20}
         >
           <FormControl isRequired id='username' pb={8}>
@@ -90,6 +91,7 @@ const Signup = () => {
               boxShadow='lg'
             >
               <Input
+                color='yellow.900'
                 name="username"
                 value={formState.name}
                 placeholder='Enter your username'
@@ -107,6 +109,7 @@ const Signup = () => {
               boxShadow='lg'
             >
               <Input
+                color='yellow.900'
                 name="email"
                 value={formState.email}
                 type='email'
@@ -132,6 +135,7 @@ const Signup = () => {
                 boxShadow='lg'
               >
                 <Input
+                  color='yellow.900'
                   name="password"
                   value={formState.password}
                   onChange={handleChange}
