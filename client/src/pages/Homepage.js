@@ -15,6 +15,7 @@ import { useQuery } from '@apollo/client';
 import { QUERY_USER, QUERY_POSTS, QUERY_SINGLE_POST, QUERY_ME } from '../utils/queries';
 import Auth from '../utils/auth';
 import PostList from '../components/PostList';
+import PostForm from '../components/PostForm';
 
 export default function Homepage({ loggedIn, setLoggedIn }) {
 
@@ -86,30 +87,11 @@ export default function Homepage({ loggedIn, setLoggedIn }) {
                             > 
                                 What's on your mind? 
                         </Text>
-                        <Center>
-                            <Box p='20px' w='80%'>
-                                <FormControl id='post'>
-                                    <InputGroup
-                                        size='lg'
-                                        boxShadow='lg'
-                                    >
-                                        <Input h='100px'
-                                            backgroundColor='RGBA(0, 0, 0, 0.16)'
-                                            variant='filled'
-                                            type='post'
-                                            placeholder='Type something here... '
-                                            // onChange={(e) => setEmail(e.target.value)}
-                                        />
-                                        <InputRightElement mr={5} p='50px'>
-                                            <IconButton icon={<FaPaperPlane />} 
-                                                size='lg'
-                                                backgroundColor={isDark ? '#ECE8DF' : '#BFAE98'}
-                                                color={isDark ? '#5E4D3B' : '#E8DFD8'} />
-                                        </InputRightElement>
-                                    </InputGroup>
-                                </FormControl>
-                            </Box>
-                        </Center>
+                        
+                        {/* renders post form */}
+                        <Box textAlign='center'>
+                            <PostForm />
+                        </Box>
                     </Box>
 
                     <Divider />
