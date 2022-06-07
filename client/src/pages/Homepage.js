@@ -11,8 +11,8 @@ import { Swiper, SwiperSlide } from 'swiper/react';
 import SwiperCore, { Autoplay, Navigation, Pagination, Controller, Thumbs, EffectFade } from 'swiper';
 import 'swiper/css';
 
-import { PostsList } from '../components/PostsList'
-import PostForm, { PostsForm } from '../components/PostForm'
+import  PostsList  from '../components/PostsList'
+import PostForm from '../components/PostForm'
 
 import { useQuery } from '@apollo/client';
 import { QUERY_USER, QUERY_POSTS, QUERY_SINGLE_POST, QUERY_ME } from '../utils/queries';
@@ -320,7 +320,8 @@ export default function Homepage({ loggedIn, setLoggedIn }) {
                                 </Text>
 
                                 {/* user's post 1 */}
-                                <Box m={3}>
+                                <PostsList/>
+                                {/* <Box m={3}>
                                     <FormControl isReadOnly id='comment' >
                                         <FormLabel color={textcolor}> username1 </FormLabel>
                                         <InputGroup
@@ -334,7 +335,7 @@ export default function Homepage({ loggedIn, setLoggedIn }) {
                                             />
                                         </InputGroup>
                                     </FormControl>
-                                </Box>
+                                </Box> */}
 
                                 {/* user's post 2 */}
                                 <Box m={3}>

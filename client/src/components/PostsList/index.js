@@ -3,19 +3,28 @@ import { Box, FormControl, FormLabel, FormHelperText, Input, InputGroup, InputRi
 import { FaSun, FaMoon, FaGithub, FaUser, FaPaperPlane, FaHeart, FaTrashAlt } from 'react-icons/fa';
 import { useColorMode, useColorModeValue } from '@chakra-ui/color-mode';
 
-const PostList = ({
+const PostsList = ({
     posts,
     title,
     showTitle = true,
     showUsername = true,
+    
 }) => {
+    const { colorMode, toggleColorMode } = useColorMode();
+    const isDark = colorMode === 'dark';
+    const textcolor = useColorModeValue('yellow.900', '#E8DFD8');
+    const bgcolor = useColorModeValue('RGBA(0, 0, 0, 0.16)', 'RGBA(0, 0, 0, 0.36)');
+
     if (!posts.length) {
         return <h3> No Posts Yet</h3>;
     }
 
     return (
         <Box m={3}>
-            <FormControl isReadOnly id='comment' >
+             {showTitle && <h3>{title}</h3>}
+                { posts &&
+                    posts.map((post) => (
+            <FormControl key={post._id} isReadOnly id='comment' >
                 <FormLabel color={textcolor}> username1 </FormLabel>
                     <InputGroup
                         size='md'
@@ -38,8 +47,9 @@ const PostList = ({
                             </InputRightElement>
                      </InputGroup>
                 </FormControl>
+                    ))}
         </Box>
     )
 }
 
-export default PostList;
+export default PostsList;
