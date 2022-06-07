@@ -1,5 +1,5 @@
 @import url('http://fonts.cdnfonts.com/css/halimun');
-@import url('https://fonts.googleapis.com/css2?family=Itim&family=Mali&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Itim&family=Mali&family=Short+Stack&display=swap');
 
 /* main light */
 .background {
@@ -49,6 +49,20 @@
     background-position: center;
 }
 
+/* homepage light bg */
+.hlightbg {
+    background-image: url(./img/lightbg.png);
+    min-height: 100vh;
+    background-size: contain;
+}
+
+/* homepage dark bg */
+.hdarkbg {
+    background-image: url(./img/darkbg.png);
+    min-height: 100vh;
+    background-size: contain;
+}
+
 .text {
     font-weight: bold;
 }
@@ -63,4 +77,9 @@
 
 .indie {
     font-family: 'Mali', cursive;
+}
+
+.indieFlower {
+    font-family: 'Short Stack', cursive;
+    font-weight: bold;
 }
