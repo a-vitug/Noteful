@@ -38,6 +38,7 @@ import { useQuery } from '@apollo/client';
 import { QUERY_USER, QUERY_POSTS, QUERY_SINGLE_POST, QUERY_ME } from '../utils/queries';
 import Auth from '../utils/auth';
 import PostList from '../components/PostList';
+import PostForm from '../components/PostForm';
 import ProfileList from '../components/ProfileLists';
 
 const Profile = () => {
@@ -286,30 +287,11 @@ const Profile = () => {
                 > 
                   Share your thoughts!
             </Text>
-            <Center>
-                <Box w='100%'>
-                    <FormControl id='post'>
-                        <InputGroup
-                            size='lg'
-                            boxShadow='lg'
-                        >
-                            <Input h='100px'
-                                backgroundColor='RGBA(0, 0, 0, 0.16)'
-                                variant='filled'
-                                type='post'
-                                placeholder='Type something here... '
-                                // onChange={(e) => setEmail(e.target.value)}
-                            />
-                            <InputRightElement mr={5} p='50px'>
-                                <IconButton icon={<FaPaperPlane />} 
-                                size='lg'
-                                    backgroundColor={isDark ? '#ECE8DF' : '#BFAE98'}
-                                    color={isDark ? '#5E4D3B' : '#E8DFD8'} />
-                            </InputRightElement>
-                        </InputGroup>
-                    </FormControl>
-                </Box>
-            </Center>
+
+            {/* renders post form */}
+            <Box textAlign='center'>
+                <PostForm />
+            </Box>
           </Flex>
         </WrapItem>
 
@@ -336,6 +318,10 @@ const Profile = () => {
                   > 
                       Your posts go here...
               </Text>
+
+              <Box>
+                  <RouteLink to="/post"></RouteLink>
+              </Box>
               
               {/* user's post list */}
               {loading ? (
