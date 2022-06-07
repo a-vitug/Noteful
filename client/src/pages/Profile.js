@@ -25,10 +25,12 @@ import {
   Text,
   Wrap,
   WrapItem,
+  Icon,
+  Tooltip,
 } from '@chakra-ui/react';
 
 import { useColorMode, useColorModeValue } from '@chakra-ui/color-mode';
-import { FaSun, FaMoon, FaGithub, FaUser, FaPaperPlane, FaHeart, FaTrashAlt, FaHouseUser } from 'react-icons/fa';
+import { FaSun, FaMoon, FaGithub, FaUser, FaPaperPlane, FaHeart, FaTrashAlt, FaHouseUser, FaPowerOff, FaLandmark, } from 'react-icons/fa';
 
 import { useQuery } from '@apollo/client';
 import { QUERY_USER, QUERY_POSTS, QUERY_SINGLE_POST, QUERY_ME } from '../utils/queries';
@@ -45,6 +47,11 @@ const Profile = () => {
 
   const [pic, setPic] = useState(false);
   const [userPic, setUserPic] = useState();
+
+  const logout = (event) => {
+    event.preventDefault();
+    Auth.logout();
+  };
 
   const { username: userParam } = useParams();
 
@@ -162,33 +169,59 @@ const Profile = () => {
   return (
     <Stack p={5} className={isDark ? 'darkbg': 'lightbg'}>
       <Flex w='100%'>
-        <Spacer></Spacer>
-        <RouteLink to='/'>
-          <IconButton
-            ml={8}
-            icon={<FaHouseUser />}
-            isRound='true'
-            backgroundColor={bgcolor}
-          >
-          </IconButton>
-        </RouteLink>
+          <Link href='https://github.com/a-vitug/react-app'>
+            <IconButton
+              ml={8}
+              icon={<FaGithub />}
+              isRound='true'
+              backgroundColor={bgcolor}
+            ></IconButton>
+          </Link>
 
-        <Link href='https://github.com/a-vitug/react-app'>
           <IconButton
             ml={8}
-            icon={<FaGithub />}
+            icon={isDark ? <FaSun /> : <FaMoon />}
             isRound='true'
+            onClick={toggleColorMode}
             backgroundColor={bgcolor}
           ></IconButton>
-        </Link>
 
-        <IconButton
-          ml={8}
-          icon={isDark ? <FaSun /> : <FaMoon />}
-          isRound='true'
-          onClick={toggleColorMode}
-          backgroundColor={bgcolor}
-        ></IconButton>
+        <Spacer></Spacer>
+
+        {/* if logged in */}
+        {Auth.loggedIn() ? (
+          <>
+            <RouteLink to='/'>
+              <Tooltip label='Home'>
+                <IconButton
+                  ml={8}
+                  icon={<FaLandmark />}
+                  isRound='true'
+                  backgroundColor={bgcolor}
+                >
+                </IconButton>
+              </Tooltip>
+            </RouteLink>
+            
+            <Tooltip label='Logout'>
+              <IconButton onClick={logout}
+                ml={8}
+                icon={<FaPowerOff />}
+                backgroundColor={bgcolor}
+                isRound='true'
+              >
+              </IconButton>
+            </Tooltip>
+            
+            
+          </>
+          // else logged out
+        ) : (
+          <>
+            
+          </>
+        )}
+          
       </Flex>
 
       <Wrap spacing='20px' pl={35}>
@@ -216,12 +249,6 @@ const Profile = () => {
               </Button>
             </Box>
           </Flex>
-        </WrapItem>
-
-        <WrapItem>
-          <Text>
-            Welcome {userParam ? `${user.username}'s` : 'your'}
-          </Text>
         </WrapItem>
         
         <WrapItem>
