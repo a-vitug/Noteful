@@ -10,6 +10,9 @@ import { Swiper, SwiperSlide } from 'swiper/react';
 import SwiperCore, { Autoplay, Navigation, Pagination, Controller, Thumbs, EffectFade } from 'swiper';
 import 'swiper/css';
 
+import { PostsList } from '../components/PostsList'
+import PostForm, { PostsForm } from '../components/PostForm'
+
 import { useQuery } from '@apollo/client';
 import { QUERY_USER, QUERY_POSTS, QUERY_SINGLE_POST, QUERY_ME } from '../utils/queries';
 
@@ -63,7 +66,9 @@ export default function Homepage({ loggedIn, setLoggedIn }) {
                             Log out
                         </Button>
                     </Flex>
-                    <Box m='30px'>
+
+                    <PostForm />
+                    {/* <Box m='30px'>
                         <Text 
                             textShadow='2px 2px #BFAE98'
                             className='gloria' 
@@ -98,7 +103,7 @@ export default function Homepage({ loggedIn, setLoggedIn }) {
                                 </FormControl>
                             </Box>
                         </Center>
-                    </Box>
+                    </Box> */}
 
                     <Divider />
 

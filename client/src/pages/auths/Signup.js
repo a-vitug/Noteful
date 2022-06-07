@@ -23,7 +23,7 @@ import Auth from '../../utils/auth'
 
 const Signup = () => {
   const { colorMode, toggleColorMode } = useColorMode();
-  const textcolor = useColorModeValue('#E8DFD8', 'yellow.900');
+  const textcolor = useColorModeValue('yellow.900', '#E8DFD8');
   const bgcolor = useColorModeValue('#ECE8DF', '#BFAE98');
   const isDark = colorMode === 'dark';
 

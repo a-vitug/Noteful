@@ -17,7 +17,7 @@ const resolvers = {
         post: async (parent, { postId }) => {
             return Post.findOne({ _id: postId });
         },
-        me: async (parant, args, context) => {
+        me: async (parent, args, context) => {
             if (context.user) {
                 return User.findOne({ _id: context.user._id }).populate('posts')
             }
@@ -122,10 +122,10 @@ const resolvers = {
 
                 if (post) {
                     if (post.likes.find(like => like.username === context.username)) {
-                        //Post is already like and will unlike it
+                        //Post is already liked and will unlike it
                         post.likes = post.likes.filter((like) => like.username !== context.username)
                     } else {
-                        //when post is not liked, when cliked, then post it
+                        //when post is not liked, when clicked, then post it
                         // const username = post.likes.username
 
                         post.likes.push({
