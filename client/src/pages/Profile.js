@@ -27,6 +27,8 @@ import {
   WrapItem,
   Icon,
   Tooltip,
+  Tag,
+  TagLabel,
 } from '@chakra-ui/react';
 
 import { useColorMode, useColorModeValue } from '@chakra-ui/color-mode';
@@ -34,17 +36,18 @@ import { FaSun, FaMoon, FaGithub, FaUser, FaPaperPlane, FaHeart, FaTrashAlt, FaH
 
 import { useQuery } from '@apollo/client';
 import { QUERY_USER, QUERY_POSTS, QUERY_SINGLE_POST, QUERY_ME } from '../utils/queries';
+import Auth from '../utils/auth';
+import PostList from '../components/PostList';
 import ProfileList from '../components/ProfileLists';
-import Auth from '../utils/auth'
 
 const Profile = () => {
   const { colorMode, toggleColorMode } = useColorMode();
   const isDark = colorMode === 'dark';
   const textcolor = useColorModeValue('#BFAE98', '#E8DFD8');
   const bgcolor = useColorModeValue('RGBA(0, 0, 0, 0.16)', 'RGBA(0, 0, 0, 0.36)');
+
   const toast = useToast();
   const navigate = useNavigate();
-
   const [pic, setPic] = useState(false);
   const [userPic, setUserPic] = useState();
 
@@ -68,17 +71,23 @@ const Profile = () => {
     return <div>Loading...</div>;
   }
 
-  // if (!user?.username) {
-  //   return (
-  //     <h4>
-  //       You need to be logged in to see this. Use the navigation links above to
-  //       sign up or log in!
-  //     </h4>
-  //   );
-  // }
+  if (!user?.username) {
+    return (
+      <Text 
+        className='indie'
+        fontWeight='bold'
+        p='20px'
+        fontSize='xl'
+        color={textcolor}
+        textAlign='center'
+      > 
+        You need to be logged in to see this.
+    </Text>
+    );
+  }
 
-  // const { loading, data } = useQuery(QUERY_ME);
-  // const me = data?.me || [];
+  // const { loading, data } = useQuery(QUERY_ME, QUERY_POSTS);
+  // const user = data?.user || [];
 
 
   // uploads 's profile picture
@@ -136,7 +145,7 @@ const Profile = () => {
         },
       };
       const { data } = await axios.post(
-        '/api/user',
+        '/profile',
         {
           pic,
         },
@@ -224,10 +233,24 @@ const Profile = () => {
           
       </Flex>
 
-      <Wrap spacing='20px' pl={35}>
+      <Wrap  >
+
         {/* upload 's profile picture */}
-        <WrapItem>
+        <WrapItem pl={65}>
           <Flex flexDirection='column' p='170px'>
+            {/* renders user's name */}
+            <Text 
+              p={3}
+              color='#1D454E'
+              fontSize='2xl'
+              className='indieFlower' 
+              textAlign='center'
+            >
+              Hello, I'm {user.username}!
+            </Text>
+
+            <Tag colorScheme='whiteAlpha'></Tag>
+
             <Box border='1px' p='10px'>
               <FormControl id='pic'>
                 <FormLabel>Upload your Picture</FormLabel>
@@ -248,23 +271,23 @@ const Profile = () => {
                 Upload{' '}
               </Button>
             </Box>
+
           </Flex>
         </WrapItem>
         
         <WrapItem>
-          <Box m='30px'>
+          <Flex flexDirection='column' pt='120px'>
             <Text 
                 textShadow={isDark ? '2px 2px #BFAE98' : '2px 2px #E8DFD8'}
                 className='gloria' 
                 p='30px'
-                pl='100px'
                 fontSize='6xl'
                 color={textcolor}
                 > 
-                    What's on your mind? 
+                  Share your thoughts!
             </Text>
             <Center>
-                <Box p='30px' w='80%'>
+                <Box w='100%'>
                     <FormControl id='post'>
                         <InputGroup
                             size='lg'
@@ -287,7 +310,7 @@ const Profile = () => {
                     </FormControl>
                 </Box>
             </Center>
-          </Box>
+          </Flex>
         </WrapItem>
 
         <Divider></Divider>
@@ -311,19 +334,21 @@ const Profile = () => {
                   fontSize='3xl'
                   color={textcolor}
                   > 
-                      Here's some news for you...
+                      Your posts go here...
               </Text>
-
-              {/* 's posts */}
+              
+              {/* user's post list */}
               {loading ? (
                   <Box m={3}>
-                    No Posts
+                    No Posts yet!
                   </Box>
                 ) : (
                   <ProfileList
                     user={user}
+                    posts={user.posts}
                   />
                 )}
+
               
           </GridItem>
 

@@ -46,7 +46,6 @@ const Signup = () => {
     })
   }
 
-
   const submitHandler = async (event) => {
     event.preventDefault();
     console.log(formState)
@@ -62,8 +61,6 @@ const Signup = () => {
     } catch (e) {
       console.error(e)
     }
-
-
   };
 
   //added
