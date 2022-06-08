@@ -15,12 +15,46 @@ import {
 import { useColorMode, useColorModeValue } from '@chakra-ui/color-mode';
 import { FaTrashAlt } from 'react-icons/fa';
 
-const CommentList = ({ comments }) => {
+import { useMutation, useQuery } from '@apollo/client';
+import { REMOVE_COMMENT } from '../../utils/mutations';
+import { QUERY_ME} from '../../utils/queries'
+
+const CommentList = ({ comments, postId }) => {
     const { colorMode, toggleColorMode } = useColorMode();
     const isDark = colorMode === 'dark';
     const textcolor = useColorModeValue('#BFAE98', '#E8DFD8');
     const bgcolor = useColorModeValue('RGBA(0, 0, 0, 0.16)', 'RGBA(0, 0, 0, 0.36)');
     
+    const refresh = function () {
+        document.location.reload()
+    }
+
+    const [removeComment, { error }] = useMutation(REMOVE_COMMENT, {
+        updata(cache, { data: { removeComment }}) {
+            try {
+                cache.writeQuery({
+                    query: QUERY_ME,
+                    data: { me: removeComment}
+                })
+            } catch (e) {
+                console.error(e);
+            }
+        },
+    })
+
+    const handleRemoveComment = async (commentId, postId) => {
+        try {
+            const { data } = await removeComment ({
+                variables: {
+                    postId,
+                    commentId
+                }
+            })
+        } catch (e) {
+            console.error(e)
+        }
+    }
+
     if (!comments.length) {
         return (
             <Text 
@@ -69,13 +103,13 @@ const CommentList = ({ comments }) => {
                                 placeholder={comment.commentText}
                             />
                             <InputRightElement mr={5} p='33px' 
-                                // onClick= {refresh}
+                                onClick= {refresh}
                             >
                                 <IconButton 
                                     icon={<FaTrashAlt />} 
                                     backgroundColor={isDark ? '#ECE8DF' : '#BFAE98'}
                                     color={isDark ? '#5E4D3B' : '#E8DFD8'}
-                                    // onClick={() => handleRemovePost(post._id)} 
+                                    onClick={() => handleRemoveComment(comment._id, postId)} 
                                 />
                             </InputRightElement>
                         </InputGroup>
