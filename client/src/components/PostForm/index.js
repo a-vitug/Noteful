@@ -6,8 +6,6 @@ import { useColorMode, useColorModeValue } from '@chakra-ui/color-mode';
 import { FormControl, FormHelperText, Box, Input, InputGroup, InputRightElement, IconButton, Text, Center, Button, Textarea } from '@chakra-ui/react';
 import { FaPaperPlane } from 'react-icons/fa';
 
-
-
 import { ADD_POST } from '../../utils/mutations';
 import { QUERY_POSTS, QUERY_ME } from '../../utils/queries';
 import Auth from '../../utils/auth';

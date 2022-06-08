@@ -2,16 +2,47 @@ import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { useMutation } from '@apollo/client';
 
-import { CREATE_COMMENT } from '../../utils/mutations';
-
-
 import Auth from '../../utils/auth';
+import { CREATE_COMMENT } from '../../utils/mutations';
+import { useColorMode, useColorModeValue } from '@chakra-ui/color-mode';
+import { FaComment, FaPaperPlane } from 'react-icons/fa';
+
+import {
+  Avatar,
+  AvatarGroup,
+  Box,
+  Fade,
+  FormControl,
+  FormLabel,
+  ScaleFade, 
+  Slide, 
+  SlideFade,
+  IconButton,
+  Input,
+  InputGroup,
+  InputRightElement,
+  Text,
+  Textarea,
+  Container
+} from '@chakra-ui/react';
 
 const CommentForm = ({ postId }) => {
+
+  //Styles
+  const { colorMode, toggleColorMode } = useColorMode();
+  const isDark = colorMode === 'dark';
+  const textcolor = useColorModeValue('yellow.900', '#E8DFD8');
+  const bgcolor = useColorModeValue('RGBA(0, 0, 0, 0.16)', 'RGBA(0, 0, 0, 0.36)');
+  const color = useColorModeValue('#ECE8DF', '#BFAE98');
+
   const [commentText, setCommentText] = useState('');
   const [characterCount, setCharacterCount] = useState(0);
 
   const [createComment, { error }] = useMutation(CREATE_COMMENT);
+
+  const refresh = function () {
+    document.location.reload()
+  }
 
   const handleFormSubmit = async (event) => {
     event.preventDefault();
@@ -41,39 +72,34 @@ const CommentForm = ({ postId }) => {
   }
   
   return(
-    <div>
+    <>
     {Auth.loggedIn() ? (
-      <>
-        <p
-          className={`m-0 ${
-            characterCount === 160 || error ? 'text-danger' : ''
-          }`}
-        >
-          Character Count: {characterCount}/160
-          {error && <span className="ml-2">{error.message}</span>}
-        </p>
-        <form
-          className="flex-row justify-center justify-space-between-md align-center"
-          onSubmit={handleFormSubmit}
-        >
-          <div className="col-12 col-lg-9">
-            <textarea
-              name="commentText"
-              placeholder="Add your comment..."
-              value={commentText}
-              className="form-input w-100"
-              style={{ lineHeight: '1.5', resize: 'vertical' }}
-              onChange={handleChange}
-            ></textarea>
-          </div>
-
-          <div className="col-12 col-lg-3">
-            <button className="btn btn-primary btn-block py-3" type="submit">
-              Add Comment
-            </button>
-          </div>
+      <Container maxW='container.sm'>
+        <form className='form' id='post' onSubmit={handleFormSubmit}>
+          <InputGroup
+                  size='lg'
+                  boxShadow='lg'
+              >
+                <Input h='100px'
+                    name="commentText"
+                    value={commentText}
+                    backgroundColor='RGBA(0, 0, 0, 0.16)'
+                    variant='filled'
+                    placeholder='Type something here... '
+                    onChange={handleChange}
+                />
+                <InputRightElement mr={5} p='50px'>
+                    <IconButton icon={<FaComment />}
+                        type='submit'
+                        onClick={refresh}
+                        size='lg'
+                        backgroundColor={isDark ? '#ECE8DF' : '#BFAE98'}
+                        color={isDark ? '#5E4D3B' : '#E8DFD8'} 
+                    />
+                </InputRightElement>
+            </InputGroup>
         </form>
-      </>
+      </Container>
 
     // <div>
     //   {Auth.loggedIn() ? (
@@ -96,7 +122,7 @@ const CommentForm = ({ postId }) => {
               <Link to="/login">login</Link> or <Link to="/signup">signup.</Link>
           </p>
         )}
-    </div>
+    </>
   );
 };
 
