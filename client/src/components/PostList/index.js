@@ -37,7 +37,9 @@ const PostList = ({
                                         <AvatarGroup>
                                             <Avatar 
                                                 bg='#1D454E'
+                                                color='#E8DFD8'
                                                 boxSize={7}
+                                                name={post.postAuthor}
                                             >
                                             </Avatar>
                                             <Text pl={5} className='indieFlower'>
@@ -70,11 +72,11 @@ const PostList = ({
                                                 <IconButton
                                                     icon={<FaHeart />} 
                                                     backgroundColor={isDark ? '#ECE8DF' : '#BFAE98'}
-                                                    color={textcolor} />
+                                                    color={isDark ? '#5E4D3B' : '#E8DFD8'} />
                                                 <IconButton 
                                                     icon={<FaTrashAlt />} 
                                                     backgroundColor={isDark ? '#ECE8DF' : '#BFAE98'}
-                                                    color={textcolor} />
+                                                    color={isDark ? '#5E4D3B' : '#E8DFD8'} />
                                             </InputRightElement>
                                         </InputGroup>
                                     </RouteLink>
