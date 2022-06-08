@@ -23,12 +23,17 @@ import {
   StackDivider,
   Text,
   Textarea,
+  useDisclosure,
   Wrap,
   WrapItem,
+  Popover,
+  PopoverTrigger,
+  PopoverContent,
+  Fade,
 } from '@chakra-ui/react';
 
 import { useColorMode, useColorModeValue } from '@chakra-ui/color-mode';
-import { FaSun, FaMoon, FaGithub, FaUser, FaPaperPlane, FaHeart, FaTrashAlt, FaArrowCircleLeft } from 'react-icons/fa';
+import { FaSun, FaMoon, FaGithub, FaUser, FaPaperPlane, FaHeart, FaTrashAlt, FaArrowCircleLeft, FaComment } from 'react-icons/fa';
 
 import CommentList from '../components/CommentList'
 import CommentForm from '../components/CommentForm'
@@ -44,6 +49,7 @@ const Post = () => {
     const isDark = colorMode === 'dark';
     const textcolor = useColorModeValue('#BFAE98', '#E8DFD8');
     const bgcolor = useColorModeValue('RGBA(0, 0, 0, 0.16)', 'RGBA(0, 0, 0, 0.36)');
+    const { isOpen, onToggle } = useDisclosure()
 
     const { postId } = useParams();
 
@@ -61,9 +67,7 @@ const Post = () => {
         <>
 
         <Stack className='postbg' pt={100}>
-            <Box>
-                <CommentForm postId={post._id}></CommentForm>
-            </Box>
+            
             
             <Container p={5} maxW='container.sm'>
                 <Box textAlign='right' p={10}>
@@ -75,7 +79,7 @@ const Post = () => {
                         />
                     </RouteLink>
                 </Box>
-                
+
                 <Box m={3}>
                     <FormControl isReadOnly id='comment' >
                         <FormLabel color={textcolor}>
@@ -114,6 +118,25 @@ const Post = () => {
                 <CommentList
                     comments={post.comments}
                 />
+
+                {/* renders comment form */}
+                <Container p={5} textAlign='right'>
+                    <Button className='indieFlower' onClick={onToggle} backgroundColor='#C98860' color='#F4F4F4'>
+                        Add a comment
+                    </Button>
+                    <Fade in={isOpen}>
+                        <Box
+                            p='10px'
+                            mt='4'
+                            rounded='md'
+                        >
+                            <CommentForm postId={post._id} />
+                        </Box>
+                    </Fade>
+                </Container>
+                
+
+                
 
                 {/* user #2's comment */}
                 {/* <Box m={10}>

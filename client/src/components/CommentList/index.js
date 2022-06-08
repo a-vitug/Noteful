@@ -4,29 +4,16 @@ import {
     Avatar,
     AvatarGroup,
     Box,
-    Center,
-    Container,
-    Divider,
     FormControl,
     FormLabel,
-    Grid,
-    GridItem,
-    Button,
-    ButtonGroup,
     IconButton,
-    Image,
-    Link,
     InputGroup,
     InputRightElement,
-    SimpleGrid,
-    StackDivider,
     Text,
-    Textarea,
-    Wrap,
-    WrapItem,
-  } from '@chakra-ui/react';
+} from '@chakra-ui/react';
 
-  import { useColorMode, useColorModeValue } from '@chakra-ui/color-mode';
+import { useColorMode, useColorModeValue } from '@chakra-ui/color-mode';
+import { FaTrashAlt } from 'react-icons/fa';
 
 const CommentList = ({ comments }) => {
     const { colorMode, toggleColorMode } = useColorMode();
@@ -35,7 +22,18 @@ const CommentList = ({ comments }) => {
     const bgcolor = useColorModeValue('RGBA(0, 0, 0, 0.16)', 'RGBA(0, 0, 0, 0.36)');
     
     if (!comments.length) {
-      return <h3>No Comments Yet</h3>;
+        return (
+            <Text 
+                className='indie'
+                fontWeight='bold'
+                p='20px'
+                fontSize='xl'
+                color={textcolor}
+                textAlign='center'
+                > 
+                No Comments yet!
+            </Text>
+        )
     };
 
     return(
@@ -70,6 +68,16 @@ const CommentList = ({ comments }) => {
                                 type='comment'
                                 placeholder={comment.commentText}
                             />
+                            <InputRightElement mr={5} p='33px' 
+                                // onClick= {refresh}
+                            >
+                                <IconButton 
+                                    icon={<FaTrashAlt />} 
+                                    backgroundColor={isDark ? '#ECE8DF' : '#BFAE98'}
+                                    color={isDark ? '#5E4D3B' : '#E8DFD8'}
+                                    // onClick={() => handleRemovePost(post._id)} 
+                                />
+                            </InputRightElement>
                         </InputGroup>
                     </FormControl>
             ))}
