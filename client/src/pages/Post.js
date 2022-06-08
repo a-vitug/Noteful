@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import { Flex, Stack, VStack, Spacer } from '@chakra-ui/layout';
 import {
   Input,
+  Avatar,
+  AvatarGroup,
   Box,
   Center,
   Container,
@@ -33,6 +35,7 @@ import { QUERY_SINGLE_POST } from '../utils/queries';
 
 import { useQuery } from '@apollo/client';
 import { Link as RouteLink, useParams } from 'react-router-dom';
+import Navbar from '../components/Navbar';
 
 const Post = () => {
     
@@ -54,19 +57,40 @@ const Post = () => {
   }
 
     return (
+        <>
+
         <Stack className='postbg' pt={100}>
             
             <Container p={5} maxW='container.sm'>
-                <RouteLink to='/'>
-                    <IconButton icon={<FaArrowCircleLeft />} 
-                        isRound='true' 
-                        backgroundColor={isDark ? '#ECE8DF' : '#BFAE98'}
-                        color={isDark ? '#5E4D3B' : '#E8DFD8'} 
-                    />
-                </RouteLink>
+                <Box textAlign='right' p={10}>
+                    <RouteLink to='/'>
+                        <IconButton icon={<FaArrowCircleLeft />} 
+                            isRound='true' 
+                            backgroundColor={isDark ? '#ECE8DF' : '#BFAE98'}
+                            color={isDark ? '#5E4D3B' : '#E8DFD8'} 
+                        />
+                    </RouteLink>
+                </Box>
+                
                 <Box m={3}>
                     <FormControl isReadOnly id='comment' >
-                        <FormLabel color={textcolor}> {post.postAuthor} </FormLabel>
+                        <FormLabel color={textcolor}>
+                            <AvatarGroup>
+                                <Avatar 
+                                    bg='#1D454E'
+                                    color='#E8DFD8'
+                                    boxSize={7}
+                                    name={post.postAuthor}
+                                >
+                                </Avatar>
+                                <Text pl={5} className='indieFlower'>
+                                    {post.postAuthor}
+                                </Text>
+                                <Text ml='auto'>
+                                    {post.createdAt}
+                                </Text>
+                            </AvatarGroup>
+                        </FormLabel>
                         <InputGroup
                             size='md'
                             boxShadow='lg'
@@ -108,7 +132,7 @@ const Post = () => {
 
             </Container>
         </Stack>
-        
+        </>
     );
 };
 

@@ -1,6 +1,8 @@
 import React from 'react';
 import {
     Input,
+    Avatar,
+    AvatarGroup,
     Box,
     Center,
     Container,
@@ -41,8 +43,24 @@ const CommentList = ({ comments }) => {
             {comments &&
                 comments.map((comment) => (
 
-                    <FormControl key={comment._id} isReadOnly id='comment' >
-                        <FormLabel color={textcolor}> {comment.commentAuthor}  </FormLabel>
+                    <FormControl p={3} key={comment._id} isReadOnly id='comment' >
+                        <FormLabel color={textcolor}>
+                            <AvatarGroup>
+                                <Avatar 
+                                    bg='#1D454E'
+                                    color='#E8DFD8'
+                                    boxSize={7}
+                                    name={comment.commentAuthor}
+                                >
+                                </Avatar>
+                                <Text pl={5} className='indieFlower'>
+                                    {comment.commentAuthor}
+                                </Text>
+                                <Text ml='auto'>
+                                    {comment.createdAt}
+                                </Text>
+                            </AvatarGroup>
+                        </FormLabel>
                         <InputGroup
                             size='md'
                             boxShadow='lg'

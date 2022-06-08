@@ -76,7 +76,7 @@ export default function Homepage({ loggedIn, setLoggedIn }) {
 
                     </Flex>
 
-                    <Box m='50px' mx={300}>
+                    <Box p='100px' m='50px' mx={300}>
                         <Text 
                             textShadow={isDark ? '2px 2px #BFAE98' : '2px 2px #E8DFD8'}
                             className='gloria' 
@@ -99,10 +99,11 @@ export default function Homepage({ loggedIn, setLoggedIn }) {
                     <Grid templateColumns='repeat(5, 1fr)' gap={5}>
                         {/* paid ads */}
                         <Box m={3}>
-                                <Link href='https://buy.stripe.com/test_aEU7sD5at8bBali004'>
-                                    <Image src={isDark ? './images/dark4.png' : './images/adss4.png'} />
-                                </Link>
-                            </Box>
+                            <Link href='https://buy.stripe.com/test_aEU7sD5at8bBali004'>
+                                <Image src={isDark ? './images/dark4.png' : './images/adss4.png'} />
+                            </Link>
+                        </Box>
+
                         <GridItem colSpan={3}>
                             <Text 
                                 className='indie'
