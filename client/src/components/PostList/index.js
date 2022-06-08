@@ -63,57 +63,54 @@ const PostList = ({
                         {/* renders the username */}
                             {showUsername ? (
                                 <>
-                                    {/* this is the post author */}
-                                    <FormLabel color={textcolor}>
-                                        <AvatarGroup>
-                                            <Avatar 
-                                                bg='#1D454E'
-                                                color='#E8DFD8'
-                                                boxSize={7}
-                                                name={post.postAuthor}
-                                            >
-                                            </Avatar>
-                                            <Text pl={5} className='indieFlower'>
-                                                {post.postAuthor}
-                                            </Text>
-                                            <Text ml='auto'>
-                                                {post.createdAt}
-                                            </Text>
-                                        </AvatarGroup>
-                                        
-                                            
+                                    {/* this links to the actual post page */}                                
+                                    <RouteLink to={`/post/${post._id}`}>
 
-                                    </FormLabel>
+                                        {/* this is the post author */}
+                                        <FormLabel color={textcolor}>
+                                            <AvatarGroup>
+                                                <Avatar 
+                                                    bg='#1D454E'
+                                                    color='#E8DFD8'
+                                                    boxSize={7}
+                                                    name={post.postAuthor}
+                                                >
+                                                </Avatar>
+                                                <Text pl={5} className='indieFlower'>
+                                                    {post.postAuthor}
+                                                </Text>
+                                                <Text ml='auto'>
+                                                    {post.createdAt}
+                                                </Text>
+                                            </AvatarGroup>
+                                        </FormLabel>
+                                    </RouteLink>
                                     
-                                    {/* this links to the actual post page */}
-                                    {/* <RouteLink to={`/post/${post._id}`}> */}
                                         
-                                        <InputGroup
-                                            size='md'
-                                            boxShadow='lg'
-                                        >
-                                            
-                                            <Input h='65px' backgroundColor={bgcolor}
-                                                variant='filled'
-                                                type='comment'
-                                                // posts text
-                                                placeholder={post.postText}
-                                            />
-                                            <InputRightElement mr={5} p='33px'
-                                             onClick= {refresh}>
-                                                <IconButton
-                                                    icon={<FaHeart />} 
-                                                    backgroundColor={isDark ? '#ECE8DF' : '#BFAE98'}
-                                                    color={isDark ? '#5E4D3B' : '#E8DFD8'} />
-                                                <IconButton 
-                                                    icon={<FaTrashAlt />} 
-                                                    backgroundColor={isDark ? '#ECE8DF' : '#BFAE98'}
-                                                    color={isDark ? '#5E4D3B' : '#E8DFD8'}
-                                                    onClick={() => handleRemovePost(post._id)} />
-                                            </InputRightElement>
-                                        </InputGroup>
+                                    <InputGroup
+                                        size='md'
+                                        boxShadow='lg'
+                                    >
+                                        <Input h='65px' backgroundColor={bgcolor}
+                                            variant='filled'
+                                            type='comment'
+                                            // posts text
+                                            placeholder={post.postText}
+                                        />
+                                        <InputRightElement mr={5} p='33px'
+                                            onClick= {refresh}>
+                                            {/* <IconButton
+                                                icon={<FaHeart />} 
+                                                backgroundColor={isDark ? '#ECE8DF' : '#BFAE98'}
+                                                color={isDark ? '#5E4D3B' : '#E8DFD8'} /> */}
+                                            <IconButton 
+                                                icon={<FaTrashAlt />} 
+                                                backgroundColor={isDark ? '#ECE8DF' : '#BFAE98'}
+                                                color={isDark ? '#5E4D3B' : '#E8DFD8'}
+                                                onClick={() => handleRemovePost(post._id)} />
+                                        </InputRightElement>
+                                    </InputGroup>
 
-                                    {/* </RouteLink> */}
 
                                     <Divider></Divider>
                                 </>
