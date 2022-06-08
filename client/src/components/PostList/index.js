@@ -3,12 +3,15 @@ import { FaSun, FaMoon, FaGithub, FaUser, FaPaperPlane, FaHeart, FaTrashAlt, FaU
 import { useColorMode, useColorModeValue } from '@chakra-ui/color-mode';
 
 import React from 'react';
+import { useMutation } from '@apollo/client';
 import { Link as RouteLink } from 'react-router-dom';
-    
+
+import { REMOVE_POST } from '../../utils/mutations';
+import { QUERY_POSTS, QUERY_ME } from '../../utils/queries';
+
+
 const PostList = ({
     posts,
-    title,
-    showTitle = true,
     showUsername = true,
 }) => {
 
@@ -16,7 +19,35 @@ const PostList = ({
     const isDark = colorMode === 'dark';
     const textcolor = useColorModeValue('yellow.900', '#E8DFD8');
     const bgcolor = useColorModeValue('RGBA(0, 0, 0, 0.16)', 'RGBA(0, 0, 0, 0.36)');
+    
+    const refresh = function () {
+        document.location.reload()
+    }
 
+    console.log(QUERY_ME)
+    const [removePost, { error }] = useMutation(REMOVE_POST, {
+        update(cache, { data: { removePost } }) {
+            try {
+                cache.writeQuery({
+                    query: QUERY_ME,
+                    data: { me: removePost }
+                });
+            } catch (e) {
+                console.error(e);
+            }
+        },
+    })
+
+    const handleRemovePost = async (postId) => {
+        try {
+            const { data } = await removePost({
+                variables: { postId }
+
+            });
+        } catch (err) {
+            console.error(err);
+        }
+    };
     if (!posts.length) {
         return <h3>No posts yet!</h3>;
     }
@@ -55,7 +86,7 @@ const PostList = ({
                                     </FormLabel>
                                     
                                     {/* this links to the actual post page */}
-                                    <RouteLink to={`/post/${post._id}`}>
+                                    {/* <RouteLink to={`/post/${post._id}`}> */}
                                         
                                         <InputGroup
                                             size='md'
@@ -68,7 +99,8 @@ const PostList = ({
                                                 // posts text
                                                 placeholder={post.postText}
                                             />
-                                            <InputRightElement mr={5} p='33px'>
+                                            <InputRightElement mr={5} p='33px'
+                                             onClick= {refresh}>
                                                 <IconButton
                                                     icon={<FaHeart />} 
                                                     backgroundColor={isDark ? '#ECE8DF' : '#BFAE98'}
@@ -76,10 +108,12 @@ const PostList = ({
                                                 <IconButton 
                                                     icon={<FaTrashAlt />} 
                                                     backgroundColor={isDark ? '#ECE8DF' : '#BFAE98'}
-                                                    color={isDark ? '#5E4D3B' : '#E8DFD8'} />
+                                                    color={isDark ? '#5E4D3B' : '#E8DFD8'}
+                                                    onClick={() => handleRemovePost(post._id)} />
                                             </InputRightElement>
                                         </InputGroup>
-                                    </RouteLink>
+
+                                    {/* </RouteLink> */}
 
                                     <Divider></Divider>
                                 </>
