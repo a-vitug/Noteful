@@ -117,7 +117,6 @@ const Post = () => {
                 {/* renders post's comments */}
                 <CommentList
                     comments={post.comments}
-                    postId={post._id}
                 />
 
                 {/* renders comment form */}
