@@ -2,7 +2,8 @@ import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { useMutation } from '@apollo/client';
 
-import { ADD_COMMENT } from '../../utils/mutations';
+import { CREATE_COMMENT } from '../../utils/mutations';
+
 
 import Auth from '../../utils/auth';
 
@@ -10,13 +11,13 @@ const CommentForm = ({ postId }) => {
   const [commentText, setCommentText] = useState('');
   const [characterCount, setCharacterCount] = useState(0);
 
-  const [addComment, { error }] = useMutation(ADD_COMMENT);
+  const [createComment, { error }] = useMutation(CREATE_COMMENT);
 
   const handleFormSubmit = async (event) => {
     event.preventDefault();
 
     try {
-      const { data } = await addComment({
+      const { data } = await createComment({
         variables: {
           postId,
           commentText,
@@ -41,20 +42,54 @@ const CommentForm = ({ postId }) => {
   
   return(
     <div>
-      {Auth.loggedIn() ? (
-        <>
+    {Auth.loggedIn() ? (
+      <>
+        <p
+          className={`m-0 ${
+            characterCount === 160 || error ? 'text-danger' : ''
+          }`}
+        >
+          Character Count: {characterCount}/160
+          {error && <span className="ml-2">{error.message}</span>}
+        </p>
         <form
-            className="flex-row justify-center justify-space-between-md align-center"
-            onSubmit={handleFormSubmit}
-          ></form>
-        <Text mb='8px'>What are your comment on this post? {value}</Text>
-          <Textarea
-          value={commentText}
-          onChange={handleChange}
-          placeholder='Here is a sample placeholder'
-          size='sm'
-          />
-        </>
+          className="flex-row justify-center justify-space-between-md align-center"
+          onSubmit={handleFormSubmit}
+        >
+          <div className="col-12 col-lg-9">
+            <textarea
+              name="commentText"
+              placeholder="Add your comment..."
+              value={commentText}
+              className="form-input w-100"
+              style={{ lineHeight: '1.5', resize: 'vertical' }}
+              onChange={handleChange}
+            ></textarea>
+          </div>
+
+          <div className="col-12 col-lg-3">
+            <button className="btn btn-primary btn-block py-3" type="submit">
+              Add Comment
+            </button>
+          </div>
+        </form>
+      </>
+
+    // <div>
+    //   {Auth.loggedIn() ? (
+    //     <>
+    //     <form
+    //         className="flex-row justify-center justify-space-between-md align-center"
+    //         onSubmit={handleFormSubmit}
+    //       ></form>
+    //     <Text mb='8px'>What are your comment on this post? {value}</Text>
+    //       <Textarea
+    //       value={commentText}
+    //       onChange={handleChange}
+    //       placeholder='Here is a sample placeholder'
+    //       size='sm'
+    //       />
+    //     </>
         ) : (
           <p>
               You need to be logged in to share your thoughts. Please{' '}

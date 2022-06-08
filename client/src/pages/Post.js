@@ -31,6 +31,7 @@ import { useColorMode, useColorModeValue } from '@chakra-ui/color-mode';
 import { FaSun, FaMoon, FaGithub, FaUser, FaPaperPlane, FaHeart, FaTrashAlt, FaArrowCircleLeft } from 'react-icons/fa';
 
 import CommentList from '../components/CommentList'
+import CommentForm from '../components/CommentForm'
 import { QUERY_SINGLE_POST } from '../utils/queries';
 
 import { useQuery } from '@apollo/client';
@@ -60,6 +61,9 @@ const Post = () => {
         <>
 
         <Stack className='postbg' pt={100}>
+            <Box>
+                <CommentForm postId={post._id}></CommentForm>
+            </Box>
             
             <Container p={5} maxW='container.sm'>
                 <Box textAlign='right' p={10}>
