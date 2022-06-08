@@ -1,6 +1,6 @@
 import Authspage from './auths/Authspage';
 import { Flex, Stack, HStack, Heading, Grid, GridItem, Spacer } from '@chakra-ui/layout';
-import { IconButton, Link, Box, Button, Center, Divider, ButtonGroup, Container, Image, InputGroup, FormControl, FormLabel, Input, Text, Tooltip, InputRightElement, Wrap, WrapItem } from '@chakra-ui/react';
+import { Avatar, AvatarGroup, IconButton, Link, Box, Button, Center, Divider, ButtonGroup, Container, Image, InputGroup, FormControl, FormLabel, Input, Text, Tooltip, InputRightElement, Wrap, WrapItem } from '@chakra-ui/react';
 import { useColorMode, useColorModeValue } from '@chakra-ui/color-mode';
 import { Link as RouteLink } from 'react-router-dom';
 
@@ -251,7 +251,20 @@ export default function Homepage({ loggedIn, setLoggedIn }) {
                                 {/* user's post 1 */}
                                 <Box m={3}>
                                     <FormControl isReadOnly id='comment' >
-                                        <FormLabel color={textcolor}> username1 </FormLabel>
+                                        <FormLabel color={textcolor}> 
+                                            <AvatarGroup>
+                                                <Avatar 
+                                                    bg='#1D454E'
+                                                    color='#E8DFD8'
+                                                    boxSize={7}
+                                                    name='Xxhera'
+                                                >
+                                                </Avatar>
+                                                <Text pl={5} className='indieFlower'>
+                                                    xxhera
+                                                </Text>
+                                            </AvatarGroup>
+                                        </FormLabel>
                                         <InputGroup
                                             size='md'
                                             boxShadow='lg'
@@ -268,7 +281,23 @@ export default function Homepage({ loggedIn, setLoggedIn }) {
                                 {/* user's post 2 */}
                                 <Box m={3}>
                                     <FormControl isReadOnly id='comment' >
-                                        <FormLabel color={textcolor}> username2 </FormLabel>
+                                        <FormLabel color={textcolor}>
+                                            <AvatarGroup>
+                                                <Avatar 
+                                                    bg='#1D454E'
+                                                    color='#E8DFD8'
+                                                    boxSize={7}
+                                                    name='Alexaaa'
+                                                >
+                                                </Avatar>
+                                                <Text pl={5} className='indieFlower'>
+                                                    alexaaa
+                                                </Text>
+                                                <Text ml='auto'>
+                                                    
+                                                </Text>
+                                            </AvatarGroup>
+                                        </FormLabel>
                                         <InputGroup
                                             size='md'
                                             boxShadow='lg'
@@ -286,7 +315,20 @@ export default function Homepage({ loggedIn, setLoggedIn }) {
                                 {/* user's post 3 */}
                                 <Box m={3}>
                                     <FormControl isReadOnly id='comment' >
-                                        <FormLabel color={textcolor}> username3 </FormLabel>
+                                        <FormLabel color={textcolor}> 
+                                            <AvatarGroup>
+                                                <Avatar 
+                                                    bg='#1D454E'
+                                                    color='#E8DFD8'
+                                                    boxSize={7}
+                                                    name='casper'
+                                                >
+                                                </Avatar>
+                                                <Text pl={5} className='indieFlower'>
+                                                    casper
+                                                </Text>
+                                            </AvatarGroup>
+                                        </FormLabel>
                                         <InputGroup
                                             size='md'
                                             boxShadow='lg'
@@ -294,7 +336,7 @@ export default function Homepage({ loggedIn, setLoggedIn }) {
                                             <Input h='65px' backgroundColor={bgcolor}
                                                 variant='filled'
                                                 type='comment'
-                                                placeholder='lorem ipsum dolor sit amet consectetur adipiscing elit. '
+                                                placeholder='everyone did such a good job!'
                                             />
                                         </InputGroup>
                                     </FormControl>
