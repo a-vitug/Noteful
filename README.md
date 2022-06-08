@@ -8,6 +8,7 @@
 * AS A USER who uses social media for many reasons,
 * I WANT a platform that I can sign-up for to post/upload notes, thoughts, reminders, and ideas,
 * SO THAT I can easily look through my previous posts without the distractions of added feautures. 
+```
 
 ## Acceptance Criteria
 ```
